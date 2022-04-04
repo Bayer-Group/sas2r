@@ -15,6 +15,10 @@ link-citations: yes
 github-repo: bayer-int/ocs.early.sas2r
 ---
 
+# SAS2R
+
+This is a line that was added using the live git-editing. It won't appear in the HTML because we have no CICD currently, but you should see this in the Rmd nonetheless.
+
 # About
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
