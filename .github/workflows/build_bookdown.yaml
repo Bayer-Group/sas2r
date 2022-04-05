@@ -2,9 +2,9 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, master, dev]
+    branches: [dev]
   pull_request:
-    branches: [main, master, dev]
+    branches: [dev]
 
 name: build_bookdown
 
@@ -21,12 +21,24 @@ jobs:
        - uses: r-lib/actions/setup-r@v1
          with:
            use-public-rspm: true
-           r-version: "3.6.0"
+           r-version: "4.0.0"
           
-       - uses: r-lib/actions/setup-r-dependencies@v1
+     #  - uses: r-lib/actions/setup-r-dependencies@v1
       
        - name: scratch
          run: |
             cd ${{ github.workspace }}
             pwd
             ls
+            
+       - uses: actions/checkout@v3
+         with:
+            ref: dev
+       - name: build
+         run: |
+           cd ${{ github.workspace }}
+           R -e "bookdown::render_book()"
+           git add . 
+           git commit -m "render book" 
+           git push origin
+        
