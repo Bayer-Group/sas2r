@@ -31,10 +31,6 @@ jobs:
             pwd
             ls
             
-       - uses: actions/checkout@v3
-         with:
-            ref: dev
-            
        - name: install pandoc
          run: brew install pandoc
 
@@ -48,8 +44,9 @@ jobs:
            git config --global user.email "siqi.zhang@bayer.com"
            git config --global user.name "Siqi Z. Bot"
            
+           git checkout -b build
            git add . 
            git commit -m "render book" 
            git status
-           # git push origin
+           git push -f origin
         
