@@ -2,9 +2,9 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [dev]
+    branches: [main]
   pull_request:
-    branches: [dev]
+    branches: [main]
 
 name: build_bookdown
 
@@ -28,7 +28,7 @@ jobs:
        - name: Install Pandoc
          run: brew install pandoc
 
-       - name: Setup Git Ideneity
+       - name: Setup Git Identity
          run: |
            git config --global user.email "siqi.zhang@bayer.com"
            git config --global user.name "Siqi Z. Bot"
