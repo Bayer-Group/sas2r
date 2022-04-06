@@ -1,0 +1,47 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+name: build_bookdown
+
+jobs: 
+  build_bookdown:
+     runs-on: ubuntu-latest
+     steps: 
+       - name: Checkout Repo
+         uses: actions/checkout@v2
+         with: 
+           repository: ${{ github.repository }}
+           ref: dev
+           token: ${{ secrets.MY_GITHUB_TOKEN }}
+        
+       - name: Setup R
+         uses: r-lib/actions/setup-r@v1
+         with:
+           use-public-rspm: true
+           r-version: "4.0.0"
+          
+       - name: Install Pandoc
+         run: brew install pandoc
+
+       - name: Setup Git Identity
+         run: |
+           git config --global user.email "siqi.zhang@bayer.com"
+           git config --global user.name "Siqi Z. Bot"
+           
+       - name: Build & push
+         run: |
+           cd ${{ github.workspace }}
+           R -e "renv::restore()"
+           R -e 'install.packages("bookdown")'
+           R -e "bookdown::render_book()"
+           
+           git checkout -b build
+           git add . 
+           git commit -m "build book" 
+           git push -uf origin HEAD
+        
