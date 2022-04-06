@@ -37,6 +37,7 @@ jobs:
        - name: build
          run: |
            cd ${{ github.workspace }}
+           R -e "renv::restore()"
            R -e "bookdown::render_book()"
            git add . 
            git commit -m "render book" 
