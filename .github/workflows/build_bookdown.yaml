@@ -44,6 +44,10 @@ jobs:
            R -e "renv::restore()"
            R -e 'install.packages("bookdown")'
            R -e "bookdown::render_book()"
+           
+           git config --global user.email "siqi.zhang@bayer.com"
+           git config --global user.name "Siqi Z. Bot"
+           
            git add . 
            git commit -m "render book" 
            git status
