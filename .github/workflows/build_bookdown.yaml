@@ -3,8 +3,6 @@
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 name: build_bookdown
 
@@ -36,6 +34,7 @@ jobs:
        - name: Build & push
          run: |
            cd ${{ github.workspace }}
+
            R -e "renv::restore()"
            R -e 'install.packages("bookdown")'
            R -e "bookdown::render_book()"
