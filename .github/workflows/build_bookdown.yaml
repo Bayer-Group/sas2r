@@ -12,41 +12,36 @@ jobs:
   build_bookdown:
      runs-on: ubuntu-latest
      steps: 
-       - uses: actions/checkout@v2
+       - name: Checkout Repo
+         uses: actions/checkout@v2
          with: 
            repository: ${{ github.repository }}
            ref: dev
            token: ${{ secrets.MY_GITHUB_TOKEN }}
         
-       - uses: r-lib/actions/setup-r@v1
+       - name: Setup R
+         uses: r-lib/actions/setup-r@v1
          with:
            use-public-rspm: true
            r-version: "4.0.0"
           
-     #  - uses: r-lib/actions/setup-r-dependencies@v1
-      
-       - name: scratch
-         run: |
-            cd ${{ github.workspace }}
-            pwd
-            ls
-            
-       - name: install pandoc
+       - name: Install Pandoc
          run: brew install pandoc
 
-       - name: build
+       - name: Setup Git Ideneity
+         run: |
+           git config --global user.email "siqi.zhang@bayer.com"
+           git config --global user.name "Siqi Z. Bot"
+           
+       - name: Build & push
          run: |
            cd ${{ github.workspace }}
            R -e "renv::restore()"
            R -e 'install.packages("bookdown")'
            R -e "bookdown::render_book()"
            
-           git config --global user.email "siqi.zhang@bayer.com"
-           git config --global user.name "Siqi Z. Bot"
-           
            git checkout -b build
            git add . 
-           git commit -m "render book" 
-           git status
+           git commit -m "build book" 
            git push -uf origin HEAD
         
