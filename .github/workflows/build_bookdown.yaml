@@ -41,10 +41,11 @@ jobs:
        - name: build
          run: |
            cd ${{ github.workspace }}
-           R -e "install.packages('renv')"
            R -e "renv::restore()"
+           R -e 'install.packages("bookdown")'
            R -e "bookdown::render_book()"
            git add . 
            git commit -m "render book" 
-           git push origin
+           git status
+           # git push origin
         
