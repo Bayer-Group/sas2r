@@ -48,5 +48,5 @@ jobs:
            git add . 
            git commit -m "render book" 
            git status
-           git push -uf origin
+           git push -uf origin HEAD
         
