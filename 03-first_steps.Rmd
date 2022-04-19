@@ -1,0 +1,9 @@
+# First Steps in R
+
+## R vs. SAS Syntax - basic functions
+
+## Dates in R
+
+## Labels in R
+
+## Codelist Mapping in R
