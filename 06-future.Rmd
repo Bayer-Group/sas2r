@@ -1,0 +1,12 @@
+# Future
+
+This section collections areas of the catalog contains ideas for future content not currently covered. The idea is we have individuals across pharma add to these areas (or suggest new ones!).
+
+## Areas of Expansion
+- ADaM derivation with `{admiral}` and/or `{dplyr}`
+- define.xml
+
+## Content 
+- Working with dates in R
+- Data exportation
+- More examples using Pharmaverse-based packages as they mature

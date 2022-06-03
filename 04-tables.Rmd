@@ -1,0 +1,179 @@
+# Tables
+
+In this section, we use the `Tplyr` package to build a demographics table using a subject-level dataset. 
+
+## Building
+
+### Dataset Source
+For demonstration purposes, we will use the `adsl` from the  <a href="https://advance.phuse.global/display/WEL/Test+Dataset+Factory">PHUSE Test Datasets Factory</a> repository.
+
+```{r, message = F, warning = F, error = F}
+library(haven)
+
+adsl <- read_xpt("https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/adsl.xpt")
+```
+
+### String Formatting
+This section sets the default formats for tables built with Tplyr.  
+
+For each variable type (continuous, categorical), we specify the following:
+
+1. Which summary statistic(s) should be computed?
+2. How should the summary statistic(s) be formatted for display?
+
+Once set, these formats are carried over to your table automatically.
+```{r, message = F, warning = F}
+library(Tplyr)
+
+options(
+  # Categorical variable defaults
+  tplyr.count_layer_default_formats =
+    list(n_counts = f_str("xxx [xx.xx%]", n, pct)),
+  
+  # Continuous variable defaults
+  tplyr.desc_layer_default_formats =
+    list('N'         = f_str('xx', n),
+         'Mean [SD]' = f_str('xx.xx [xx.xxx]', mean, sd),
+         'Median'    = f_str('xx.x', median),
+         'Min, Max'  = f_str('xx, xx', min, max))
+)
+```
+
+### Create
+For demonstration purposes, we will select a handful of variables from the adsl dataset to work with.
+
+```{r, warning = F, message = F}
+library(dplyr)
+
+# Initiate Tplyr, specify treatment variable, optional where condition
+my_table <-  tplyr_table(adsl, TRT01P, where = SAFFL == "Y") %>%
+  
+  # Add a total group column
+  add_total_group() %>%
+  
+  # Add individual variables here
+  add_layer(group_desc(AGE, b = "Age (years)")) %>%
+  add_layer(group_count(AGEGR1, b = "Age Group 1 (years)")) %>%
+  add_layer(group_count(SEX, b = "Gender")) %>%
+  add_layer(group_count(ETHNIC, b = "Ethnicity")) %>%
+  add_layer(group_desc(BMIBL, b = "Baseline Body Mass Index (kg/m2)")) %>%
+  
+  # Build
+  build()
+```
+
+## Formatting
+
+### Post Processing
+By default, Tplyr will build your table and store it as a tibble. It can be accessed directly in your environment by simply calling it.
+
+```{r}
+head(my_table, n = 9)
+```
+
+Since it is tibble, you are free to further process or wrangle it to your liking. Below we'll apply some light formatting using a combination of `Tplyr` and `dplyr`:
+
+1. Remove repeating variable labels and insert breaks between variable rows
+2. Reorder the columns
+3. Remove extraneous columns not of interest for display (i.e. meta data created by Tplyr) 
+
+```{r, message = F, warning = F}
+library(dplyr)
+
+my_table <- my_table %>%
+  
+  # remove repeating labels
+  apply_row_masks(., row_breaks = TRUE) %>%
+  
+  # specify order of relevant variables
+  select(row_label1, 
+         row_label2,
+         `var1_Xanomeline High Dose`,
+         `var1_Xanomeline Low Dose`,
+         var1_Placebo,
+         var1_Total)  
+```
+
+We can see the formatting has taken effect by recalling it in our environment. Specifically, compare the `row_label1` variable below to the previous section while also noting the order of columns has changed to our specification.
+
+```{r}
+head(my_table, n = 9)
+```
+
+### Displaying
+
+While `Tplyr` aided us in *building* a summary tables, other packages exist to help us *display* them. Once package we will focus on is the `flextable` package. This table display package is quite powerful and offers a high degree of customization.
+
+We turn the interested reader to the <a href="https://ardata-fr.github.io/flextable-book/"> flextable book</a> to view additional examples.
+
+```{r, warning = F, message = F}
+library(flextable)
+
+# a basic flextable
+my_flextable <- my_table %>%
+  
+  # start flextable 
+  flextable() %>%
+  autofit()
+```
+
+```{r}
+my_flextable
+```
+
+We can apply some `flextable` formatting to alter the display of the table.
+
+```{r}
+# a nicer flextable
+my_flextable <- my_table %>%
+  
+  # start flextable 
+  flextable() %>% 
+  autofit() %>%
+  
+  # add some padding between rows
+  padding(padding = 0.5) %>%
+  
+  # adjust width of first two columns
+  width(j = 1:2, width = 4) %>%
+  
+  # align treatment columns to center
+  align(part = "all", align = "center", j = 3:6) %>%
+  
+  # column header labels
+  set_header_labels(., values = list(
+    row_label1 = 'Variable',
+    row_label2 = ' ',
+    `var1_Xanomeline High Dose` = 'Xanomeline \nHigh Dose',
+    `var1_Xanomeline Low Dose` = 'Xanomeline \nLow Dose',
+    var1_Placebo = 'Placebo',
+    var1_Total = 'Total')) %>%
+  
+  # header + footers
+  add_header_lines(values = "Table: Demographics (Safety Analysis Set)") %>%
+  add_footer_lines(values = "This was produced in R!") %>%
+  
+  # font size, font name
+  fontsize(part = "all", size = 8) %>%
+  font(part = "all", fontname = "Times")  
+```
+
+```{r echo = F}
+my_flextable
+```
+
+## Exporting
+
+To export our table to MS Word (.docx), we may use the `officer` package. This package simplifies working with various Microsoft Office formats and integrates nicely with `flextable`.
+
+```{r, warning = F, message = F, eval = F}
+library(officer)
+
+# send the flextable to .docx output
+read_docx() %>%
+  body_add_flextable(my_flextable) %>%
+  print(target = "my_document.docx")
+```
+
+In your working directory, you should now see the file `my_document.docx` has been created and contains your table.
+
