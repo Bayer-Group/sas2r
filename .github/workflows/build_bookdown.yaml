@@ -2,7 +2,7 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, dev, 24]
+    branches: [24]
 
 name: build_bookdown
 
@@ -10,11 +10,16 @@ jobs:
   build_to_ghp:
      runs-on: ubuntu-latest
      steps: 
+       - name: Setup Git Identity
+         run: |
+           git config --global user.email "siqi.zhang@bayer.com"
+           git config --global user.name "Siqi Z. Bot"
+           
        - name: Checkout Repo
          uses: actions/checkout@v2
          with: 
            repository: ${{ github.repository }}
-           ref: dev
+           ref: 24
            token: ${{ secrets.MY_GITHUB_TOKEN }}
         
        - name: Setup R
@@ -26,11 +31,6 @@ jobs:
        - name: Install Pandoc
          run: brew install pandoc
 
-       - name: Setup Git Identity
-         run: |
-           git config --global user.email "siqi.zhang@bayer.com"
-           git config --global user.name "Siqi Z. Bot"
-           
        - name: Build & push
          run: |
            cd ${{ github.workspace }}
