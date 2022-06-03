@@ -63,7 +63,7 @@ jobs:
       - name: Install Pandoc
         run: brew install pandoc
       - name: Install nlopt
-        run: sudo yum install nlopt-devel
+        run: sudo apt-get install libnlopt-dev
         
       - name: Build & push
         run: |
