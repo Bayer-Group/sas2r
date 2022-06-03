@@ -52,7 +52,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
         with: 
-           ref: dev
+           ref: 24
         
       - name: Setup R
         uses: r-lib/actions/setup-r@v1
