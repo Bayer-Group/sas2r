@@ -7,7 +7,7 @@ on:
 name: build_bookdown
 
 jobs: 
-  build_bookdown:
+  build_to_ghp:
      runs-on: ubuntu-latest
      steps: 
        - name: Checkout Repo
@@ -44,3 +44,48 @@ jobs:
            git commit -m "build book" 
            git push -uf origin HEAD
         
+  build_to_intranet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with: 
+           repository: ${{ github.repository }}
+           ref: dev
+           token: ${{ secrets.MY_GITHUB_TOKEN }}
+        
+      - name: Setup R
+         uses: r-lib/actions/setup-r@v1
+         with:
+           use-public-rspm: true
+           r-version: "4.0.0"
+          
+      - name: Install Pandoc
+         run: brew install pandoc
+           
+      - name: Build & push
+         run: |
+           cd ${{ github.workspace }}
+
+           R -e "renv::restore()"
+           R -e 'install.packages("bookdown")'
+           R -e "bookdown::render_book(output_dir = 'site')"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: site/
+
+  deploy_to_intranet:
+    name: "Publish Docs"
+    needs: build
+    
+    # See the full reference for available parameters https://docs.int.bayer.com/ref/
+    uses: bayer-int/actions-workflows/.github/workflows/publish-docs.yml@main
+    with:
+      artifact: site
+      dir:      site
+      preview:  ${{ github.ref != 'refs/heads/main' && github.run_id || '' }}
+
+      # namespace:  'example' # add a custom path your documentation will be available on
