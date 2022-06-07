@@ -1,3 +1,0 @@
-# Data  
-
-[Overview of data sources used --> reproducability]

@@ -1,6 +1,0 @@
-## Examples
-
-### Swimmer Plot
-### Waterfall Plot
-### Spider Plot
-### Survival Plot 

@@ -1,5 +1,0 @@
-# Figures & Plots
-
-## Basics
-### Building a plot using ggplot2
-### Exporting plots

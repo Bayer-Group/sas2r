@@ -1,0 +1,82 @@
+# Data
+
+In this section, we provide some ways to obtain and use data for learning purposes. We differentiate between external data (data from an outside source such as a file or web address) and internal data (data that already exists within R).
+
+## External Data
+
+Data may be directly imported into the R environment using packages. Most often, data will take the form of Comma Separated Values (`.csv`), Excel Spreadsheets (`.xlsx`), SAS (`.sas7bdat`) or JSON (`.json`). 
+
+```{r echo=FALSE}
+sources <- data.frame(Package = c('readr','readxl','haven','jsonlite'),
+                      Formats = c('.csv, .txt', '.xls, .xlsx', '.sas7bdat, .sas7bcat, .xpt','.json'),
+                      Reference = c('<a href="https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf">Cheat Sheet</a>',
+                  '<a href="https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf">Cheat Sheet</a>',
+                  '<a href="https://haven.tidyverse.org/reference/read_sas.html">Package Site</a>',
+                  '<a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html">Vignette</a>'),stringsAsFactors = FALSE)
+
+
+kableExtra::kable(sources, escape = FALSE)
+```
+
+### CDISC Datasets
+
+The <a href="https://advance.phuse.global/display/WEL/Test+Dataset+Factory">PHUSE Test Datasets Factory</a> provides a convenient set CDISC datasets in `xpt` format to experiment with. You may access them through the following github repositories:
+
++ <a href="https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM">ADaM Data</a>
++ <a href="https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_SDTM">SDTM Data</a>
+
+Below is an example of using the `haven` package to read in `adsl.xpt` directly from the ADaM repository. Note you can also chose to download these data and read them locally from your computer.
+
+```{r, message = F, warning = F, error = F}
+library(haven)
+
+adsl <- read_xpt("https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/adsl.xpt")
+```
+
+```{r echo = F}
+kableExtra::kable(head(adsl, n=5), escape = FALSE, align = 'c')
+```
+
+## Internal Data
+
+Internal data sources include those that come bundled with R packages or data you create yourself. 
+
+### Package Data
+
+The `datasets` package comes with your default installation of R and houses many example datasets you can utilize. 
+
+Simply run the following to learn about the different ones included.
+```{r, eval = F}
+library(help = "datasets")
+```
+
+Once you've made a selection, running the following will make that data available in your R session.
+```{r, eval = F}
+# ToothGrowth looks interesting
+data(ToothGrowth)
+```
+
+```{r echo = F}
+kableExtra::kable(head(ToothGrowth, n=5), escape = FALSE, align = 'c')
+```
+
+Using package data is not just limited to the `datasets` package. Many specialized packages will make an effort to include some data to demonstrate how their functions work. For example, the `admiral.test` package has many of the SDTM datasets listed in the above repo.
+
+### Simulating Your Own
+
+In some cases you may wish to simulate your own data. You can do so quite easily using a combination of `sample` and `r*` functions built into R.
+
+Below is an example of simulating a few variables typically found in an ADSL dataset.
+
+```{r}
+my_sim_data <- data.frame(subjidn = 1:10,
+                          sex = sample(c('M','F'), 10, replace = TRUE),
+                          age = round(rnorm(10, mean = 30, sd = 5)),
+                          stringsAsFactors = FALSE
+)
+```
+
+```{r echo = F}
+kableExtra::kable(head(my_sim_data, n=5), escape = FALSE, align = 'c')
+```
+
