@@ -1,0 +1,92 @@
+# About 
+
+## Organization
+
+The SAS and R catalog is structured as following:
+
+### First Steps
+
+This section gives an introduction to basic R concepts and draws parallels between the respective SAS PROC(s).
+
+If you are already familiar with R, feel free to skip it or come back later. All basic concepts are linked to the more complex code examples later on in the book so that you can quickly jump forth and back in case you would like to look up something.
+
+$\rightarrow$ [First Steps][First Steps in R coming from SAS- Getting Started]
+
+### Data
+
+This section consists of various code examples for reading data from internal and external sources into R.
+
+$\rightarrow$ [Data][Data]
+
+### Tables
+
+This section introduces techniques for creating, displaying and exporting tables in R.
+
+$\rightarrow$ [Tables][Tables]
+
+### Plots
+
+This section is dedicated to creating data visualizations used in clinical studies reporting.
+
+$\rightarrow$ [Plots][Examples]
+
+### Packages
+
+Below are a list of package and package versions used in the various examples in this book.
+
+```{r, echo = F, message = F, warning = F}
+library(tidyverse)
+
+tibble::tibble(
+  Package = names(installed.packages()[,3]),
+  Version = unname(installed.packages()[,3])
+) %>%
+filter(
+  Package %in% c('tidyverse',
+                 'ggplot2',
+                 'tibble',
+                 'tidyr',
+                 'dplyr',
+                 'ggplot2',
+                 'readr',
+                 'haven',
+                 'purrr',
+                 'stringr',
+                 'gg.gap',
+                 'ggrepel',
+                 'forcats',
+                 'Tplyr',
+                 'broom',
+                 'survival',
+                 'kableExtra',
+                 'flextable',
+                 'swimplot',
+                 'officer',
+                 'kableExtra')) %>%
+  arrange(Package) %>%
+  kableExtra::kable(align = 'c')
+```
+
+
+## House Keeping
+
+This section describes general house keeping for the SAS and R Catalog
+
+### Philosophy
+
+We aim to provide a gentle, yet thorough introduction to clinical computing in R for SAS programmers. We appreciate learning a new language can be daunting and time consuming, so with this in mind, we strive to make this process as smooth as possible.
+
+Learning a new language is more of a journey than it is a task, and requires courage and practice. Our hope is that this catalog will help guide you through that journey!
+
+### Approach
+
+**Concepts**: When introducing a new concept, we will first demonstrate it using the minimal code required. Once a concept is clear, we will show you how to extend the code to meet your own needs.
+
+**Coding**: Throughout the examples, we aim to use the **Tidyverse** where possible. This is an excellent framework for our daily programming tasks that is consistent and easy to understand. As our catalog grows, we also recommend the use of **pharmaverse** packages which are relevant to clinical and pharmaceutical specific tasks.
+
+**Code Snippets**: Our code snippets aim to be self-contained. That means that you should be able to simply copy and paste code examples and reproduce the result on your machine.
+
+### Contributing
+We welcome the addition of new content you’ve encountered in your journey that you feel is relevant. If you are interested in contributing in any capacity, please continue below for more information.
+
+> Siqi to outline how contributing can work (using the git edit feature of bookdown) and PR procedure, given that this repo will be outward facing

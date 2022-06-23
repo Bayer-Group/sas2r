@@ -1,0 +1,322 @@
+# First Steps in R
+
+In this chapter, you can find the basics of data wrangling in R for transforming, cleaning and exploring your data. 
+
+Please take a look at this wonderful SAS2R **cheat sheet** created by **Brendan O’Dowd**. 
+
+This one and many more cheat sheets can be found on the [RStudio website](https://www.rstudio.com/resources/cheatsheets/):
+
+```{r out.height = "460px", out.width='800px', echo=F}
+knitr::include_graphics("./additional resources/sas-r_cheatsheet.pdf")
+```
+
+## R and SAS Syntax
+
+Below are some examples that use `adsl` to show how common operations are done in SAS and R.
+
+### Packages and Sample Data
+```{r, warning = F, message = F}
+# Packages
+library(haven)
+library(tidyverse)
+
+# Data
+adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
+adsl <- read_xpt(paste0(adam_path, "adsl.xpt"))
+
+# Select a few variables
+adsl <- adsl %>%
+  select(STUDYID, USUBJID, SUBJID, AGE, TRT01P, TRTSDT, TRTEDT, RACE, SEX)
+```
+
+### PROC CONTENTS $\rightarrow$ summary()
+To explore the variables of your dataset you can use PROC contents in SAS: 
+
+```{sas, eval = F}
+proc contents data = adsl;
+run;
+```
+
+In R, you can use `str()` and `summary()` instead:
+```{r}
+str(adsl)
+summary(adsl) 
+```
+
+
+### PROC FREQ $\rightarrow$ count()
+In order to get the frequencies for one variables you use PROC FREQ in SAS. 
+```{sas, eval = F}
+PROC FREQ data = adsl;
+  TABLES SEX;
+RUN;
+```
+
+And for cross tables: 
+```{sas, eval = F}
+PROC FREQ data = adsl;
+  TABLES SEX * TRT01P * RACE;
+RUN;
+```
+
+In R we use `table()` or `count()` from the tidyverse package:
+
+**For One Variable**
+```{r, message = F, eval = F}
+table(adsl$SEX)
+
+adsl %>%
+  count(SEX)
+```
+
+```{r, message = F, eval = T, echo = F, warning = F}
+library(kableExtra)
+table(adsl$SEX)
+
+adsl %>%
+  count(SEX) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+
+**For Multiple Variables**
+```{r, message = F, eval = F}
+#for multiple variables
+table(adsl$SEX, adsl$TRT01P, adsl$RACE) 
+
+adsl %>%
+  count(SEX, TRT01P, RACE)
+```
+
+```{r, message = F, eval = T, echo = F}
+#for multiple variables
+table(adsl$SEX, adsl$TRT01P, adsl$RACE) 
+
+adsl %>%
+  count(SEX, TRT01P, RACE) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+### KEEP/DROP $\rightarrow$ select()
+
+```{sas, eval = F}
+DATA adsl2;
+  SET adsl;
+  KEEP subjidn; *or drop subjidn;
+RUN;
+```
+
+In R we use the `select()` function from the tidyverse package. 
+```{r, eval = F}
+# to keep (only) SUBJID
+adsl %>%
+  select(SUBJID) %>%
+  head() # keep only first 6 rows
+
+# to keep all variables except SUBJID
+adsl %>%
+  select(-SUBJID) %>%
+  head()
+```
+
+```{r, eval = T, echo = F}
+# to keep (only) SUBJID
+adsl %>%
+  select(SUBJID) %>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+
+# to keep all variables except SUBJID
+adsl %>%
+  select(-SUBJID) %>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+### Subsetting data (WHERE/IF) $\rightarrow$ filter()
+
+```{sas, eval = F}
+DATA female;
+  SET adsl;
+  WHERE SEX = 'F';
+RUN;
+```
+
+```{r, eval = F}
+adsl %>%
+  filter(SEX == "F") %>%
+  head() 
+
+# multiple conditions:
+adsl %>%
+  filter(SEX == "F" & AGE > 70) %>%
+  head() 
+```
+
+```{r, eval = T, echo = F}
+adsl %>%
+  filter(SEX == "F") %>%
+  head() %>%
+  kbl() %>%
+   kable_classic_2(full_width = F)
+
+# multiple conditions:
+adsl %>%
+  filter(SEX == "F" & AGE > 70) %>%
+  head() %>%
+  kbl() %>%
+   kable_classic_2(full_width = F)
+```
+
+### Sorting data
+
+```{sas, eval = F}
+PROC SORT data=adsl out=adsl_sort_age;
+  BY AGE; 
+RUN;
+```
+
+In R we use the `arrange()` function from tidyverse: 
+
+```{r, warning = F, message = F, eval = F}
+# ascending
+adsl %>%
+  arrange(AGE)%>%
+  head() 
+
+# descending
+adsl %>%
+  arrange(-AGE)%>%
+  head() 
+```
+
+```{r, warning = F, message = F, echo = F, eval = T}
+# ascending
+adsl %>%
+  arrange(AGE)%>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+
+# descending
+adsl %>%
+  arrange(-AGE)%>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+  
+```
+
+### Creating new variables 
+```{sas, eval = F}
+DATA adsl;
+  SET adsl;
+  length AGEGR1 $20.; * length function in R means something different
+  IF age > 50 then AGEGR1 = ‘> 50 years old’;
+  ELSE if age <= 50 then AGEGR1 = ‘<= 50 years old’;
+run;
+```
+
+In R we use the `mutate()` function:
+```{r, eval = F}
+adsl %>%
+  mutate(AGEGR1 = case_when(
+    AGE > 50 ~"> 50 years old",
+    AGE <= 50 ~"<= 50 years old",
+  )) %>%
+  head()
+```
+
+```{r, eval = T, echo = F}
+adsl %>%
+  mutate(AGEGR1 = case_when(
+    AGE > 50 ~"> 50 years old",
+    AGE <= 50 ~"<= 50 years old",
+  )) %>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+### Merging Data
+
+We create another data set with weight information for some of the subjects: 
+```{r}
+SUBJID <- sample(adsl$SUBJID, 100, replace = FALSE)
+WEIGHT <- sample(50:100, 100, replace = TRUE)
+
+adsl_weight <- data.frame(SUBJID, WEIGHT)
+```
+
+Now, we would like to join the weight column to our adsl data set. 
+
+In SAS, we use the merge function: 
+```{sas, eval = F}
+* inner join;
+data adsl_merge;
+merge adsl(in = inadsl) adsl_weight(in = inweight);
+by subjidn;
+if inadsl and inweight; * inner join in SAS
+run;
+
+* outer join;
+data adsl_merge_all;
+merge adsl(in = inadsl) adsl_weight(in = inweight);
+by subjidn;
+if inadsl or inweight; * default in SAS
+run;
+
+* left join;
+data adsl_merge_left;
+merge adsl(in = inadsl) adsl_weight(in = inweight);
+by subjidn;
+if inadsl;
+run;
+```
+
+In R, we use again the tidyverse package: 
+
+```{r, eval = F}
+# inner join
+adsl%>%
+  inner_join(adsl_weight, by = "SUBJID") 
+
+# outer join
+adsl %>%
+  full_join(adsl_weight, by = "SUBJID")
+
+# left join
+adsl %>%
+  left_join(adsl_weight, by = "SUBJID")
+```
+
+
+### Concatenating Data
+
+To demonstrate stacking or concatenating data sets, we can first split adsl into two parts, each having 5 records with the same columns in common.
+
+```{r, eval = F}
+# first 5 records of adsl
+adsl_1 <- adsl[c(1:5),]
+
+# the next 5 records of adsl
+adsl_2 <- adsl[c(6:10),]
+```
+
+In SAS, you could use the set command:
+```{sas, eval  = F}
+DATA adsl_stacked;
+ SET adsl_1 adsl_2;
+RUN;
+```
+
+In R, you may accomplish this like so:
+```{r, eval = F}
+# tidyverse method - bind_rows()
+adsl_stacked <- adsl_1 %>%
+  bind_rows(adsl_2) 
+```
