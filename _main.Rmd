@@ -4,10 +4,10 @@ author: "Bayer Oncology SBU"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-# url: your book url like https://bookdown.org/yihui/bookdown
+url: https://docs.int.bayer.com/-/ocs.sas2r/
 # cover-image: path to the social sharing image like images/cover.jpg
 link-citations: yes
-github-repo: bayer-int/ocs.early.sas2r
+github-repo: bayer-int/ocs.sas2r
 ---
 
 # Welcome
@@ -24,6 +24,1423 @@ If you have any suggestions about content which should be added, questions or fe
 * [Siqi Zhang](https://github.com/iqis)
 * [Robert Adams](https://github.com/)
      
+
+<!--chapter:end:index.Rmd-->
+
+# About 
+
+## Organization
+
+The SAS and R catalog is structured as following:
+
+### First Steps
+
+This section gives an introduction to basic R concepts and draws parallels between the respective SAS PROC(s).
+
+If you are already familiar with R, feel free to skip it or come back later. All basic concepts are linked to the more complex code examples later on in the book so that you can quickly jump forth and back in case you would like to look up something.
+
+$\rightarrow$ [First Steps][First Steps in R coming from SAS- Getting Started]
+
+### Data
+
+This section consists of various code examples for reading data from internal and external sources into R.
+
+$\rightarrow$ [Data][Data]
+
+### Tables
+
+This section introduces techniques for creating, displaying and exporting tables in R.
+
+$\rightarrow$ [Tables][Tables]
+
+### Plots
+
+This section is dedicated to creating data visualizations used in clinical studies reporting.
+
+$\rightarrow$ [Plots][Examples]
+
+### Packages
+
+Below are a list of package and package versions used in the various examples in this book.
+
+```{r, echo = F, message = F, warning = F}
+library(tidyverse)
+
+tibble::tibble(
+  Package = names(installed.packages()[,3]),
+  Version = unname(installed.packages()[,3])
+) %>%
+filter(
+  Package %in% c('tidyverse',
+                 'ggplot2',
+                 'tibble',
+                 'tidyr',
+                 'dplyr',
+                 'ggplot2',
+                 'readr',
+                 'haven',
+                 'purrr',
+                 'stringr',
+                 'gg.gap',
+                 'ggrepel',
+                 'forcats',
+                 'Tplyr',
+                 'broom',
+                 'survival',
+                 'kableExtra',
+                 'flextable',
+                 'swimplot',
+                 'officer',
+                 'kableExtra')) %>%
+  arrange(Package) %>%
+  kableExtra::kable(align = 'c')
+```
+
+
+## House Keeping
+
+This section describes general house keeping for the SAS and R Catalog
+
+### Philosophy
+
+We aim to provide a gentle, yet thorough introduction to clinical computing in R for SAS programmers. We appreciate learning a new language can be daunting and time consuming, so with this in mind, we strive to make this process as smooth as possible.
+
+Learning a new language is more of a journey than it is a task, and requires courage and practice. Our hope is that this catalog will help guide you through that journey!
+
+### Approach
+
+**Concepts**: When introducing a new concept, we will first demonstrate it using the minimal code required. Once a concept is clear, we will show you how to extend the code to meet your own needs.
+
+**Coding**: Throughout the examples, we aim to use the **Tidyverse** where possible. This is an excellent framework for our daily programming tasks that is consistent and easy to understand. As our catalog grows, we also recommend the use of **pharmaverse** packages which are relevant to clinical and pharmaceutical specific tasks.
+
+**Code Snippets**: Our code snippets aim to be self-contained. That means that you should be able to simply copy and paste code examples and reproduce the result on your machine.
+
+### Contributing
+We welcome the addition of new content you’ve encountered in your journey that you feel is relevant. If you are interested in contributing in any capacity, please continue below for more information.
+
+> Siqi to outline how contributing can work (using the git edit feature of bookdown) and PR procedure, given that this repo will be outward facing
+
+<!--chapter:end:01-intro.Rmd-->
+
+# First Steps in R
+
+In this chapter, you can find the basics of data wrangling in R for transforming, cleaning and exploring your data. 
+
+Please take a look at this wonderful SAS2R **cheat sheet** created by **Brendan O’Dowd**. 
+
+This one and many more cheat sheets can be found on the [RStudio website](https://www.rstudio.com/resources/cheatsheets/):
+
+```{r out.height = "460px", out.width='800px', echo=F}
+knitr::include_graphics("./additional resources/sas-r_cheatsheet.pdf")
+```
+
+## R and SAS Syntax
+
+Below are some examples that use `adsl` to show how common operations are done in SAS and R.
+
+### Packages and Sample Data
+```{r, warning = F, message = F}
+# Packages
+library(haven)
+library(tidyverse)
+
+# Data
+adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
+adsl <- read_xpt(paste0(adam_path, "adsl.xpt"))
+
+# Select a few variables
+adsl <- adsl %>%
+  select(STUDYID, USUBJID, SUBJID, AGE, TRT01P, TRTSDT, TRTEDT, RACE, SEX)
+```
+
+### PROC CONTENTS $\rightarrow$ summary()
+To explore the variables of your dataset you can use PROC contents in SAS: 
+
+```{sas, eval = F}
+proc contents data = adsl;
+run;
+```
+
+In R, you can use `str()` and `summary()` instead:
+```{r}
+str(adsl)
+summary(adsl) 
+```
+
+
+### PROC FREQ $\rightarrow$ count()
+In order to get the frequencies for one variables you use PROC FREQ in SAS. 
+```{sas, eval = F}
+PROC FREQ data = adsl;
+  TABLES SEX;
+RUN;
+```
+
+And for cross tables: 
+```{sas, eval = F}
+PROC FREQ data = adsl;
+  TABLES SEX * TRT01P * RACE;
+RUN;
+```
+
+In R we use `table()` or `count()` from the tidyverse package:
+
+**For One Variable**
+```{r, message = F, eval = F}
+table(adsl$SEX)
+
+adsl %>%
+  count(SEX)
+```
+
+```{r, message = F, eval = T, echo = F, warning = F}
+library(kableExtra)
+table(adsl$SEX)
+
+adsl %>%
+  count(SEX) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+
+**For Multiple Variables**
+```{r, message = F, eval = F}
+#for multiple variables
+table(adsl$SEX, adsl$TRT01P, adsl$RACE) 
+
+adsl %>%
+  count(SEX, TRT01P, RACE)
+```
+
+```{r, message = F, eval = T, echo = F}
+#for multiple variables
+table(adsl$SEX, adsl$TRT01P, adsl$RACE) 
+
+adsl %>%
+  count(SEX, TRT01P, RACE) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+### KEEP/DROP $\rightarrow$ select()
+
+```{sas, eval = F}
+DATA adsl2;
+  SET adsl;
+  KEEP subjidn; *or drop subjidn;
+RUN;
+```
+
+In R we use the `select()` function from the tidyverse package. 
+```{r, eval = F}
+# to keep (only) SUBJID
+adsl %>%
+  select(SUBJID) %>%
+  head() # keep only first 6 rows
+
+# to keep all variables except SUBJID
+adsl %>%
+  select(-SUBJID) %>%
+  head()
+```
+
+```{r, eval = T, echo = F}
+# to keep (only) SUBJID
+adsl %>%
+  select(SUBJID) %>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+
+# to keep all variables except SUBJID
+adsl %>%
+  select(-SUBJID) %>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+### Subsetting data (WHERE/IF) $\rightarrow$ filter()
+
+```{sas, eval = F}
+DATA female;
+  SET adsl;
+  WHERE SEX = 'F';
+RUN;
+```
+
+```{r, eval = F}
+adsl %>%
+  filter(SEX == "F") %>%
+  head() 
+
+# multiple conditions:
+adsl %>%
+  filter(SEX == "F" & AGE > 70) %>%
+  head() 
+```
+
+```{r, eval = T, echo = F}
+adsl %>%
+  filter(SEX == "F") %>%
+  head() %>%
+  kbl() %>%
+   kable_classic_2(full_width = F)
+
+# multiple conditions:
+adsl %>%
+  filter(SEX == "F" & AGE > 70) %>%
+  head() %>%
+  kbl() %>%
+   kable_classic_2(full_width = F)
+```
+
+### Sorting data
+
+```{sas, eval = F}
+PROC SORT data=adsl out=adsl_sort_age;
+  BY AGE; 
+RUN;
+```
+
+In R we use the `arrange()` function from tidyverse: 
+
+```{r, warning = F, message = F, eval = F}
+# ascending
+adsl %>%
+  arrange(AGE)%>%
+  head() 
+
+# descending
+adsl %>%
+  arrange(-AGE)%>%
+  head() 
+```
+
+```{r, warning = F, message = F, echo = F, eval = T}
+# ascending
+adsl %>%
+  arrange(AGE)%>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+
+# descending
+adsl %>%
+  arrange(-AGE)%>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+  
+```
+
+### Creating new variables 
+```{sas, eval = F}
+DATA adsl;
+  SET adsl;
+  length AGEGR1 $20.; * length function in R means something different
+  IF age > 50 then AGEGR1 = ‘> 50 years old’;
+  ELSE if age <= 50 then AGEGR1 = ‘<= 50 years old’;
+run;
+```
+
+In R we use the `mutate()` function:
+```{r, eval = F}
+adsl %>%
+  mutate(AGEGR1 = case_when(
+    AGE > 50 ~"> 50 years old",
+    AGE <= 50 ~"<= 50 years old",
+  )) %>%
+  head()
+```
+
+```{r, eval = T, echo = F}
+adsl %>%
+  mutate(AGEGR1 = case_when(
+    AGE > 50 ~"> 50 years old",
+    AGE <= 50 ~"<= 50 years old",
+  )) %>%
+  head() %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+### Merging Data
+
+We create another data set with weight information for some of the subjects: 
+```{r}
+SUBJID <- sample(adsl$SUBJID, 100, replace = FALSE)
+WEIGHT <- sample(50:100, 100, replace = TRUE)
+
+adsl_weight <- data.frame(SUBJID, WEIGHT)
+```
+
+Now, we would like to join the weight column to our adsl data set. 
+
+In SAS, we use the merge function: 
+```{sas, eval = F}
+* inner join;
+data adsl_merge;
+merge adsl(in = inadsl) adsl_weight(in = inweight);
+by subjidn;
+if inadsl and inweight; * inner join in SAS
+run;
+
+* outer join;
+data adsl_merge_all;
+merge adsl(in = inadsl) adsl_weight(in = inweight);
+by subjidn;
+if inadsl or inweight; * default in SAS
+run;
+
+* left join;
+data adsl_merge_left;
+merge adsl(in = inadsl) adsl_weight(in = inweight);
+by subjidn;
+if inadsl;
+run;
+```
+
+In R, we use again the tidyverse package: 
+
+```{r, eval = F}
+# inner join
+adsl%>%
+  inner_join(adsl_weight, by = "SUBJID") 
+
+# outer join
+adsl %>%
+  full_join(adsl_weight, by = "SUBJID")
+
+# left join
+adsl %>%
+  left_join(adsl_weight, by = "SUBJID")
+```
+
+
+### Concatenating Data
+
+To demonstrate stacking or concatenating data sets, we can first split adsl into two parts, each having 5 records with the same columns in common.
+
+```{r, eval = F}
+# first 5 records of adsl
+adsl_1 <- adsl[c(1:5),]
+
+# the next 5 records of adsl
+adsl_2 <- adsl[c(6:10),]
+```
+
+In SAS, you could use the set command:
+```{sas, eval  = F}
+DATA adsl_stacked;
+ SET adsl_1 adsl_2;
+RUN;
+```
+
+In R, you may accomplish this like so:
+```{r, eval = F}
+# tidyverse method - bind_rows()
+adsl_stacked <- adsl_1 %>%
+  bind_rows(adsl_2) 
+```
+
+<!--chapter:end:02-first_steps.Rmd-->
+
+# Data
+
+In this section, we provide some ways to obtain and use data for learning purposes. We differentiate between external data (data from an outside source such as a file or web address) and internal data (data that already exists within R).
+
+## External Data
+
+Data may be directly imported into the R environment using packages. Most often, data will take the form of Comma Separated Values (`.csv`), Excel Spreadsheets (`.xlsx`), SAS (`.sas7bdat`) or JSON (`.json`). 
+
+```{r echo=FALSE}
+sources <- data.frame(Package = c('readr','readxl','haven','jsonlite'),
+                      Formats = c('.csv, .txt', '.xls, .xlsx', '.sas7bdat, .sas7bcat, .xpt','.json'),
+                      Reference = c('<a href="https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf">Cheat Sheet</a>',
+                  '<a href="https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf">Cheat Sheet</a>',
+                  '<a href="https://haven.tidyverse.org/reference/read_sas.html">Package Site</a>',
+                  '<a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html">Vignette</a>'),stringsAsFactors = FALSE)
+
+
+kableExtra::kable(sources, escape = FALSE)
+```
+
+### CDISC Datasets
+
+The <a href="https://advance.phuse.global/display/WEL/Test+Dataset+Factory">PHUSE Test Datasets Factory</a> provides a convenient set CDISC datasets in `xpt` format to experiment with. You may access them through the following github repositories:
+
++ <a href="https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM">ADaM Data</a>
++ <a href="https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_SDTM">SDTM Data</a>
+
+Below is an example of using the `haven` package to read in `adsl.xpt` directly from the ADaM repository. Note you can also chose to download these data and read them locally from your computer.
+
+```{r, message = F, warning = F, error = F}
+library(haven)
+
+adsl <- read_xpt("https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/adsl.xpt")
+```
+
+```{r echo = F}
+kableExtra::kable(head(adsl, n=5), escape = FALSE, align = 'c')
+```
+
+## Internal Data
+
+Internal data sources include those that come bundled with R packages or data you create yourself. 
+
+### Package Data
+
+The `datasets` package comes with your default installation of R and houses many example datasets you can utilize. 
+
+Simply run the following to learn about the different ones included.
+```{r, eval = F}
+library(help = "datasets")
+```
+
+Once you've made a selection, running the following will make that data available in your R session.
+```{r, eval = F}
+# ToothGrowth looks interesting
+data(ToothGrowth)
+```
+
+```{r echo = F}
+kableExtra::kable(head(ToothGrowth, n=5), escape = FALSE, align = 'c')
+```
+
+Using package data is not just limited to the `datasets` package. Many specialized packages will make an effort to include some data to demonstrate how their functions work. For example, the `admiral.test` package has many of the SDTM datasets listed in the above repo.
+
+### Simulating Your Own
+
+In some cases you may wish to simulate your own data. You can do so quite easily using a combination of `sample` and `r*` functions built into R.
+
+Below is an example of simulating a few variables typically found in an ADSL dataset.
+
+```{r}
+my_sim_data <- data.frame(subjidn = 1:10,
+                          sex = sample(c('M','F'), 10, replace = TRUE),
+                          age = round(rnorm(10, mean = 30, sd = 5)),
+                          stringsAsFactors = FALSE
+)
+```
+
+```{r echo = F}
+kableExtra::kable(head(my_sim_data, n=5), escape = FALSE, align = 'c')
+```
+
+
+<!--chapter:end:03-data.Rmd-->
+
+# Tables
+
+In this section, we use the `Tplyr` package to build a demographics table using a subject-level dataset. 
+
+## Building
+
+### Dataset Source
+For demonstration purposes, we will use the `adsl` from the  <a href="https://advance.phuse.global/display/WEL/Test+Dataset+Factory">PHUSE Test Datasets Factory</a> repository.
+
+```{r, message = F, warning = F, error = F}
+library(haven)
+
+adsl <- read_xpt("https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/adsl.xpt")
+```
+
+### String Formatting
+This section sets the default formats for tables built with Tplyr.  
+
+For each variable type (continuous, categorical), we specify the following:
+
+1. Which summary statistic(s) should be computed?
+2. How should the summary statistic(s) be formatted for display?
+
+Once set, these formats are carried over to your table automatically.
+```{r, message = F, warning = F}
+library(Tplyr)
+
+options(
+  # Categorical variable defaults
+  tplyr.count_layer_default_formats =
+    list(n_counts = f_str("xxx [xx.xx%]", n, pct)),
+  
+  # Continuous variable defaults
+  tplyr.desc_layer_default_formats =
+    list('N'         = f_str('xx', n),
+         'Mean [SD]' = f_str('xx.xx [xx.xxx]', mean, sd),
+         'Median'    = f_str('xx.x', median),
+         'Min, Max'  = f_str('xx, xx', min, max))
+)
+```
+
+### Create
+For demonstration purposes, we will select a handful of variables from the adsl dataset to work with.
+
+```{r, warning = F, message = F}
+library(dplyr)
+
+# Initiate Tplyr, specify treatment variable, optional where condition
+my_table <-  tplyr_table(adsl, TRT01P, where = SAFFL == "Y") %>%
+  
+  # Add a total group column
+  add_total_group() %>%
+  
+  # Add individual variables here
+  add_layer(group_desc(AGE, b = "Age (years)")) %>%
+  add_layer(group_count(AGEGR1, b = "Age Group 1 (years)")) %>%
+  add_layer(group_count(SEX, b = "Gender")) %>%
+  add_layer(group_count(ETHNIC, b = "Ethnicity")) %>%
+  add_layer(group_desc(BMIBL, b = "Baseline Body Mass Index (kg/m2)")) %>%
+  
+  # Build
+  build()
+```
+
+## Formatting
+
+### Post Processing
+By default, Tplyr will build your table and store it as a tibble. It can be accessed directly in your environment by simply calling it.
+
+```{r}
+head(my_table, n = 9)
+```
+
+Since it is tibble, you are free to further process or wrangle it to your liking. Below we'll apply some light formatting using a combination of `Tplyr` and `dplyr`:
+
+1. Remove repeating variable labels and insert breaks between variable rows
+2. Reorder the columns
+3. Remove extraneous columns not of interest for display (i.e. meta data created by Tplyr) 
+
+```{r, message = F, warning = F}
+library(dplyr)
+
+my_table <- my_table %>%
+  
+  # remove repeating labels
+  apply_row_masks(., row_breaks = TRUE) %>%
+  
+  # specify order of relevant variables
+  select(row_label1, 
+         row_label2,
+         `var1_Xanomeline High Dose`,
+         `var1_Xanomeline Low Dose`,
+         var1_Placebo,
+         var1_Total)  
+```
+
+We can see the formatting has taken effect by recalling it in our environment. Specifically, compare the `row_label1` variable below to the previous section while also noting the order of columns has changed to our specification.
+
+```{r}
+head(my_table, n = 9)
+```
+
+### Displaying
+
+While `Tplyr` aided us in *building* a summary tables, other packages exist to help us *display* them. Once package we will focus on is the `flextable` package. This table display package is quite powerful and offers a high degree of customization.
+
+We turn the interested reader to the <a href="https://ardata-fr.github.io/flextable-book/"> flextable book</a> to view additional examples.
+
+```{r, warning = F, message = F}
+library(flextable)
+
+# a basic flextable
+my_flextable <- my_table %>%
+  
+  # start flextable 
+  flextable() %>%
+  autofit()
+```
+
+```{r}
+my_flextable
+```
+
+We can apply some `flextable` formatting to alter the display of the table.
+
+```{r}
+# a nicer flextable
+my_flextable <- my_table %>%
+  
+  # start flextable 
+  flextable() %>% 
+  autofit() %>%
+  
+  # add some padding between rows
+  padding(padding = 0.5) %>%
+  
+  # adjust width of first two columns
+  width(j = 1:2, width = 4) %>%
+  
+  # align treatment columns to center
+  align(part = "all", align = "center", j = 3:6) %>%
+  
+  # column header labels
+  set_header_labels(., values = list(
+    row_label1 = 'Variable',
+    row_label2 = ' ',
+    `var1_Xanomeline High Dose` = 'Xanomeline \nHigh Dose',
+    `var1_Xanomeline Low Dose` = 'Xanomeline \nLow Dose',
+    var1_Placebo = 'Placebo',
+    var1_Total = 'Total')) %>%
+  
+  # header + footers
+  add_header_lines(values = "Table: Demographics (Safety Analysis Set)") %>%
+  add_footer_lines(values = "This was produced in R!") %>%
+  
+  # font size, font name
+  fontsize(part = "all", size = 8) %>%
+  font(part = "all", fontname = "Times")  
+```
+
+```{r echo = F}
+my_flextable
+```
+
+## Exporting
+
+To export our table to MS Word (.docx), we may use the `officer` package. This package simplifies working with various Microsoft Office formats and integrates nicely with `flextable`.
+
+```{r, warning = F, message = F, eval = F}
+library(officer)
+
+# send the flextable to .docx output
+read_docx() %>%
+  body_add_flextable(my_flextable) %>%
+  print(target = "my_document.docx")
+```
+
+In your working directory, you should now see the file `my_document.docx` has been created and contains your table.
+
+
+<!--chapter:end:04-tables.Rmd-->
+
+# Figures & Plots
+
+## Basics
+### Building a plot using ggplot2
+
+#### Packages and Sample Data
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+# Packages
+library(haven)
+library(tidyverse)
+
+# Data
+adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
+adsl <- as.data.frame(haven::read_xpt(paste0(adam_path, "adsl.xpt")))
+```
+
+Let's create a basic scatter plot of weight vs height.
+```{r, eval = F}
+library(ggplot2)
+
+# basic scatter plot of weight vs height
+my_scatter_plot <- ggplot(adsl, aes(x = HEIGHTBL, y = WEIGHTBL)) +
+  geom_point()
+```
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+library(ggplot2)
+ggplot(adsl, aes(x = HEIGHTBL, y = WEIGHTBL)) +
+  geom_point()
+```
+
+### Exporting plots
+You may export plots as png files a few ways. If your plot is created in ggplot2, you can use the `ggsave()` function to export as png:
+```{r, eval = F}
+# save plot as a png file
+ggsave(plot = my_scatter_plot, 
+       filename = "my_plot_output_1.png", 
+       width = 7, 
+       height = 5, 
+       units = "in")
+```
+
+The more general way to save plots as png files is to use the `png()` function. It can work with ggplot2, but also plots created in base R.
+```{r, eval = F}
+png(filename = "my_plot_output_2.png", 
+    width = 7, 
+    height = 5, 
+    units = "in", 
+    res = 300)
+
+print(my_scatter_plot)
+dev.off()
+```
+
+## Examples
+
+### Swimmer Plot
+
+For this example we use the **swimplot** package for plotting. It makes the creation of swimmer plots very easy and is based on ggplot2 and thus allows nice customizations. However, if even more customization is required, swimmer plots can also be created by using ggplot2 only.  
+
+A little demo how you could use the package is given below, in case you would like to find out more, you can check out [this](https://cran.r-project.org/web/packages/swimplot/vignettes/Introduction.to.swimplot.html). 
+
+
+#### Packages and Sample Data
+```{r, message = F, warning = F}
+# Packages
+library(haven)
+library(tidyverse)
+library(swimplot)
+
+# Data
+adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
+adsl <- haven::read_xpt(paste0(adam_path, "adsl.xpt"))
+adae <- haven::read_xpt(paste0(adam_path, "adae.xpt"))
+adtte <- haven::read_xpt(paste0(adam_path, "adtte.xpt"))
+```
+
+We have to apply some changes to the data so that they can be processed by the plot functions later on. The number of subjects is limited to 50 for display purposes and we create our own response duration variable because we only have the start date of the event given in those data.
+
+```{r, message = F}
+adsl_new <- adsl %>%
+  select(USUBJID, ARM, TRTDURD, SEX) %>%
+  slice(1:50) 
+adae_new <- adae %>%
+  select(USUBJID, AEDECOD, AESEV, AEREL, ASTDY) %>%
+  filter(USUBJID %in% adsl_new$USUBJID & ASTDY >= 0)
+adtte_new <- adtte %>%
+  select(USUBJID, EVNTDESC, AVAL) %>%
+  filter(USUBJID %in% adsl_new$USUBJID & EVNTDESC != "Study Completion Date")  
+random_duration_of_events <- sample(1:25, nrow(adtte_new), replace = T)
+adtte_new <- adtte_new %>% 
+  bind_cols(random_duration_of_events) %>%
+    mutate(Resp_end = AVAL + random_duration_of_events )
+adsl_new <- as.data.frame(adsl_new)
+adae_new <- as.data.frame(adae_new)
+adtte_new <- as.data.frame(adtte_new)
+```
+
+#### Basic swimmer plot
+
+A basic swimmer plot just consists of a simple bar chart. 
+```{r}
+swimmer_plot(df=adsl_new,
+             id='USUBJID',
+             end='TRTDURD',
+             fill='lightblue',
+             width=.85)
+```
+
+Now, treatment information is added. 
+
+```{r}
+arm_plot <- swimmer_plot(df=adsl_new,
+                         id='USUBJID',
+                         end='TRTDURD',
+                         name_fill='ARM',
+                         id_order='ARM',
+                         col="black",
+                         alpha=0.75,
+                         width=.8)
+arm_plot
+```
+
+
+The plot could be stratified by any other variable of interest, in this case: SEX. 
+```{r}
+swim_plot_stratify <-swimmer_plot(df=adsl_new,
+                                  id='USUBJID',
+                                  end='TRTDURD',
+                                  name_fill='ARM',
+                                  col="black",
+                                  alpha=0.75,
+                                  width=.8,
+                                  base_size=14,
+                                  stratify= c('SEX'))
+swim_plot_stratify
+```
+
+
+#### Adding adverse event information to the plot
+
+```{r}
+AE_plot <- arm_plot + 
+  swimmer_points(df_points=adae_new,
+                 id='USUBJID',
+                 time='ASTDY',
+                 name_shape='AESEV',
+                 size=2.5,
+                 fill='white', 
+                 name_col='AEREL')
+AE_plot
+```
+
+#### Adding time-to-event information to the plot
+
+```{r, message = F, warning = F}
+Response_plot <- arm_plot +
+  swimmer_lines(df_lines=adtte_new,
+                id='USUBJID',
+                start ='AVAL',
+                end='Resp_end',
+                name_col='EVNTDESC',
+                size=1)
+Response_plot
+```
+
+#### Customize plot
+
+```{r, message = F, warning = F}
+Response_plot_with_points <- Response_plot +
+  swimmer_points_from_lines(df_lines=adtte_new,
+                            id='USUBJID',
+                            start='AVAL',
+                            end='Resp_end',
+                            name_col='EVNTDESC',
+                            size=2) +
+  scale_fill_manual(name="Treatment",
+                    values=c("Placebo" ="#A9342F", 
+                             "Xanomeline High Dose"="#5B7ACE",
+                             "Xanomeline Low Dose"='#FFC300'))+
+  scale_color_manual(name="Response",
+                     values=c("grey20"))+
+  scale_shape_manual(name='',
+                     values=c(17,15),
+                     breaks=c('AVAL','Resp_end'),
+                     labels=c('Response start','Response end'))+
+  guides(fill = guide_legend(override.aes = list(shape = NA))) +
+  scale_y_continuous(name = "Time since enrollment")
+
+Response_plot_with_points
+```
+
+### Waterfall Plot
+#### Packages and Sample Data
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+# Packages
+library(tidyverse)
+library(gridExtra)
+library(grid)
+
+# Data
+wp <- data.frame(subjidn = 1:30,
+                 trtp = sample(c('Drug','Placebo'), replace = T, 30),
+                 aval = runif(30, min = -40, max = 40))
+```
+
+```{r echo = F}
+head(wp) %>% 
+  kableExtra::kable(align = 'c')
+```
+
+#### Basic Waterfall Plot
+Create an initial waterfall plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+basic_waterfall <- ggplot(wp, aes(y = aval,x = reorder(subjidn, -aval))) +
+  geom_bar(stat = "identity")
+
+basic_waterfall
+```
+
+
+#### Adding Customizations
+Add a few customizations to the waterfall plot
+
+1. Bar fill color is determined by trtp value
+2. Specify custom colors, name the legend
+3. Specify Y-axis goes from -40 to 40, by increments of 10
+4. Add in a Y-axis label
+5. Specify a base theme
+6. Remove the X-axis
+7. Move legend to bottom of graph
+
+#### Customized Waterfall Plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+custom_waterfall <- ggplot(wp, aes(y = aval, x = reorder(subjidn, -aval), fill = trtp)) +                            
+  geom_bar(stat = "identity") +
+  scale_fill_manual("Planned Treatment Arm", values = c('#00bbff','#89d329')) +
+  scale_y_continuous(limits = c(-40,40), breaks = seq(-40, 40, by = 10)) +      
+  ylab("Maximum reduction of tumor size (%)\n") +                              
+  theme_light() +                                                               
+  theme(axis.title.x = element_blank(),                                         
+        axis.line.x  = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.position = "bottom")                                             
+          
+custom_waterfall
+```
+
+#### Study Example
+
+* A special waterfall plot layout is needed in a real study. In this layout, biomarker information in the subject level needs to be added at the bottom of the waterfall plots.
+
+* The dataset for the plot was derived from ADRS and ADSL in SAS; simulated data is used in this demo.
+
+Simulate Data:
+```{r,  message=FALSE, warnings=FALSE}
+set.seed(100)  
+
+n <- 120   # size/records of simulated data
+
+dat_all <- 
+  data.frame(SUBJID = 120010100:(120010100+n-1),
+           AVAL = c(rnorm(round(0.8*n), 0, 20), rep(0, round(0.2*n))) %>% sample(),
+           OVERALLRESP = c("PR", "SD","PD") %>% sample(size=n, replace=TRUE),
+           AMEDGRPN = seq(10, 50, 10) %>% sample(size=n, replace=TRUE),
+           DOR = rpois(n, 40),
+           AVISIT = c("C1", "C2", "C3","EOT") %>% sample(size=n, replace=TRUE),
+           ATMLOSS_L = c("E", "L", "Data unavailable") %>% sample(size=n, replace=TRUE),
+           ATMLOSS_P = c("E", "L", "Data unavailable") %>% sample(size=n, replace=TRUE),
+           ATMLOSS_R = c("E", "L", "Data unavailable") %>% sample(size=n, replace=TRUE),
+           IDFOOT = "Bayer: /study/path/.../f_waterfall.sas               30NOV2021 16:06"
+           ) %>%
+  mutate_at(vars("OVERALLRESP", "DOR", "IDFOOT"), as.character)
+```
+
+* X: SUBJID 
+* Y: AVAL (derived from ADRS.AVAL when ADRS.PARAM = "Maximum Tumor Reduction (%)") 
+* Label: OVERALLRESP (derived from ADRS.AVAL when ADRS.PARAM = "Best Overall Response") 
+* Subset: AMEDGRPN (5 groups)
+* A graph function is created in the real study for different analysis groups, in this demo, we subset data to AMEDGRPN = 50. 
+
+```{r, echo=FALSE, message=FALSE, warnings=FALSE}
+dat_all %>% 
+  filter(AMEDGRPN==50) %>% 
+  select(SUBJID, AVAL, OVERALLRESP, AMEDGRPN, 
+         DOR, AVISIT, ATMLOSS_L, ATMLOSS_P, ATMLOSS_R) %>%
+  head() %>%
+  kableExtra::kable(align = 'c')
+
+dat <- dat_all %>% filter(AMEDGRPN==50)
+```
+
+**Create a waterfall plot with simulated data and below customization**
+
+1. Add x/y-axis labels through function "labs"
+2. SUBJID has long digits, below functions are used to avoid overlapping at x-axis:
+    + function stringr::str_wrap: add split character “\n" between digits
+    + function gsub: add space between digits to enable the use of str_wrap
+    + function str_replace_all: remove space
+3. Specify legend title, order/colors (similar to SAS sgplot - dattrmap)
+4. Annotation on the top of the bar when Y=0  
+5. Adjust background, legend, and size/color/font of x/y-axis aesthetics through Theme
+
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(9, 4)}
+waterfall.plot <- dat %>% ggplot(aes(reorder(SUBJID, -AVAL), AVAL, fill =OVERALLRESP)) + 
+    geom_bar(stat="identity") +
+  labs(x = "Subject", 
+       y = "Best % Change from baseline \n in sum of diameters \n (target lesions)\n") +
+  scale_x_discrete(labels = function(x) str_wrap(gsub("([0-9])([0-9])", "\\1 \\2 ", x), 
+                                                     width = 5) %>% 
+                     str_replace_all(" ", "")) +
+  scale_fill_manual("Best Response",
+                    breaks = c("PR", "SD","PD"),
+                    values=c("PR"='#89d329',
+                             "SD"="#756bb1",
+                             "PD"='#00bbff')) + 
+  geom_text(aes(label = if_else(AVAL == 0,OVERALLRESP,""),fontface="bold"), 
+            vjust = -1,
+            size=3,
+            color="black") + theme_bw() +     
+  theme(
+    axis.text = element_text(size=12,color="black",face = "bold"),  
+    axis.title.y = element_text(size=12, face="bold"), 
+    axis.title.x = element_blank(),  
+    legend.background = element_rect(color = "steelblue", linetype = "solid"),
+    legend.justification = c(1, 1), 
+    legend.position = c(1, 1),
+    legend.direction = "horizontal",
+    legend.text = element_text(size=8, color = "black", face = "bold"),
+    legend.title = element_text(size=8, color = "black", face = "bold"),  
+    plot.caption = element_text(hjust = 0, size = 10, color = "blue"), 
+    plot.caption.position =  "plot"
+  ) 
+
+waterfall.plot
+```
+
+As requested from the study, more information at subject level needs to be added in the bottom of the waterfall plots. Thus, two more plots are created (add-in plot1/2) to display the subject level information. 
+
+* Add-in plot 1: visit and duration of response information at subject level
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(9, 3)}
+var <- c("DOR", "AVISIT")
+var_label <- c("Duration (days)", "Timepoint")
+
+add.plot1 <- dat %>%
+  reshape2::melt(measure.vars = eval(var), value.name = "label", variable.name = "layer") %>%
+  mutate(layer = factor(layer, levels = var, labels = var_label)) %>%
+  ggplot(aes(reorder(SUBJID, -AVAL))) +
+  geom_text(aes(y = layer, label = label), size = 3, fontface = "bold") +
+  labs(y = "", x = NULL) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(
+      size = 10,
+      colour = "black",
+      face = "bold"
+    ),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank(),
+    strip.text = element_blank()
+  ) +
+  coord_fixed(ratio = .8)
+add.plot1
+```
+
+* Add-in plot 2: biomarker-related information at subject level, footnotes are added in this plot
+  + wrap long footnote by adding "\\n\" or using stringr::str_wrap
+  + display SAS macro variable "&idfoot."
+
+Footnotes:
+```{r}
+footnote1 <- 'Footnote1: "\\n\" can be used to split long footnote into next line.'
+footnote2 <- "Footnote2: To avoid manually adding split character. The function stringr::str_wrap	can be used here to wrap the long text with a specified width."
+footnote <- lapply(c(footnote1,
+                     footnote2,
+                     "",
+                     dat$IDFOOT[1]),
+                   function(x) str_wrap(x, width=120)) %>% # apply str_wrap to individual footnote
+  unlist() %>%       # convert list structure to vector
+  str_flatten('\n')  # add split character(new line) between footnotes
+```
+
+```{r, error = FALSE, message=FALSE, warnings=FALSE, fig.dim = c(9, 3)}
+var <- c("ATMLOSS_L", "ATMLOSS_P","ATMLOSS_R")
+var_label <- c("Local", "Prospective", "Retrospective")
+
+add.plot2 <- dat %>%  
+  reshape2::melt(measure.vars = eval(var), 
+                 value.name = "label",
+                 variable.name = "layer") %>%
+  mutate(label=case_when(
+    label == "L" ~ "ATM Loss",
+    label == "E" ~ "ATM Expressed",      
+    label == "9" ~ "Data unavailable",
+    TRUE ~ label
+  )) %>% 
+  mutate(layer = factor(layer, levels = rev(var), labels = rev(var_label))) %>% 
+  ggplot() +
+  aes(reorder(SUBJID, -AVAL), layer, color=label,shape=label) +
+  geom_point(size=3)+
+  scale_shape_manual(breaks = c("ATM Loss","ATM Expressed", "Data unavailable"), 
+                     values = c("ATM Loss"=15,"ATM Expressed"=0, 
+                                "Data unavailable"=7))+
+  scale_color_manual(values = c("ATM Loss"="black", "ATM Expressed"="black", 
+                                "Data unavailable"= 'black'))+
+  theme_classic()+
+  theme(axis.text=element_text(size=10, colour = "black",face = "bold"),
+        axis.title=element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        legend.title = element_blank(),
+        legend.text = element_text(size=10, color = "black", face = "bold"),
+        legend.position = "bottom",
+        panel.border = element_blank(),
+        panel.grid = element_blank(), 
+        strip.text = element_blank(),
+        plot.caption = element_text(hjust = 0, size = 10), 
+        plot.caption.position =  "plot"
+  )+
+  coord_fixed(ratio=.9)+ 
+  labs(caption = footnote)
+add.plot2
+```
+
+* The following functions are used to combine three plots aligned with x value.
+  + ggplot2::ggplotGrob
+  + gridExtra::gtable_rbind
+  + grid::grid.draw
+  
+* Align the three plots with the same x-axis (SUBJID). 
+  + waterfall.plot 
+  + add.plot1 
+  + add.plot2 
+  
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(10, 7)}
+p1 <- waterfall.plot %>% ggplotGrob()
+p2 <- add.plot1 %>% ggplotGrob()
+p3 <- add.plot2 %>% ggplotGrob()
+gtable_rbind(p1, p2, p3,
+             size='first') %>% grid.draw()
+```
+
+### Spaghetti Plot
+#### Packages and Sample Data
+```{r message = F, warning = F}
+# Packages
+library(tidyverse)
+library(gg.gap)
+
+# Data
+set.seed(100)  
+
+n <- 50   # number of subjects, each subject has 12 data points
+
+spaghetti_sim <- data.frame(SUBJIDN = rep(1:n,each=12),
+                            X = rep(1:12,n),
+                            Y = c(rgamma((n*12-5), 5, 1), rnorm(5, 200,40)) %>% sample(),
+                            TRT01AN = c("Drug","Placebo") %>% sample(size=n*12, replace=TRUE))
+```
+
+```{r echo = FALSE}
+spaghetti_sim %>% head() %>%
+  kableExtra::kable(align = 'c')
+```
+
+#### Basic Spaghetti plot
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(10, 7)}
+p_spaghetti <- spaghetti_sim %>% 
+  ggplot(aes(X, Y, group = SUBJIDN, colour = TRT01AN)) + 
+  geom_point() + geom_line(size = 0.3) + theme_bw() + 
+  labs(y="Y values", 
+       x="Months since start of study treatment",
+       colour = "Actual Treatment for Period 01 (N)") +
+  theme(legend.background = element_rect(size=0.1, linetype="solid", 
+                                         colour ="black"),
+        legend.position="bottom", legend.box = "horizontal")
+p_spaghetti
+```
+
+#### Spaghetti Plot with Broken Y
+Different scales presented in the same plot when outliers are presented, to enlarge the detailed part of small values.
+
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(10, 7)}
+#library(gg.gap)
+
+p_spaghetti_break <- gg.gap(plot=p_spaghetti, tick_width=c(1,70),
+         segments=c(15,25), rel_heights=c(8,0,1),
+         ylim=c(0,235)) 
+p_spaghetti_break
+```
+
+### Spider Plot
+#### Packages and Sample Data
+Create a sample data set to visualize
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+# Packages
+library(tidyverse)
+library(ggrepel)
+
+# Data
+sp <- data.frame(subjidn = rep(1:5, times = c(5,4,5,3,4)),
+                 trtp = rep(c('drug','placebo'), times = c(8,13)),
+                 avisit = c(0:4,0:3, 0:4, 0:2, 0:3),
+                 aval = c(0,5,15,20,20,
+                          0,-10,-20,-15,
+                          0,-30,-25,-35,-30,
+                          0,15,30,
+                          0,-20,-15,-20))
+```
+
+```{r echo = F}
+sp %>% 
+  head(n=5) %>%
+  kableExtra::kable(align = 'c')
+```
+
+#### Basic Spider Plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+basic_spider <- ggplot(sp, aes(x = avisit, y = aval, group = subjidn)) +
+  geom_line()
+
+basic_spider
+```
+
+#### Adding Customizations
+
+Add a few customizations to the spider plot
+
+1. Line color is determined by `trtp` value
+2. Add points to each line 
+3. Add a dashed reference line at Y = 0
+4. Specify custom colors, name the legend
+5. Specify Y-axis goes from -40 to 40, by increments of 10
+6. Add in a Y-axis label
+7. Add in a X-axis label
+8. Specify a base theme
+9. Move legend to bottom of graph
+
+#### Customized Spider Plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+custom_spider <- ggplot(sp, aes(x = avisit, y = aval, group = subjidn, color = trtp)) +                             
+  geom_line() +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_color_manual("Planned Treatment Arm", values = c('#00bbff','#89d329')) +
+  scale_y_continuous(limits = c(-40,40), breaks = seq(-40, 40, by = 10)) +      
+  ylab("Change in Target Lesion from Baseline (%)\n") +                         
+  xlab("Time (weeks)") +                                                        
+  theme_light() +                                                               
+  theme(legend.position = "bottom")                                             
+  
+custom_spider
+```
+
+#### Subject Labels Customization
+
+Add subject Labels (IDs) at the end of each line
+
+```{r}
+sp_ends <- sp %>% 
+  group_by(subjidn) %>% 
+  top_n(1, avisit) 
+```
+
+```{r, echo = F}
+sp_ends %>%
+  kableExtra::kable(align = 'c')
+```
+
+```{r, warning = F, message = F}
+# library(ggrepel)
+
+custom_spider +
+  geom_text_repel(
+    aes(label = subjidn),
+    color="black",
+    data=sp_ends,
+    size = 3,
+    direction = "x",
+    hjust = 1
+  )
+```
+
+### Survival Plot 
+#### Kaplan-Meier statistics and plotting
+
+In the following example the _survfit_ function from the _survival_ package is used to calculate Kaplan-Meier statistics from time-to-event data. The model statistics can be inspected (using _broom_ - a generic function to extract statistics from R models). 
+
+Passing the model to the _ggsurvplot_ function from the _survminer_ package creates a Kaplan-Meier curve. The configuration tries to mimic the known SAS output as close as possible (e.g. number at risk table style etc.).
+
+#### Packages and Sample Data
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+# Packages
+library(tidyverse)
+library(dplyr)
+library(survminer)
+library(survival)
+library(broom)
+library(flextable)
+
+# Data
+adtte <- haven::read_xpt(
+  paste0("https://github.com/phuse-org/TestDataFactory/",
+         "raw/main/Updated/TDF_ADaM/adtte.xpt"))
+``` 
+
+Filter time-to-event parameter and select required variables. The piping command directly passed filtered and selected data to the `survfit` function and creates the model. 
+
+>**Note:** The event parameter from survival function (survival::Surv) is the status   indicator, normally 0=alive, 1=death; while ADTTE.CNSR=0 usually means event  occurred(e.g., death), ADTTE.CNSR=1 represents censoring. Thus, “1-CNSR” is used here to  accommodate the CDISC ADaM standard.
+
+```{r}
+surv_model <- adtte %>%
+  filter(PARAMCD == "TTDE") %>%
+  select(STUDYID, USUBJID, PARAMCD, AVAL, CNSR, TRTA) %>%
+  survfit(Surv(AVAL, 1-CNSR) ~ TRTA, data = .)
+```
+
+#### Inspecting fitted survival model
+
+```{r, eval = F, echo = T}
+head(tidy(surv_model))  
+```
+
+```{r, echo = F, eval = T}
+head(tidy(surv_model)) %>%
+ kableExtra::kable(align = 'c')
+```
+#### Plotting custom configured Kaplan-Meier curves without confidence intervals
+
+>**Note:** Let´s assume a month is defined as 30.4375 (days); 
+The xscale parameter d_m converts days (input) to month.
+If six months breaks are required for the numbers-at-risk table this would mean: 
+break.x.by = 182.625 (6*30.4375).
+
+```{r, fig.width=15, fig.height=10, out.width="680px"}
+ggsurvplot(
+  fit = surv_model,
+  data = adtte,
+  risk.table = TRUE,
+  #ylab = ylabs,
+  xlab = "Months",
+  linetype = "strata",
+  conf.int = F,
+  legend.title = "Randomized Treatment",
+  legend = c(0.1, 0.1),
+  #palette = c(color_trt1,color_trt2),
+  risk.table.title = "Number of subjects at risk",
+  risk.table.y.text = F,
+  risk.table.height = .15,
+  censor.shape = 1,
+  censor.size = 3,
+  ncensor.plot = F,
+  #xlim = c(0,250),
+  xscale = "d_m",
+  break.x.by = 30.4375,
+  break.y.by = .1,
+  ggtheme = theme_survminer(
+    font.main = c(10, "bold"),
+    font.submain = c(10, "bold"),
+    font.x = c(12, "bold"),
+    font.y = c(12, "bold"),
+  ) + theme(panel.border = element_rect(fill = NA)),
+  tables.theme = theme_cleantable()
+)
+```
+
+#### Plotting custom configured Kaplan-Meier curves with confidence intervals
+
+```{r, fig.width=15, fig.height=10, out.width="680px"}
+ggsurvplot(
+  fit = surv_model,
+  data = adtte,
+  risk.table = TRUE,
+  #ylab = ylabs,
+  xlab = "Months",
+  linetype = "strata",
+  conf.int = T,
+  legend.title = "Randomized Treatment",
+  legend = c(0.1, 0.1),
+  #palette = c(color_trt1,color_trt2),
+  risk.table.title = "Number of subjects at risk",
+  risk.table.y.text = F,
+  risk.table.height = .15,
+  censor.shape = 1,
+  censor.size = 3,
+  ncensor.plot = F,
+  #xlim = c(0,250),
+  xscale = "d_m",
+  break.x.by = 30.4375,
+  break.y.by = .1,
+  ggtheme = theme_survminer(
+    font.main = c(10, "bold"),
+    font.submain = c(10, "bold"),
+    font.x = c(12, "bold"),
+    font.y = c(12, "bold"),
+  ) + theme(panel.border = element_rect(fill = NA)),
+  tables.theme = theme_cleantable()
+)
+```
+
+<!--chapter:end:05-plots.Rmd-->
+
+# Future
+
+This section collections areas of the catalog contains ideas for future content not currently covered. The idea is we have individuals across pharma add to these areas (or suggest new ones!).
+
+## Areas of Expansion
+- ADaM derivation with `{admiral}` and/or `{dplyr}`
+- define.xml
+
+## Content 
+- Working with dates in R
+- Data exportation
+- More examples using Pharmaverse-based packages as they mature
+
+<!--chapter:end:06-future.Rmd-->
+
 
 <!--chapter:end:index.Rmd-->
 
