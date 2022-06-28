@@ -2,7 +2,7 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [24]
+    branches: [main]
 
 name: build_bookdown
 
@@ -16,7 +16,7 @@ jobs:
            git config --global user.name "Siqi Z. Bot"
            
        - name: Checkout Repo
-         uses: actions/checkout@v2
+         uses: actions/checkout@v3
          with: 
            repository: ${{ github.repository }}
            ref: main
@@ -52,7 +52,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
         with: 
-           ref: 24
+           ref: main
         
       - name: Setup R
         uses: r-lib/actions/setup-r@v1
@@ -87,5 +87,4 @@ jobs:
       artifact: site
       dir:      site
       preview:  ${{ github.ref != 'refs/heads/main' && github.run_id || '' }}
-
       # namespace:  'example' # add a custom path your documentation will be available on

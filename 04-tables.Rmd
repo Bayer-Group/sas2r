@@ -154,8 +154,10 @@ my_flextable <- my_table %>%
   add_footer_lines(values = "This was produced in R!") %>%
   
   # font size, font name
-  fontsize(part = "all", size = 8) %>%
-  font(part = "all", fontname = "Times")  
+  fontsize(part = "all", size = 8)
+  # font()
+  # font(part = "all", fontname = "Times")  
+  # This errors, perhaps version issue.  -- SZ
 ```
 
 ```{r echo = F}
