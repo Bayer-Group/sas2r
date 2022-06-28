@@ -4,3 +4,5 @@
 .Ruserdata
 /_bookdown_files
 _main.Rmd
+/_main_files
+**/*.html
