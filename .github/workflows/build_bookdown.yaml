@@ -16,7 +16,7 @@ jobs:
            git config --global user.name "Siqi Z. Bot"
            
        - name: Checkout Repo
-         uses: actions/checkout@v3
+         uses: actions/checkout@v2
          with: 
            repository: ${{ github.repository }}
            ref: main
