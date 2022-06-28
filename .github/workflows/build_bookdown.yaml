@@ -36,6 +36,8 @@ jobs:
            cd ${{ github.workspace }}
 
            R -e "renv::restore()"
+           R -e 'install.packages("bookdown")'
+           R -e 'install.packages("tidyverse")'
            R -e "bookdown::render_book()"
            
            git checkout -b build
@@ -66,7 +68,9 @@ jobs:
       - name: Build & push
         run: |
            R -e "renv::restore()"
-           R -e 'bookdown::render_book(output_dir = "site")'
+           R -e 'install.packages("bookdown")'
+           R -e 'install.packages("tidyverse")'
+           R -e 'bookdown::render_book(output_dir = "site"")'
 
       - uses: actions/upload-artifact@v3
         with:
@@ -82,7 +86,5 @@ jobs:
     with:
       artifact: site
       dir:      site
-      preview:  ""
-      # preview:  ${{ github.ref != 'refs/heads/main' && github.run_id || '' }}
-
+      preview:  ${{ github.ref != 'refs/heads/main' && github.run_id || '' }}
       # namespace:  'example' # add a custom path your documentation will be available on

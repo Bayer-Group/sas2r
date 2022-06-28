@@ -1,13 +1,10 @@
-Welcome! 
+# ocs.early.sas2r
+Early experimentations for github + bookdown that will eventually translate for our SAS2R cataloge
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
+Let's try the following:
 
-This template provides a skeleton file structure that you can edit to create your book. 
+`dev` - contains only the work we do on the Rmd files (i.e. source)
 
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
+`main` - whenever we're finished work, we'll knit and store the HTML here for serving via GH Pages
 
-Additional resources:
-
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
-
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
+Eventually this will be CI/CD, but for now, let's get started on the *content* for the open source version of the book

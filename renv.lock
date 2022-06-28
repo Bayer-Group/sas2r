@@ -422,7 +422,6 @@
         "vctrs",
         "withr"
       ]
-    },
     "desc": {
       "Package": "desc",
       "Version": "1.4.1",
@@ -955,6 +954,12 @@
         "xml2"
       ]
     },
+    "knitr": {
+      "Package": "knitr",
+      "Version": "1.38",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "10b3dc3c6acb925910edda5d0543b3a2",
     "km.ci": {
       "Package": "km.ci",
       "Version": "0.5-6",
@@ -1043,6 +1048,12 @@
       "Hash": "7ce2733a9826b3aeb1775d56fd305472",
       "Requirements": []
     },
+    "mgcv": {
+      "Package": "mgcv",
+      "Version": "1.8-28",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "aa301a255aac625db12ee1793bd79265",
     "maptools": {
       "Package": "maptools",
       "Version": "1.1-4",
@@ -1133,6 +1144,12 @@
         "colorspace"
       ]
     },
+    "nlme": {
+      "Package": "nlme",
+      "Version": "3.1-139",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fc65a7cf4fd50fb378aa5c7b3f3c7a35",
     "mvtnorm": {
       "Package": "mvtnorm",
       "Version": "1.1-3",
@@ -1466,7 +1483,6 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.14",
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "31b60a882fabfabf6785b8599ffeb8ba",
