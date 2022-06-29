@@ -59,7 +59,7 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
            use-public-rspm: true
-           r-version: "4.0.0"
+           r-version: "3.6.0"
           
       - name: Install Pandoc
         run: brew install pandoc
