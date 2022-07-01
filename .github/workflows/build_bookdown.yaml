@@ -34,7 +34,9 @@ jobs:
 
        - name: Build & push
          run: |
+           pwd
            cd ${{ github.workspace }}
+           pwd
 
            R -e "renv::restore()"
            R -e 'bookdown::render_book(output_dir = "docs")'
