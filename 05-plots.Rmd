@@ -7,7 +7,6 @@
 ```{r, echo = TRUE, message = FALSE, warning = FALSE}
 # Packages
 library(haven)
-library(tidyverse)
 
 # Data
 adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
@@ -24,7 +23,6 @@ my_scatter_plot <- ggplot(adsl, aes(x = HEIGHTBL, y = WEIGHTBL)) +
 ```
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
-library(ggplot2)
 ggplot(adsl, aes(x = HEIGHTBL, y = WEIGHTBL)) +
   geom_point()
 ```
@@ -65,7 +63,6 @@ A little demo how you could use the package is given below, in case you would li
 ```{r, message = F, warning = F}
 # Packages
 library(haven)
-library(tidyverse)
 library(swimplot)
 
 # Data
@@ -195,7 +192,6 @@ Response_plot_with_points
 
 ```{r, message = FALSE, warning = FALSE, error = FALSE}
 # Packages
-library(tidyverse)
 library(gridExtra)
 library(grid)
 
@@ -451,7 +447,6 @@ gtable_rbind(p1, p2, p3,
 #### Packages and Sample Data
 ```{r message = F, warning = F}
 # Packages
-library(tidyverse)
 library(gg.gap)
 
 # Data
@@ -502,7 +497,6 @@ Create a sample data set to visualize
 
 ```{r, message = FALSE, warning = FALSE, error = FALSE}
 # Packages
-library(tidyverse)
 library(ggrepel)
 
 # Data
@@ -601,8 +595,6 @@ Passing the model to the _ggsurvplot_ function from the _survminer_ package crea
 #### Packages and Sample Data
 ```{r, message = FALSE, warning = FALSE, error = FALSE}
 # Packages
-library(tidyverse)
-library(dplyr)
 library(survminer)
 library(survival)
 library(broom)

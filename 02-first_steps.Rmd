@@ -16,17 +16,13 @@ Below are some examples that use `adsl` to show how common operations are done i
 
 ### Packages and Sample Data
 ```{r, warning = F, message = F}
-# Packages
-library(haven)
-library(tidyverse)
-
 # Data
 adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
-adsl <- read_xpt(paste0(adam_path, "adsl.xpt"))
+adsl <- haven::read_xpt(paste0(adam_path, "adsl.xpt"))
 
 # Select a few variables
 adsl <- adsl %>%
-  select(STUDYID, USUBJID, SUBJID, AGE, TRT01P, TRTSDT, TRTEDT, RACE, SEX)
+  dplyr::select(STUDYID, USUBJID, SUBJID, AGE, TRT01P, TRTSDT, TRTEDT, RACE, SEX)
 ```
 
 ### PROC CONTENTS $\rightarrow$ summary()
@@ -71,6 +67,8 @@ adsl %>%
 
 ```{r, message = F, eval = T, echo = F, warning = F}
 library(kableExtra)
+library(dplyr)
+
 table(adsl$SEX)
 
 adsl %>%
