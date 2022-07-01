@@ -376,7 +376,7 @@ footnote <- lapply(c(footnote1,
                      dat$IDFOOT[1]),
                    function(x) stringr::str_wrap(x, width=120)) %>% # apply str_wrap to individual footnote
   unlist() %>%       # convert list structure to vector
-  str_flatten('\n')  # add split character(new line) between footnotes
+  stringr::str_flatten('\n')  # add split character(new line) between footnotes
 ```
 
 ```{r, error = FALSE, message=FALSE, warnings=FALSE, fig.dim = c(9, 3)}
