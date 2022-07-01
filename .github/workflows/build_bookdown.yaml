@@ -53,10 +53,6 @@ jobs:
            git add .
            git commit -m "build book" 
            git push -uf origin HEAD
-           
-        - name: Upload book folder for debug
-          if: failure()
-          uses: actions/upload-artifact@main
 
         
   build_to_intranet:
