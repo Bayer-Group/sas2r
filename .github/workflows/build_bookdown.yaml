@@ -44,7 +44,8 @@ jobs:
            git checkout -b gh-pages
            git status
            ls 
-           git add docs 
+           touch .nojekyll
+           git add .
            git commit -m "build book" 
            git push -uf origin HEAD
         
