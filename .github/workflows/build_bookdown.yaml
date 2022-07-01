@@ -40,7 +40,9 @@ jobs:
            R -e 'bookdown::render_book(output_dir = "docs")'
            
            git checkout -b gh-pages
-           git add -f /docs 
+           git status
+           ls 
+           git add docs 
            git commit -m "build book" 
            git push -uf origin HEAD
         
