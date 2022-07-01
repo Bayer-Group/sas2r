@@ -303,7 +303,7 @@ waterfall.plot <- dat %>% ggplot(aes(reorder(SUBJID, -AVAL), AVAL, fill =OVERALL
     geom_bar(stat="identity") +
   labs(x = "Subject", 
        y = "Best % Change from baseline \n in sum of diameters \n (target lesions)\n") +
-  scale_x_discrete(labels = function(x) str_wrap(gsub("([0-9])([0-9])", "\\1 \\2 ", x), 
+  scale_x_discrete(labels = function(x) stringr::str_wrap(gsub("([0-9])([0-9])", "\\1 \\2 ", x), 
                                                      width = 5) %>% 
                      stringr::str_replace_all(" ", "")) +
   scale_fill_manual("Best Response",
@@ -374,7 +374,7 @@ footnote <- lapply(c(footnote1,
                      footnote2,
                      "",
                      dat$IDFOOT[1]),
-                   function(x) str_wrap(x, width=120)) %>% # apply str_wrap to individual footnote
+                   function(x) stringr::str_wrap(x, width=120)) %>% # apply str_wrap to individual footnote
   unlist() %>%       # convert list structure to vector
   str_flatten('\n')  # add split character(new line) between footnotes
 ```
