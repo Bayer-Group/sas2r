@@ -7,6 +7,7 @@
 ```{r, echo = TRUE, message = FALSE, warning = FALSE}
 # Packages
 library(haven)
+library(ggplot2)
 
 # Data
 adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
@@ -15,17 +16,12 @@ adsl <- as.data.frame(haven::read_xpt(paste0(adam_path, "adsl.xpt")))
 
 Let's create a basic scatter plot of weight vs height.
 ```{r, eval = F}
-library(ggplot2)
-
 # basic scatter plot of weight vs height
 my_scatter_plot <- ggplot(adsl, aes(x = HEIGHTBL, y = WEIGHTBL)) +
   geom_point()
+my_scatter_plot
 ```
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE}
-ggplot(adsl, aes(x = HEIGHTBL, y = WEIGHTBL)) +
-  geom_point()
-```
 
 ### Exporting plots
 You may export plots as png files a few ways. If your plot is created in ggplot2, you can use the `ggsave()` function to export as png:
@@ -64,6 +60,7 @@ A little demo how you could use the package is given below, in case you would li
 # Packages
 library(haven)
 library(swimplot)
+library(dplyr)
 
 # Data
 adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"

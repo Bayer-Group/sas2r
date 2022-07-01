@@ -37,8 +37,6 @@ jobs:
            cd ${{ github.workspace }}
 
            R -e "renv::restore()"
-           R -e 'install.packages("bookdown")'
-           R -e 'install.packages("tidyverse")'
            R -e "bookdown::render_book()"
            
            git checkout -b build
@@ -69,8 +67,6 @@ jobs:
       - name: Build & push
         run: |
            R -e "renv::restore()"
-           R -e 'install.packages("bookdown")'
-           R -e 'install.packages("tidyverse")'
            R -e 'bookdown::render_book(output_dir = "site"")'
 
       - uses: actions/upload-artifact@v3
