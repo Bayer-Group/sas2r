@@ -42,9 +42,7 @@ jobs:
            R -e 'bookdown::render_book(output_dir = "docs")'
            
            git checkout -b gh-pages
-           git status
-           ls 
-           touch .nojekyll
+           touch docs/.nojekyll
            git add .
            git commit -m "build book" 
            git push -uf origin HEAD
