@@ -37,7 +37,7 @@ jobs:
            cd ${{ github.workspace }}
 
            R -e "renv::restore()"
-           R -e "bookdown::render_book()"
+           R -e 'bookdown::render_book(output_dir = "site")'
            
            ls
            git status
@@ -70,7 +70,7 @@ jobs:
       - name: Build & push
         run: |
            R -e "renv::restore()"
-           R -e 'bookdown::render_book(output_dir = "site"")'
+           R -e 'bookdown::render_book(output_dir = "site'
 
       - uses: actions/upload-artifact@v3
         with:
