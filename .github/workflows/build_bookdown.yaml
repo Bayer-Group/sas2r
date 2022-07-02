@@ -48,12 +48,17 @@ jobs:
            R -e "renv::restore()"
            R -e 'bookdown::render_book(output_dir = "docs")'
            
-           git checkout -b gh-pages
-           touch docs/.nojekyll
-           git add .
-           git commit -m "build book" 
-           git push -uf origin HEAD
-
+#           git checkout -b gh-pages
+#           touch docs/.nojekyll
+#           git add .
+#           git commit -m "build book" 
+#           git push -uf origin HEAD
+           
+       - name: Deploy 🚀
+         uses: JamesIves/github-pages-deploy-action@v4
+         with:
+           branch: gh-pages
+           folder: docs
         
   build_to_intranet:
     runs-on: ubuntu-latest
