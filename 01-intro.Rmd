@@ -87,4 +87,4 @@ Learning a new language is more of a journey than it is a task, and requires cou
 **Code Snippets**: Our code snippets aim to be self-contained. That means that you should be able to simply copy and paste code examples and reproduce the result on your machine.
 
 ### Contributing
-New contents are welcome. If you are interested in contributing, please see [CONTRIBUTING.md]()
+New contents are welcome. If you are interested in contributing, please see [CONTRIBUTING.md](https://github.com/bayer-int/ocs.sas2r/blob/main/CONTRIBUTING.md)
