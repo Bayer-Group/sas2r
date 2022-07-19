@@ -47,9 +47,8 @@ jobs:
 
            R -e "renv::restore()"
            R -e 'bookdown::render_book(output_dir = "docs")'
-           
 #           git checkout -b gh-pages
-#           touch docs/.nojekyll
+           touch docs/.nojekyll
 #           git add .
 #           git commit -m "build book" 
 #           git push -uf origin HEAD
