@@ -102,7 +102,7 @@ head(my_table, n = 9)
 
 ### Displaying
 
-While `Tplyr` aided us in *building* a summary tables, other packages exist to help us *display* them. Once package we will focus on is the `flextable` package. This table display package is quite powerful and offers a high degree of customization.
+While `Tplyr` aided us in *building* a summary tables, other packages exist to help us *display* them. One package we will focus on is the `flextable` package. This table display package is quite powerful and offers a high degree of customization.
 
 We turn the interested reader to the <a href="https://ardata-fr.github.io/flextable-book/"> flextable book</a> to view additional examples.
 

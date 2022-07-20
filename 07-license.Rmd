@@ -1,0 +1,19 @@
+# License
+
+This section contains the license agreement for which this work falls under. Please review and be aware of the terms below.
+
+<details>
+  <summary>Click to Expand</summary>
+ <p>Terms of Use
+Copyright Bayer AG, 2022
+
+This tutorial is protected by copyright. Copyright holder is Bayer AG.
+
+You can use this tutorial and the code samples. You may copy and modify the code samples. Redistribution of the tutorial and code samples is permitted only with the prior consent of Bayer AG.
+
+You are invited to actively participate in the further development of the tutorial. Please send us your code samples, recommendations, wishes and/or suggestions for improvement. If you send us code samples, you agree that they will be made available to others under the same conditions as the existing code samples. You also agree that Bayer AG may make changes to the code samples. We will coordinate such changes with you whenever possible but are not obligated to do so. In addition, when you provide code samples, you affirm that you wrote those code samples yourself.
+
+THE TUTORIAL (INCL. CODE SAMPLES) IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTY OF FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE TUTORIAL OR THE USE OR OTHER DEALINGS IN THE TUTORIAL. </p>
+</details>
+
+ 
