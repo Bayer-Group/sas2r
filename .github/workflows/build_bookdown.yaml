@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [main]
+  pull_request:
 
 name: Build and deploy book
 
@@ -59,6 +59,7 @@ jobs:
   publish_to_intranet:
     name: "Publish to DevDocs on Intranet"
     needs: build_bookdown
+    if: ${{github.ref}} == "main"
     
     # See the full reference for available parameters https://docs.int.bayer.com/ref/
     uses: bayer-int/actions-workflows/.github/workflows/publish-docs.yml@main
