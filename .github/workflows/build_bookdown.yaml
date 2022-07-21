@@ -34,7 +34,7 @@ jobs:
         run: |
            R -e "renv::restore()"
            R -e 'bookdown::render_book(output_dir = "site")'
-           touch docs/.nojekyll
+           touch site/.nojekyll
 
       - uses: actions/upload-artifact@v3
         with:
