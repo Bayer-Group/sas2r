@@ -1,0 +1,9 @@
+on: 
+  workflow_call:
+  
+jobs: 
+  hello_world:
+    runs-on: ubuntu-latest
+      steps: 
+      - run: cat "Hello World"
+  
