@@ -11,7 +11,7 @@ name: Build and deploy book
 jobs: 
 
   build_to_ghp_with_shared_script:
-     uses: bayer-int/ocs.meta/scratch
+     uses: bayer-int/ocs.meta/.github/workflows/scratch.yml@main
      
   build_to_ghp:
      runs-on: ubuntu-latest
