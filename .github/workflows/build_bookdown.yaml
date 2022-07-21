@@ -10,6 +10,9 @@ name: Build and deploy book
 
 jobs: 
 
+
+  hello_world: 
+     uses: ./.github/workflows/hello_world.yml
   build_to_ghp_with_shared_script:
      uses: bayer-int/ocs.meta/.github/workflows/scratch.yml@main
      
