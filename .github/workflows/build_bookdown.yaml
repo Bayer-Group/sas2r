@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
         with: 
-           ref: main
+           ref: github.ref
         
       - name: Setup R
         uses: r-lib/actions/setup-r@v1
@@ -21,16 +21,16 @@ jobs:
            use-public-rspm: true
            r-version: "4.0.5"
           
-      - name: Install Pandoc
-        run: brew install pandoc
-      - name: Install nlopt
-        run: sudo apt-get install libnlopt-dev
+      - name: Install System Dependencies
+        run: |
+          brew install pandoc
+          apt-get install libnlopt-dev
         
-      - name: Build & push
+      - name: Render Book
         run: |
            R -e "renv::restore()"
            R -e 'bookdown::render_book(output_dir = "site")'
-           touch site/.nojekyll
+           touch site/.nojekyll 
 
       - uses: actions/upload-artifact@v3
         with:
