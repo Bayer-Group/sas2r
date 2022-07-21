@@ -12,7 +12,7 @@ jobs:
 
 
   hello_world: 
-     uses: ./.github/workflows/hello_world.yml
+     uses: ./.github/workflows/local_workflow.yml
   build_to_ghp_with_shared_script:
      uses: bayer-int/ocs.meta/.github/workflows/scratch.yml@main
      
