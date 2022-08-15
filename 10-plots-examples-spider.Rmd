@@ -1,0 +1,93 @@
+### Spider Plot
+#### Packages and Sample Data
+Create a sample data set to visualize
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+# Packages
+library(ggrepel)
+
+# Data
+sp <- data.frame(subjidn = rep(1:5, times = c(5,4,5,3,4)),
+                 trtp = rep(c('drug','placebo'), times = c(8,13)),
+                 avisit = c(0:4,0:3, 0:4, 0:2, 0:3),
+                 aval = c(0,5,15,20,20,
+                          0,-10,-20,-15,
+                          0,-30,-25,-35,-30,
+                          0,15,30,
+                          0,-20,-15,-20))
+```
+
+```{r echo = F}
+sp %>% 
+  head(n=5) %>%
+  kableExtra::kable(align = 'c')
+```
+
+#### Basic Spider Plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+basic_spider <- ggplot(sp, aes(x = avisit, y = aval, group = subjidn)) +
+  geom_line()
+
+basic_spider
+```
+
+#### Adding Customizations
+
+Add a few customizations to the spider plot
+
+1. Line color is determined by `trtp` value
+2. Add points to each line 
+3. Add a dashed reference line at Y = 0
+4. Specify custom colors, name the legend
+5. Specify Y-axis goes from -40 to 40, by increments of 10
+6. Add in a Y-axis label
+7. Add in a X-axis label
+8. Specify a base theme
+9. Move legend to bottom of graph
+
+#### Customized Spider Plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+custom_spider <- ggplot(sp, aes(x = avisit, y = aval, group = subjidn, color = trtp)) +                             
+  geom_line() +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_color_manual("Planned Treatment Arm", values = c('#00bbff','#89d329')) +
+  scale_y_continuous(limits = c(-40,40), breaks = seq(-40, 40, by = 10)) +      
+  ylab("Change in Target Lesion from Baseline (%)\n") +                         
+  xlab("Time (weeks)") +                                                        
+  theme_light() +                                                               
+  theme(legend.position = "bottom")                                             
+  
+custom_spider
+```
+
+#### Subject Labels Customization
+
+Add subject Labels (IDs) at the end of each line
+
+```{r}
+sp_ends <- sp %>% 
+  group_by(subjidn) %>% 
+  top_n(1, avisit) 
+```
+
+```{r, echo = F}
+sp_ends %>%
+  kableExtra::kable(align = 'c')
+```
+
+```{r, warning = F, message = F}
+# library(ggrepel)
+
+custom_spider +
+  geom_text_repel(
+    aes(label = subjidn),
+    color="black",
+    data=sp_ends,
+    size = 3,
+    direction = "x",
+    hjust = 1
+  )
+```

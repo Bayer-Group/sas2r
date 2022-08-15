@@ -1,0 +1,137 @@
+## Examples
+
+### Swimmer Plot
+
+For this example we use the **swimplot** package for plotting. It makes the creation of swimmer plots very easy and is based on ggplot2 and thus allows nice customizations. However, if even more customization is required, swimmer plots can also be created by using ggplot2 only.  
+
+A little demo how you could use the package is given below, in case you would like to find out more, you can check out [this](https://cran.r-project.org/web/packages/swimplot/vignettes/Introduction.to.swimplot.html). 
+
+
+#### Packages and Sample Data
+```{r, message = F, warning = F}
+# Packages
+library(haven)
+library(swimplot)
+library(dplyr)
+
+# Data
+adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
+adsl <- haven::read_xpt(paste0(adam_path, "adsl.xpt"))
+adae <- haven::read_xpt(paste0(adam_path, "adae.xpt"))
+adtte <- haven::read_xpt(paste0(adam_path, "adtte.xpt"))
+```
+
+We have to apply some changes to the data so that they can be processed by the plot functions later on. The number of subjects is limited to 50 for display purposes and we create our own response duration variable because we only have the start date of the event given in those data.
+
+```{r, message = F}
+adsl_new <- adsl %>%
+  select(USUBJID, ARM, TRTDURD, SEX) %>%
+  slice(1:50) 
+adae_new <- adae %>%
+  select(USUBJID, AEDECOD, AESEV, AEREL, ASTDY) %>%
+  filter(USUBJID %in% adsl_new$USUBJID & ASTDY >= 0)
+adtte_new <- adtte %>%
+  select(USUBJID, EVNTDESC, AVAL) %>%
+  filter(USUBJID %in% adsl_new$USUBJID & EVNTDESC != "Study Completion Date")  
+random_duration_of_events <- sample(1:25, nrow(adtte_new), replace = T)
+adtte_new <- adtte_new %>% 
+  bind_cols(random_duration_of_events) %>%
+    mutate(Resp_end = AVAL + random_duration_of_events )
+adsl_new <- as.data.frame(adsl_new)
+adae_new <- as.data.frame(adae_new)
+adtte_new <- as.data.frame(adtte_new)
+```
+
+#### Basic swimmer plot
+
+A basic swimmer plot just consists of a simple bar chart. 
+```{r}
+swimmer_plot(df=adsl_new,
+             id='USUBJID',
+             end='TRTDURD',
+             fill='lightblue',
+             width=.85)
+```
+
+Now, treatment information is added. 
+
+```{r}
+arm_plot <- swimmer_plot(df=adsl_new,
+                         id='USUBJID',
+                         end='TRTDURD',
+                         name_fill='ARM',
+                         id_order='ARM',
+                         col="black",
+                         alpha=0.75,
+                         width=.8)
+arm_plot
+```
+
+
+The plot could be stratified by any other variable of interest, in this case: SEX. 
+```{r}
+swim_plot_stratify <-swimmer_plot(df=adsl_new,
+                                  id='USUBJID',
+                                  end='TRTDURD',
+                                  name_fill='ARM',
+                                  col="black",
+                                  alpha=0.75,
+                                  width=.8,
+                                  base_size=14,
+                                  stratify= c('SEX'))
+swim_plot_stratify
+```
+
+
+#### Adding adverse event information to the plot
+
+```{r}
+AE_plot <- arm_plot + 
+  swimmer_points(df_points=adae_new,
+                 id='USUBJID',
+                 time='ASTDY',
+                 name_shape='AESEV',
+                 size=2.5,
+                 fill='white', 
+                 name_col='AEREL')
+AE_plot
+```
+
+#### Adding time-to-event information to the plot
+
+```{r, message = F, warning = F}
+Response_plot <- arm_plot +
+  swimmer_lines(df_lines=adtte_new,
+                id='USUBJID',
+                start ='AVAL',
+                end='Resp_end',
+                name_col='EVNTDESC',
+                size=1)
+Response_plot
+```
+
+#### Customize plot
+
+```{r, message = F, warning = F}
+Response_plot_with_points <- Response_plot +
+  swimmer_points_from_lines(df_lines=adtte_new,
+                            id='USUBJID',
+                            start='AVAL',
+                            end='Resp_end',
+                            name_col='EVNTDESC',
+                            size=2) +
+  scale_fill_manual(name="Treatment",
+                    values=c("Placebo" ="#A9342F", 
+                             "Xanomeline High Dose"="#5B7ACE",
+                             "Xanomeline Low Dose"='#FFC300'))+
+  scale_color_manual(name="Response",
+                     values=c("grey20"))+
+  scale_shape_manual(name='',
+                     values=c(17,15),
+                     breaks=c('AVAL','Resp_end'),
+                     labels=c('Response start','Response end'))+
+  guides(fill = guide_legend(override.aes = list(shape = NA))) +
+  scale_y_continuous(name = "Time since enrollment")
+
+Response_plot_with_points
+```

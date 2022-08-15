@@ -1,0 +1,53 @@
+# Figures & Plots
+
+## Basics
+### Building a plot using ggplot2
+
+#### Packages and Sample Data
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+# Packages
+library(haven)
+library(ggplot2)
+
+# Data
+adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
+adsl <- as.data.frame(haven::read_xpt(paste0(adam_path, "adsl.xpt")))
+```
+
+Let's create a basic scatter plot of weight vs height.
+```{r, eval = F}
+# basic scatter plot of weight vs height
+my_scatter_plot <- ggplot(adsl, aes(x = HEIGHTBL, y = WEIGHTBL)) +
+  geom_point()
+my_scatter_plot
+```
+
+
+### Exporting plots
+You may export plots as png files a few ways. If your plot is created in ggplot2, you can use the `ggsave()` function to export as png:
+```{r, eval = F}
+# save plot as a png file
+ggsave(plot = my_scatter_plot, 
+       filename = "my_plot_output_1.png", 
+       width = 7, 
+       height = 5, 
+       units = "in")
+```
+
+The more general way to save plots as png files is to use the `png()` function. It can work with ggplot2, but also plots created in base R.
+```{r, eval = F}
+png(filename = "my_plot_output_2.png", 
+    width = 7, 
+    height = 5, 
+    units = "in", 
+    res = 300)
+
+print(my_scatter_plot)
+dev.off()
+```
+
+
+
+
+
+

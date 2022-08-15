@@ -1,0 +1,47 @@
+### Spaghetti Plot
+#### Packages and Sample Data
+```{r message = F, warning = F}
+# Packages
+library(gg.gap)
+
+# Data
+set.seed(100)  
+
+n <- 50   # number of subjects, each subject has 12 data points
+
+spaghetti_sim <- data.frame(SUBJIDN = rep(1:n,each=12),
+                            X = rep(1:12,n),
+                            Y = c(rgamma((n*12-5), 5, 1), rnorm(5, 200,40)) %>% sample(),
+                            TRT01AN = c("Drug","Placebo") %>% sample(size=n*12, replace=TRUE))
+```
+
+```{r echo = FALSE}
+spaghetti_sim %>% head() %>%
+  kableExtra::kable(align = 'c')
+```
+
+#### Basic Spaghetti plot
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(10, 7)}
+p_spaghetti <- spaghetti_sim %>% 
+  ggplot(aes(X, Y, group = SUBJIDN, colour = TRT01AN)) + 
+  geom_point() + geom_line(size = 0.3) + theme_bw() + 
+  labs(y="Y values", 
+       x="Months since start of study treatment",
+       colour = "Actual Treatment for Period 01 (N)") +
+  theme(legend.background = element_rect(size=0.1, linetype="solid", 
+                                         colour ="black"),
+        legend.position="bottom", legend.box = "horizontal")
+p_spaghetti
+```
+
+#### Spaghetti Plot with Broken Y
+Different scales presented in the same plot when outliers are presented, to enlarge the detailed part of small values.
+
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(10, 7)}
+#library(gg.gap)
+
+p_spaghetti_break <- gg.gap(plot=p_spaghetti, tick_width=c(1,70),
+         segments=c(15,25), rel_heights=c(8,0,1),
+         ylim=c(0,235)) 
+p_spaghetti_break
+```

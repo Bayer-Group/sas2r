@@ -1,0 +1,255 @@
+### Waterfall Plot
+#### Packages and Sample Data
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+# Packages
+library(gridExtra)
+library(grid)
+
+# Data
+wp <- data.frame(subjidn = 1:30,
+                 trtp = sample(c('Drug','Placebo'), replace = T, 30),
+                 aval = runif(30, min = -40, max = 40))
+```
+
+```{r echo = F}
+head(wp) %>% 
+  kableExtra::kable(align = 'c')
+```
+
+#### Basic Waterfall Plot
+Create an initial waterfall plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+basic_waterfall <- ggplot(wp, aes(y = aval,x = reorder(subjidn, -aval))) +
+  geom_bar(stat = "identity")
+
+basic_waterfall
+```
+
+
+#### Adding Customizations
+Add a few customizations to the waterfall plot
+
+1. Bar fill color is determined by trtp value
+2. Specify custom colors, name the legend
+3. Specify Y-axis goes from -40 to 40, by increments of 10
+4. Add in a Y-axis label
+5. Specify a base theme
+6. Remove the X-axis
+7. Move legend to bottom of graph
+
+#### Customized Waterfall Plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+custom_waterfall <- ggplot(wp, aes(y = aval, x = reorder(subjidn, -aval), fill = trtp)) +                            
+  geom_bar(stat = "identity") +
+  scale_fill_manual("Planned Treatment Arm", values = c('#00bbff','#89d329')) +
+  scale_y_continuous(limits = c(-40,40), breaks = seq(-40, 40, by = 10)) +      
+  ylab("Maximum reduction of tumor size (%)\n") +                              
+  theme_light() +                                                               
+  theme(axis.title.x = element_blank(),                                         
+        axis.line.x  = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.position = "bottom")                                             
+          
+custom_waterfall
+```
+
+#### Study Example
+
+* A special waterfall plot layout is needed in a real study. In this layout, biomarker information in the subject level needs to be added at the bottom of the waterfall plots.
+
+* The dataset for the plot was derived from ADRS and ADSL in SAS; simulated data is used in this demo.
+
+Simulate Data:
+```{r,  message=FALSE, warnings=FALSE}
+set.seed(100)  
+
+n <- 120   # size/records of simulated data
+
+dat_all <- 
+  data.frame(SUBJID = 120010100:(120010100+n-1),
+           AVAL = c(rnorm(round(0.8*n), 0, 20), rep(0, round(0.2*n))) %>% sample(),
+           OVERALLRESP = c("PR", "SD","PD") %>% sample(size=n, replace=TRUE),
+           AMEDGRPN = seq(10, 50, 10) %>% sample(size=n, replace=TRUE),
+           DOR = rpois(n, 40),
+           AVISIT = c("C1", "C2", "C3","EOT") %>% sample(size=n, replace=TRUE),
+           ATMLOSS_L = c("E", "L", "Data unavailable") %>% sample(size=n, replace=TRUE),
+           ATMLOSS_P = c("E", "L", "Data unavailable") %>% sample(size=n, replace=TRUE),
+           ATMLOSS_R = c("E", "L", "Data unavailable") %>% sample(size=n, replace=TRUE),
+           IDFOOT = "Bayer: /study/path/.../f_waterfall.sas               30NOV2021 16:06"
+           ) %>%
+  mutate_at(vars("OVERALLRESP", "DOR", "IDFOOT"), as.character)
+```
+
+* X: SUBJID 
+* Y: AVAL (derived from ADRS.AVAL when ADRS.PARAM = "Maximum Tumor Reduction (%)") 
+* Label: OVERALLRESP (derived from ADRS.AVAL when ADRS.PARAM = "Best Overall Response") 
+* Subset: AMEDGRPN (5 groups)
+* A graph function is created in the real study for different analysis groups, in this demo, we subset data to AMEDGRPN = 50. 
+
+```{r, echo=FALSE, message=FALSE, warnings=FALSE}
+dat_all %>% 
+  filter(AMEDGRPN==50) %>% 
+  select(SUBJID, AVAL, OVERALLRESP, AMEDGRPN, 
+         DOR, AVISIT, ATMLOSS_L, ATMLOSS_P, ATMLOSS_R) %>%
+  head() %>%
+  kableExtra::kable(align = 'c')
+
+dat <- dat_all %>% filter(AMEDGRPN==50)
+```
+
+**Create a waterfall plot with simulated data and below customization**
+
+1. Add x/y-axis labels through function "labs"
+2. SUBJID has long digits, below functions are used to avoid overlapping at x-axis:
+    + function stringr::str_wrap: add split character “\n" between digits
+    + function gsub: add space between digits to enable the use of str_wrap
+    + function stringr::str_replace_all: remove space
+3. Specify legend title, order/colors (similar to SAS sgplot - dattrmap)
+4. Annotation on the top of the bar when Y=0  
+5. Adjust background, legend, and size/color/font of x/y-axis aesthetics through Theme
+
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(9, 4)}
+waterfall.plot <- dat %>% ggplot(aes(reorder(SUBJID, -AVAL), AVAL, fill =OVERALLRESP)) + 
+    geom_bar(stat="identity") +
+  labs(x = "Subject", 
+       y = "Best % Change from baseline \n in sum of diameters \n (target lesions)\n") +
+  scale_x_discrete(labels = function(x) stringr::str_wrap(gsub("([0-9])([0-9])", "\\1 \\2 ", x), 
+                                                     width = 5) %>% 
+                     stringr::str_replace_all(" ", "")) +
+  scale_fill_manual("Best Response",
+                    breaks = c("PR", "SD","PD"),
+                    values=c("PR"='#89d329',
+                             "SD"="#756bb1",
+                             "PD"='#00bbff')) + 
+  geom_text(aes(label = if_else(AVAL == 0,OVERALLRESP,""),fontface="bold"), 
+            vjust = -1,
+            size=3,
+            color="black") + theme_bw() +     
+  theme(
+    axis.text = element_text(size=12,color="black",face = "bold"),  
+    axis.title.y = element_text(size=12, face="bold"), 
+    axis.title.x = element_blank(),  
+    legend.background = element_rect(color = "steelblue", linetype = "solid"),
+    legend.justification = c(1, 1), 
+    legend.position = c(1, 1),
+    legend.direction = "horizontal",
+    legend.text = element_text(size=8, color = "black", face = "bold"),
+    legend.title = element_text(size=8, color = "black", face = "bold"),  
+    plot.caption = element_text(hjust = 0, size = 10, color = "blue"), 
+    plot.caption.position =  "plot"
+  ) 
+
+waterfall.plot
+```
+
+As requested from the study, more information at subject level needs to be added in the bottom of the waterfall plots. Thus, two more plots are created (add-in plot1/2) to display the subject level information. 
+
+* Add-in plot 1: visit and duration of response information at subject level
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(9, 3)}
+var <- c("DOR", "AVISIT")
+var_label <- c("Duration (days)", "Timepoint")
+
+add.plot1 <- dat %>%
+  reshape2::melt(measure.vars = eval(var), value.name = "label", variable.name = "layer") %>%
+  mutate(layer = factor(layer, levels = var, labels = var_label)) %>%
+  ggplot(aes(reorder(SUBJID, -AVAL))) +
+  geom_text(aes(y = layer, label = label), size = 3, fontface = "bold") +
+  labs(y = "", x = NULL) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(
+      size = 10,
+      colour = "black",
+      face = "bold"
+    ),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank(),
+    strip.text = element_blank()
+  ) +
+  coord_fixed(ratio = .8)
+add.plot1
+```
+
+* Add-in plot 2: biomarker-related information at subject level, footnotes are added in this plot
+  + wrap long footnote by adding "\\n\" or using stringr::str_wrap
+  + display SAS macro variable "&idfoot."
+
+Footnotes:
+```{r}
+footnote1 <- 'Footnote1: "\\n\" can be used to split long footnote into next line.'
+footnote2 <- "Footnote2: To avoid manually adding split character. The function stringr::str_wrap	can be used here to wrap the long text with a specified width."
+footnote <- lapply(c(footnote1,
+                     footnote2,
+                     "",
+                     dat$IDFOOT[1]),
+                   function(x) stringr::str_wrap(x, width=120)) %>% # apply str_wrap to individual footnote
+  unlist() %>%       # convert list structure to vector
+  stringr::str_flatten('\n')  # add split character(new line) between footnotes
+```
+
+```{r, error = FALSE, message=FALSE, warnings=FALSE, fig.dim = c(9, 3)}
+var <- c("ATMLOSS_L", "ATMLOSS_P","ATMLOSS_R")
+var_label <- c("Local", "Prospective", "Retrospective")
+
+add.plot2 <- dat %>%  
+  reshape2::melt(measure.vars = eval(var), 
+                 value.name = "label",
+                 variable.name = "layer") %>%
+  mutate(label=case_when(
+    label == "L" ~ "ATM Loss",
+    label == "E" ~ "ATM Expressed",      
+    label == "9" ~ "Data unavailable",
+    TRUE ~ label
+  )) %>% 
+  mutate(layer = factor(layer, levels = rev(var), labels = rev(var_label))) %>% 
+  ggplot() +
+  aes(reorder(SUBJID, -AVAL), layer, color=label,shape=label) +
+  geom_point(size=3)+
+  scale_shape_manual(breaks = c("ATM Loss","ATM Expressed", "Data unavailable"), 
+                     values = c("ATM Loss"=15,"ATM Expressed"=0, 
+                                "Data unavailable"=7))+
+  scale_color_manual(values = c("ATM Loss"="black", "ATM Expressed"="black", 
+                                "Data unavailable"= 'black'))+
+  theme_classic()+
+  theme(axis.text=element_text(size=10, colour = "black",face = "bold"),
+        axis.title=element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        legend.title = element_blank(),
+        legend.text = element_text(size=10, color = "black", face = "bold"),
+        legend.position = "bottom",
+        panel.border = element_blank(),
+        panel.grid = element_blank(), 
+        strip.text = element_blank(),
+        plot.caption = element_text(hjust = 0, size = 10), 
+        plot.caption.position =  "plot"
+  )+
+  coord_fixed(ratio=.9)+ 
+  labs(caption = footnote)
+add.plot2
+```
+
+* The following functions are used to combine three plots aligned with x value.
+  + ggplot2::ggplotGrob
+  + gridExtra::gtable_rbind
+  + grid::grid.draw
+  
+* Align the three plots with the same x-axis (SUBJID). 
+  + waterfall.plot 
+  + add.plot1 
+  + add.plot2 
+  
+```{r, message=FALSE, warnings=FALSE, fig.dim = c(10, 7)}
+p1 <- waterfall.plot %>% ggplotGrob()
+p2 <- add.plot1 %>% ggplotGrob()
+p3 <- add.plot2 %>% ggplotGrob()
+gtable_rbind(p1, p2, p3,
+             size='first') %>% grid.draw()
+```

@@ -1,0 +1,114 @@
+### Survival Plot 
+#### Kaplan-Meier statistics and plotting
+
+In the following example the _survfit_ function from the _survival_ package is used to calculate Kaplan-Meier statistics from time-to-event data. The model statistics can be inspected (using _broom_ - a generic function to extract statistics from R models). 
+
+Passing the model to the _ggsurvplot_ function from the _survminer_ package creates a Kaplan-Meier curve. The configuration tries to mimic the known SAS output as close as possible (e.g. number at risk table style etc.).
+
+#### Packages and Sample Data
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+# Packages
+library(survminer)
+library(survival)
+library(broom)
+library(flextable)
+
+# Data
+adtte <- haven::read_xpt(
+  paste0("https://github.com/phuse-org/TestDataFactory/",
+         "raw/main/Updated/TDF_ADaM/adtte.xpt"))
+``` 
+
+Filter time-to-event parameter and select required variables. The piping command directly passed filtered and selected data to the `survfit` function and creates the model. 
+
+>**Note:** The event parameter from survival function (survival::Surv) is the status   indicator, normally 0=alive, 1=death; while ADTTE.CNSR=0 usually means event  occurred(e.g., death), ADTTE.CNSR=1 represents censoring. Thus, “1-CNSR” is used here to  accommodate the CDISC ADaM standard.
+
+```{r}
+surv_model <- adtte %>%
+  filter(PARAMCD == "TTDE") %>%
+  select(STUDYID, USUBJID, PARAMCD, AVAL, CNSR, TRTA) %>%
+  survfit(Surv(AVAL, 1-CNSR) ~ TRTA, data = .)
+```
+
+#### Inspecting fitted survival model
+
+```{r, eval = F, echo = T}
+head(tidy(surv_model))  
+```
+
+```{r, echo = F, eval = T}
+head(tidy(surv_model)) %>%
+ kableExtra::kable(align = 'c')
+```
+#### Plotting custom configured Kaplan-Meier curves without confidence intervals
+
+>**Note:** Let´s assume a month is defined as 30.4375 (days); 
+The xscale parameter d_m converts days (input) to month.
+If six months breaks are required for the numbers-at-risk table this would mean: 
+break.x.by = 182.625 (6*30.4375).
+
+```{r, fig.width=15, fig.height=10, out.width="680px"}
+ggsurvplot(
+  fit = surv_model,
+  data = adtte,
+  risk.table = TRUE,
+  #ylab = ylabs,
+  xlab = "Months",
+  linetype = "strata",
+  conf.int = F,
+  legend.title = "Randomized Treatment",
+  legend = c(0.1, 0.1),
+  #palette = c(color_trt1,color_trt2),
+  risk.table.title = "Number of subjects at risk",
+  risk.table.y.text = F,
+  risk.table.height = .15,
+  censor.shape = 1,
+  censor.size = 3,
+  ncensor.plot = F,
+  xlim = c(0,250),
+  xscale = "d_m",
+  break.x.by = 30.4375,
+  break.y.by = .1,
+  ggtheme = theme_survminer(
+    font.main = c(10, "bold"),
+    font.submain = c(10, "bold"),
+    font.x = c(12, "bold"),
+    font.y = c(12, "bold"),
+  ) + theme(panel.border = element_rect(fill = NA)),
+  tables.theme = theme_cleantable()
+)
+```
+
+#### Plotting custom configured Kaplan-Meier curves with confidence intervals
+
+```{r, fig.width=15, fig.height=10, out.width="680px"}
+ggsurvplot(
+  fit = surv_model,
+  data = adtte,
+  risk.table = TRUE,
+  #ylab = ylabs,
+  xlab = "Months",
+  linetype = "strata",
+  conf.int = T,
+  legend.title = "Randomized Treatment",
+  legend = c(0.1, 0.1),
+  #palette = c(color_trt1,color_trt2),
+  risk.table.title = "Number of subjects at risk",
+  risk.table.y.text = F,
+  risk.table.height = .15,
+  censor.shape = 1,
+  censor.size = 3,
+  ncensor.plot = F,
+  #xlim = c(0,250),
+  xscale = "d_m",
+  break.x.by = 30.4375,
+  break.y.by = .1,
+  ggtheme = theme_survminer(
+    font.main = c(10, "bold"),
+    font.submain = c(10, "bold"),
+    font.x = c(12, "bold"),
+    font.y = c(12, "bold"),
+  ) + theme(panel.border = element_rect(fill = NA)),
+  tables.theme = theme_cleantable()
+)
+```
