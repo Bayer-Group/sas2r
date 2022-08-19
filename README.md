@@ -1,5 +1,6 @@
-# SAS2R Catalogue
+# SAS2R 
 
-## About
+This document provides recipies for performing common computing tasks in R for clinical studies reporting, conventially done with SAS. 
 
-## Contribution
+#### Maintainer 
+Siqi Zhang <siqi.zhang@bayer.com>
