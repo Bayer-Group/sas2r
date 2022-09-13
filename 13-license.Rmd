@@ -1,19 +1,32 @@
 # License
 
-This section contains the license agreement for which this work falls under. Please review and be aware of the terms below.
-
 <details>
   <summary>Click to Expand</summary>
  <p>Terms of Use
-Copyright Bayer AG, 2022
+ 
+**The MIT License (MIT)**
 
-This tutorial is protected by copyright. Copyright holder is Bayer AG.
+Copyright © 2022 Bayer AG
 
-You can use this tutorial and the code samples. You may copy and modify the code samples. Redistribution of the tutorial and code samples is permitted only with the prior consent of Bayer AG.
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
 
-You are invited to actively participate in the further development of the tutorial. Please send us your code samples, recommendations, wishes and/or suggestions for improvement. If you send us code samples, you agree that they will be made available to others under the same conditions as the existing code samples. You also agree that Bayer AG may make changes to the code samples. We will coordinate such changes with you whenever possible but are not obligated to do so. In addition, when you provide code samples, you affirm that you wrote those code samples yourself.
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
 
-THE TUTORIAL (INCL. CODE SAMPLES) IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTY OF FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE TUTORIAL OR THE USE OR OTHER DEALINGS IN THE TUTORIAL. </p>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
+
 </details>
 
  

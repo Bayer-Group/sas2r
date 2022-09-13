@@ -1,6 +1,6 @@
 # Future
 
-Your collaboration is welcome.
+This section contains ideas for future content. Your collaboration is welcome.
 
 ## Use {renv}
 
@@ -22,7 +22,6 @@ rownames(renv_lock) <- NULL
 renv_lock  
 })
 ```
-
 
 If you think a package should be updated or newly included, reflect this information in `renv.lock` through `renv::snapshot()` and include it in your pull request.
 

@@ -23,6 +23,9 @@ Filter time-to-event parameter and select required variables. The piping command
 
 >**Note:** The event parameter from survival function (survival::Surv) is the status   indicator, normally 0=alive, 1=death; while ADTTE.CNSR=0 usually means event  occurred(e.g., death), ADTTE.CNSR=1 represents censoring. Thus, “1-CNSR” is used here to  accommodate the CDISC ADaM standard.
 
+::: {.attention}
+This section is under construction
+:::
 ```{r}
 surv_model <- adtte %>%
   filter(PARAMCD == "TTDE") %>%
@@ -48,67 +51,67 @@ If six months breaks are required for the numbers-at-risk table this would mean:
 break.x.by = 182.625 (6*30.4375).
 
 ```{r, fig.width=15, fig.height=10, out.width="680px"}
-ggsurvplot(
-  fit = surv_model,
-  data = adtte,
-  risk.table = TRUE,
-  #ylab = ylabs,
-  xlab = "Months",
-  linetype = "strata",
-  conf.int = F,
-  legend.title = "Randomized Treatment",
-  legend = c(0.1, 0.1),
-  #palette = c(color_trt1,color_trt2),
-  risk.table.title = "Number of subjects at risk",
-  risk.table.y.text = F,
-  risk.table.height = .15,
-  censor.shape = 1,
-  censor.size = 3,
-  ncensor.plot = F,
-  xlim = c(0,250),
-  xscale = "d_m",
-  break.x.by = 30.4375,
-  break.y.by = .1,
-  ggtheme = theme_survminer(
-    font.main = c(10, "bold"),
-    font.submain = c(10, "bold"),
-    font.x = c(12, "bold"),
-    font.y = c(12, "bold"),
-  ) + theme(panel.border = element_rect(fill = NA)),
-  tables.theme = theme_cleantable()
-)
+ ggsurvplot(
+   fit = surv_model,
+   data = adtte,
+   risk.table = TRUE,
+   #ylab = ylabs,
+   xlab = "Months",
+   linetype = "strata",
+   conf.int = F,
+   legend.title = "Randomized Treatment",
+   legend = c(0.1, 0.1),
+   #palette = c(color_trt1,color_trt2),
+   risk.table.title = "Number of subjects at risk",
+   risk.table.y.text = F,
+   risk.table.height = .15,
+   censor.shape = 1,
+   censor.size = 3,
+   ncensor.plot = F,
+   xlim = c(0,250),
+   xscale = "d_m",
+   break.x.by = 30.4375,
+   break.y.by = .1,
+   ggtheme = theme_survminer(
+     font.main = c(10, "bold"),
+     font.submain = c(10, "bold"),
+     font.x = c(12, "bold"),
+     font.y = c(12, "bold"),
+   ) + theme(panel.border = element_rect(fill = NA)),
+   tables.theme = theme_cleantable()
+ )
 ```
 
 #### Plotting custom configured Kaplan-Meier curves with confidence intervals
 
 ```{r, fig.width=15, fig.height=10, out.width="680px"}
-ggsurvplot(
-  fit = surv_model,
-  data = adtte,
-  risk.table = TRUE,
-  #ylab = ylabs,
-  xlab = "Months",
-  linetype = "strata",
-  conf.int = T,
-  legend.title = "Randomized Treatment",
-  legend = c(0.1, 0.1),
-  #palette = c(color_trt1,color_trt2),
-  risk.table.title = "Number of subjects at risk",
-  risk.table.y.text = F,
-  risk.table.height = .15,
-  censor.shape = 1,
-  censor.size = 3,
-  ncensor.plot = F,
-  #xlim = c(0,250),
-  xscale = "d_m",
-  break.x.by = 30.4375,
-  break.y.by = .1,
-  ggtheme = theme_survminer(
-    font.main = c(10, "bold"),
-    font.submain = c(10, "bold"),
-    font.x = c(12, "bold"),
-    font.y = c(12, "bold"),
-  ) + theme(panel.border = element_rect(fill = NA)),
-  tables.theme = theme_cleantable()
-)
+ ggsurvplot(
+   fit = surv_model,
+   data = adtte,
+   risk.table = TRUE,
+   #ylab = ylabs,
+   xlab = "Months",
+   linetype = "strata",
+   conf.int = T,
+   legend.title = "Randomized Treatment",
+   legend = c(0.1, 0.1),
+   #palette = c(color_trt1,color_trt2),
+   risk.table.title = "Number of subjects at risk",
+   risk.table.y.text = F,
+   risk.table.height = .15,
+   censor.shape = 1,
+   censor.size = 3,
+   ncensor.plot = F,
+   #xlim = c(0,250),
+   xscale = "d_m",
+   break.x.by = 30.4375,
+   break.y.by = .1,
+   ggtheme = theme_survminer(
+     font.main = c(10, "bold"),
+     font.submain = c(10, "bold"),
+     font.x = c(12, "bold"),
+     font.y = c(12, "bold"),
+   ) + theme(panel.border = element_rect(fill = NA)),
+   tables.theme = theme_cleantable()
+ )
 ```

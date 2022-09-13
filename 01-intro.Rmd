@@ -1,5 +1,7 @@
 # About 
 
+Learn more about this resource's design, philosophy and how to contribute. 
+
 ## Organization
 
 The SAS and R catalog is structured as following:

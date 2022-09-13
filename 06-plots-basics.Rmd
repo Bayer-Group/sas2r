@@ -1,5 +1,6 @@
 # Figures & Plots
 
+In this section, basic useage of the `ggplot2` package is covered. Common clinical trial displays are then created and customized in a step wise manner.
 ## Basics
 ### Building a plot using ggplot2
 

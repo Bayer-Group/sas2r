@@ -1,7 +1,6 @@
 --- 
 title: "SAS and R"
 author: "Bayer Oncology SBU"
-date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 url: https://docs.int.bayer.com/-/ocs.sas2r/
@@ -11,7 +10,7 @@ github-repo: bayer-int/ocs.sas2r
 
 # Welcome
 
-<a href="https://docs.int.bayer.com/-/ocs.sas2r/"><img class="cover" src="title.png" width="310" height="310" align = "left" HSPACE="30"></a>    The intent of this book is to provide a knowledge hub of using R in a clinical study context. 
+<a href="https://docs.int.bayer.com/-/ocs.sas2r/"><img class="cover" src="content/title2.png" width="310" height="310" align = "left" HSPACE="30"></a>    The intent of this book is to provide a knowledge hub of using R in a clinical study context. 
 
 We aim to make the transition from SAS to R as effortless as possible. Therefore, in addition to explanations of the processes, we try to focus on code that could be relevant in the context of clinical studies.
 

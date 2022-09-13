@@ -1,6 +1,6 @@
 # Tables
 
-In this section, we use the `Tplyr` package to build a demographics table using a subject-level dataset. 
+In this section, we use the `Tplyr` package to build a demographics table using a subject-level dataset. Exporting tables using the `officer` package is also covered.
 
 ## Building
 

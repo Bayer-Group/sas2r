@@ -1,10 +1,12 @@
 bookdown::gitbook:
-  css: style.css
+  includes:
+    before_body: content/hero-image.html
+  css: content/style.css
   split_by: section
   config:
     toc:
       before: |
-        <li class="toc-logo"><a href="./"><img style = "vertical-align: middle" src="logo.png" width="50" height = "50">  SAS and R</a></li>
+        <li class="toc-logo"><a href="./"> SAS and R</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit: https://github.com/bayer-int/ocs.early.sas2r/blob/dev/%s
