@@ -39,7 +39,7 @@ jobs:
 
   publish_to_ghp: 
     name: "Publish to GitHub Pages"
-    if: ${{github.ref}} == "main"
+    if: ${{github.ref}} == "main" &  github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: build_bookdown
     steps:
@@ -59,7 +59,7 @@ jobs:
   publish_to_intranet:
     name: "Publish to DevDocs on Intranet"
     needs: build_bookdown
-    if: ${{github.ref}} == "main"
+    if: ${{github.ref}} == "main" &  github.event_name != 'pull_request'
     
     # See the full reference for available parameters https://docs.int.bayer.com/ref/
     uses: bayer-int/actions-workflows/.github/workflows/publish-docs.yml@main
