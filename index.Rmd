@@ -10,10 +10,10 @@ github-repo: bayer-int/ocs.sas2r
 
 # Welcome
 
-<a href="https://docs.int.bayer.com/-/ocs.sas2r/"><img class="cover" src="content/title2.png" width="310" height="310" align = "left" HSPACE="30"></a>    The intent of this book is to provide a knowledge hub of using R in a clinical study context. 
+<a href="https://docs.int.bayer.com/-/ocs.sas2r/"><img class="cover" src="content/title2.png" width="310" height="310" align = "left" HSPACE="30"></a>    The intent of this resource is to act as a knowledge hub for using R in a clinical study context. 
 
-We aim to make the transition from SAS to R as effortless as possible. Therefore, in addition to explanations of the processes, we try to focus on code that could be relevant in the context of clinical studies.
+As our industry begins to embrace open-source languages like R, the need to replicate common analysis and reporting tasks or workflows is crucial to productivity. We appreciate that learning a new language can be challenging. Therefore, we aim to make the transition to R as effortless as possible by providing concrete examples relevant to clinical study programming. 
 
-All code snippets can be used independently, they just need to be adjusted to your data. The catalog is likely not to be exhaustive as we see it more as a living document for which we encourage cross-industry collaboration.
+All code snippets in this resource can be used independently, they just need to be adjusted to your data. Basic familiarity with R is assumed. This resource is likely not to be exhaustive as we see it more as a living document for which we encourage cross-industry collaboration.
 
-If you would suggest any content be added or amended, or have questions or feedbacks, we kindly request that you [open an issue](https://github.com/bayer-int/ocs.sas2r/issues). The current maintainer is [Siqi Zhang](https://github.com/iqis).
+If you would suggest any content be added or amended, or have questions or feedback, we kindly request that you [open an issue](https://github.com/bayer-int/ocs.sas2r/issues). The current maintainer is [Siqi Zhang](https://github.com/iqis).
