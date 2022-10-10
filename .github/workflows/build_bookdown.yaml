@@ -23,8 +23,7 @@ jobs:
           
       - name: Install System Dependencies
         run: |
-          brew install pandoc
-          sudo apt-get install libnlopt-dev
+          sudo apt-get install pandoc libnlopt-dev
         
       - name: Render Book
         run: |
