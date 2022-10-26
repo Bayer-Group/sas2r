@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.1 Examples | SAS and R</title>
+  <meta name="description" content="6.1 Examples | SAS and R" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.1 Examples | SAS and R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="bayer-int/ocs.sas2r" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.1 Examples | SAS and R" />
+  
+  
+  
+
+<meta name="author" content="Bayer Oncology SBU" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="figures-plots.html"/>
+<link rel="next" href="future.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.0.0/tabwid.css" rel="stylesheet" />
+<link href="libs/tabwid-1.0.0/scrool.css" rel="stylesheet" />
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="content/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"> SAS and R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="2" data-path="about.html"><a href="about.html"><i class="fa fa-check"></i><b>2</b> About</a><ul>
+<li class="chapter" data-level="2.1" data-path="organization.html"><a href="organization.html"><i class="fa fa-check"></i><b>2.1</b> Organization</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="organization.html"><a href="organization.html#first-steps"><i class="fa fa-check"></i><b>2.1.1</b> First Steps</a></li>
+<li class="chapter" data-level="2.1.2" data-path="organization.html"><a href="organization.html#data"><i class="fa fa-check"></i><b>2.1.2</b> Data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="organization.html"><a href="organization.html#tables"><i class="fa fa-check"></i><b>2.1.3</b> Tables</a></li>
+<li class="chapter" data-level="2.1.4" data-path="organization.html"><a href="organization.html#plots"><i class="fa fa-check"></i><b>2.1.4</b> Plots</a></li>
+<li class="chapter" data-level="2.1.5" data-path="organization.html"><a href="organization.html#packages"><i class="fa fa-check"></i><b>2.1.5</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="house-keeping.html"><a href="house-keeping.html"><i class="fa fa-check"></i><b>2.2</b> House Keeping</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="house-keeping.html"><a href="house-keeping.html#philosophy"><i class="fa fa-check"></i><b>2.2.1</b> Philosophy</a></li>
+<li class="chapter" data-level="2.2.2" data-path="house-keeping.html"><a href="house-keeping.html#approach"><i class="fa fa-check"></i><b>2.2.2</b> Approach</a></li>
+<li class="chapter" data-level="2.2.3" data-path="house-keeping.html"><a href="house-keeping.html#contributing"><i class="fa fa-check"></i><b>2.2.3</b> Contributing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="first-steps-in-r.html"><a href="first-steps-in-r.html"><i class="fa fa-check"></i><b>3</b> First Steps in R</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html"><i class="fa fa-check"></i><b>3.1</b> R and SAS Syntax</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#packages-and-sample-data"><i class="fa fa-check"></i><b>3.1.1</b> Packages and Sample Data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#proc-contents-rightarrow-summary"><i class="fa fa-check"></i><b>3.1.2</b> PROC CONTENTS <span class="math inline">\(\rightarrow\)</span> summary()</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#proc-freq-rightarrow-count"><i class="fa fa-check"></i><b>3.1.3</b> PROC FREQ <span class="math inline">\(\rightarrow\)</span> count()</a></li>
+<li class="chapter" data-level="3.1.4" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#keepdrop-rightarrow-select"><i class="fa fa-check"></i><b>3.1.4</b> KEEP/DROP <span class="math inline">\(\rightarrow\)</span> select()</a></li>
+<li class="chapter" data-level="3.1.5" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#subsetting-data-whereif-rightarrow-filter"><i class="fa fa-check"></i><b>3.1.5</b> Subsetting data (WHERE/IF) <span class="math inline">\(\rightarrow\)</span> filter()</a></li>
+<li class="chapter" data-level="3.1.6" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#sorting-data"><i class="fa fa-check"></i><b>3.1.6</b> Sorting data</a></li>
+<li class="chapter" data-level="3.1.7" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#creating-new-variables"><i class="fa fa-check"></i><b>3.1.7</b> Creating new variables</a></li>
+<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.8</b> Merging Data</a></li>
+<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.9</b> Concatenating Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>4</b> Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="external-data.html"><a href="external-data.html"><i class="fa fa-check"></i><b>4.1</b> External Data</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="external-data.html"><a href="external-data.html#cdisc-datasets"><i class="fa fa-check"></i><b>4.1.1</b> CDISC Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="internal-data.html"><a href="internal-data.html"><i class="fa fa-check"></i><b>4.2</b> Internal Data</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="internal-data.html"><a href="internal-data.html#package-data"><i class="fa fa-check"></i><b>4.2.1</b> Package Data</a></li>
+<li class="chapter" data-level="4.2.2" data-path="internal-data.html"><a href="internal-data.html#simulating-your-own"><i class="fa fa-check"></i><b>4.2.2</b> Simulating Your Own</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tables-1.html"><a href="tables-1.html"><i class="fa fa-check"></i><b>5</b> Tables</a><ul>
+<li class="chapter" data-level="5.1" data-path="building.html"><a href="building.html"><i class="fa fa-check"></i><b>5.1</b> Building</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="building.html"><a href="building.html#dataset-source"><i class="fa fa-check"></i><b>5.1.1</b> Dataset Source</a></li>
+<li class="chapter" data-level="5.1.2" data-path="building.html"><a href="building.html#string-formatting"><i class="fa fa-check"></i><b>5.1.2</b> String Formatting</a></li>
+<li class="chapter" data-level="5.1.3" data-path="building.html"><a href="building.html#create"><i class="fa fa-check"></i><b>5.1.3</b> Create</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="formatting.html"><a href="formatting.html"><i class="fa fa-check"></i><b>5.2</b> Formatting</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="formatting.html"><a href="formatting.html#post-processing"><i class="fa fa-check"></i><b>5.2.1</b> Post Processing</a></li>
+<li class="chapter" data-level="5.2.2" data-path="formatting.html"><a href="formatting.html#displaying"><i class="fa fa-check"></i><b>5.2.2</b> Displaying</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="exporting.html"><a href="exporting.html"><i class="fa fa-check"></i><b>5.3</b> Exporting</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="figures-plots.html"><a href="figures-plots.html"><i class="fa fa-check"></i><b>6</b> Figures &amp; Plots</a><ul>
+<li class="chapter" data-level="6.0.1" data-path="figures-plots.html"><a href="figures-plots.html#exporting-plots"><i class="fa fa-check"></i><b>6.0.1</b> Exporting plots</a></li>
+<li class="chapter" data-level="6.1" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>6.1</b> Examples</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="examples.html"><a href="examples.html#swimmer-plot"><i class="fa fa-check"></i><b>6.1.1</b> Swimmer Plot</a></li>
+<li class="chapter" data-level="6.1.2" data-path="examples.html"><a href="examples.html#waterfall-plot"><i class="fa fa-check"></i><b>6.1.2</b> Waterfall Plot</a></li>
+<li class="chapter" data-level="6.1.3" data-path="examples.html"><a href="examples.html#spaghetti-plot"><i class="fa fa-check"></i><b>6.1.3</b> Spaghetti Plot</a></li>
+<li class="chapter" data-level="6.1.4" data-path="examples.html"><a href="examples.html#spider-plot"><i class="fa fa-check"></i><b>6.1.4</b> Spider Plot</a></li>
+<li class="chapter" data-level="6.1.5" data-path="examples.html"><a href="examples.html#survival-plot"><i class="fa fa-check"></i><b>6.1.5</b> Survival Plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>7</b> Future</a><ul>
+<li class="chapter" data-level="7.1" data-path="use-renv.html"><a href="use-renv.html"><i class="fa fa-check"></i><b>7.1</b> Use {renv}</a></li>
+<li class="chapter" data-level="7.2" data-path="areas-of-expansion.html"><a href="areas-of-expansion.html"><i class="fa fa-check"></i><b>7.2</b> Areas of Expansion</a></li>
+<li class="chapter" data-level="7.3" data-path="content.html"><a href="content.html"><i class="fa fa-check"></i><b>7.3</b> Content</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>8</b> License</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SAS and R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="content/hero.png">
+</div>
+<div id="examples" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.1</span> Examples<a href="examples.html#examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="swimmer-plot" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.1.1</span> Swimmer Plot<a href="examples.html#swimmer-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For this example we use the <strong>swimplot</strong> package for plotting. It makes the creation of swimmer plots very easy and is based on ggplot2 and thus allows nice customizations. However, if even more customization is required, swimmer plots can also be created by using ggplot2 only.</p>
+<p>A little demo how you could use the package is given below, in case you would like to find out more, you can check out <a href="https://cran.r-project.org/web/packages/swimplot/vignettes/Introduction.to.swimplot.html">this</a>.</p>
+<div id="packages-and-sample-data-2" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.1.1</span> Packages and Sample Data<a href="examples.html#packages-and-sample-data-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="co"># Packages</span></a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="kw">library</span>(haven)</a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="kw">library</span>(swimplot)</a>
+<a class="sourceLine" id="cb47-4" title="4"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb47-5" title="5"></a>
+<a class="sourceLine" id="cb47-6" title="6"><span class="co"># Data</span></a>
+<a class="sourceLine" id="cb47-7" title="7">adam_path &lt;-<span class="st"> &quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/&quot;</span></a>
+<a class="sourceLine" id="cb47-8" title="8">adsl &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adsl.xpt&quot;</span>))</a>
+<a class="sourceLine" id="cb47-9" title="9">adae &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adae.xpt&quot;</span>))</a>
+<a class="sourceLine" id="cb47-10" title="10">adtte &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adtte.xpt&quot;</span>))</a></code></pre></div>
+<p>We have to apply some changes to the data so that they can be processed by the plot functions later on. The number of subjects is limited to 50 for display purposes and we create our own response duration variable because we only have the start date of the event given in those data.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">adsl_new &lt;-<span class="st"> </span>adsl <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="st">  </span><span class="kw">select</span>(USUBJID, ARM, TRTDURD, SEX) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) </a>
+<a class="sourceLine" id="cb48-4" title="4">adae_new &lt;-<span class="st"> </span>adae <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="st">  </span><span class="kw">select</span>(USUBJID, AEDECOD, AESEV, AEREL, ASTDY) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-6" title="6"><span class="st">  </span><span class="kw">filter</span>(USUBJID <span class="op">%in%</span><span class="st"> </span>adsl_new<span class="op">$</span>USUBJID <span class="op">&amp;</span><span class="st"> </span>ASTDY <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb48-7" title="7">adtte_new &lt;-<span class="st"> </span>adtte <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-8" title="8"><span class="st">  </span><span class="kw">select</span>(USUBJID, EVNTDESC, AVAL) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-9" title="9"><span class="st">  </span><span class="kw">filter</span>(USUBJID <span class="op">%in%</span><span class="st"> </span>adsl_new<span class="op">$</span>USUBJID <span class="op">&amp;</span><span class="st"> </span>EVNTDESC <span class="op">!=</span><span class="st"> &quot;Study Completion Date&quot;</span>)  </a>
+<a class="sourceLine" id="cb48-10" title="10">random_duration_of_events &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>, <span class="kw">nrow</span>(adtte_new), <span class="dt">replace =</span> T)</a>
+<a class="sourceLine" id="cb48-11" title="11">adtte_new &lt;-<span class="st"> </span>adtte_new <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb48-12" title="12"><span class="st">  </span><span class="kw">bind_cols</span>(random_duration_of_events) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-13" title="13"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Resp_end =</span> AVAL <span class="op">+</span><span class="st"> </span>random_duration_of_events )</a>
+<a class="sourceLine" id="cb48-14" title="14">adsl_new &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(adsl_new)</a>
+<a class="sourceLine" id="cb48-15" title="15">adae_new &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(adae_new)</a>
+<a class="sourceLine" id="cb48-16" title="16">adtte_new &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(adtte_new)</a></code></pre></div>
+</div>
+<div id="basic-swimmer-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.1.2</span> Basic swimmer plot<a href="examples.html#basic-swimmer-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A basic swimmer plot just consists of a simple bar chart.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">swimmer_plot</span>(<span class="dt">df=</span>adsl_new,</a>
+<a class="sourceLine" id="cb49-2" title="2">             <span class="dt">id=</span><span class="st">&#39;USUBJID&#39;</span>,</a>
+<a class="sourceLine" id="cb49-3" title="3">             <span class="dt">end=</span><span class="st">&#39;TRTDURD&#39;</span>,</a>
+<a class="sourceLine" id="cb49-4" title="4">             <span class="dt">fill=</span><span class="st">&#39;lightblue&#39;</span>,</a>
+<a class="sourceLine" id="cb49-5" title="5">             <span class="dt">width=</span>.<span class="dv">85</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p>Now, treatment information is added.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">arm_plot &lt;-<span class="st"> </span><span class="kw">swimmer_plot</span>(<span class="dt">df=</span>adsl_new,</a>
+<a class="sourceLine" id="cb50-2" title="2">                         <span class="dt">id=</span><span class="st">&#39;USUBJID&#39;</span>,</a>
+<a class="sourceLine" id="cb50-3" title="3">                         <span class="dt">end=</span><span class="st">&#39;TRTDURD&#39;</span>,</a>
+<a class="sourceLine" id="cb50-4" title="4">                         <span class="dt">name_fill=</span><span class="st">&#39;ARM&#39;</span>,</a>
+<a class="sourceLine" id="cb50-5" title="5">                         <span class="dt">id_order=</span><span class="st">&#39;ARM&#39;</span>,</a>
+<a class="sourceLine" id="cb50-6" title="6">                         <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb50-7" title="7">                         <span class="dt">alpha=</span><span class="fl">0.75</span>,</a>
+<a class="sourceLine" id="cb50-8" title="8">                         <span class="dt">width=</span>.<span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb50-9" title="9">arm_plot</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p>The plot could be stratified by any other variable of interest, in this case: SEX.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">swim_plot_stratify &lt;-<span class="kw">swimmer_plot</span>(<span class="dt">df=</span>adsl_new,</a>
+<a class="sourceLine" id="cb51-2" title="2">                                  <span class="dt">id=</span><span class="st">&#39;USUBJID&#39;</span>,</a>
+<a class="sourceLine" id="cb51-3" title="3">                                  <span class="dt">end=</span><span class="st">&#39;TRTDURD&#39;</span>,</a>
+<a class="sourceLine" id="cb51-4" title="4">                                  <span class="dt">name_fill=</span><span class="st">&#39;ARM&#39;</span>,</a>
+<a class="sourceLine" id="cb51-5" title="5">                                  <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb51-6" title="6">                                  <span class="dt">alpha=</span><span class="fl">0.75</span>,</a>
+<a class="sourceLine" id="cb51-7" title="7">                                  <span class="dt">width=</span>.<span class="dv">8</span>,</a>
+<a class="sourceLine" id="cb51-8" title="8">                                  <span class="dt">base_size=</span><span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb51-9" title="9">                                  <span class="dt">stratify=</span> <span class="kw">c</span>(<span class="st">&#39;SEX&#39;</span>))</a>
+<a class="sourceLine" id="cb51-10" title="10">swim_plot_stratify</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+</div>
+<div id="adding-adverse-event-information-to-the-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.1.3</span> Adding adverse event information to the plot<a href="examples.html#adding-adverse-event-information-to-the-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">AE_plot &lt;-<span class="st"> </span>arm_plot <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="st">  </span><span class="kw">swimmer_points</span>(<span class="dt">df_points=</span>adae_new,</a>
+<a class="sourceLine" id="cb52-3" title="3">                 <span class="dt">id=</span><span class="st">&#39;USUBJID&#39;</span>,</a>
+<a class="sourceLine" id="cb52-4" title="4">                 <span class="dt">time=</span><span class="st">&#39;ASTDY&#39;</span>,</a>
+<a class="sourceLine" id="cb52-5" title="5">                 <span class="dt">name_shape=</span><span class="st">&#39;AESEV&#39;</span>,</a>
+<a class="sourceLine" id="cb52-6" title="6">                 <span class="dt">size=</span><span class="fl">2.5</span>,</a>
+<a class="sourceLine" id="cb52-7" title="7">                 <span class="dt">fill=</span><span class="st">&#39;white&#39;</span>, </a>
+<a class="sourceLine" id="cb52-8" title="8">                 <span class="dt">name_col=</span><span class="st">&#39;AEREL&#39;</span>)</a>
+<a class="sourceLine" id="cb52-9" title="9">AE_plot</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+</div>
+<div id="adding-time-to-event-information-to-the-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.1.4</span> Adding time-to-event information to the plot<a href="examples.html#adding-time-to-event-information-to-the-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">Response_plot &lt;-<span class="st"> </span>arm_plot <span class="op">+</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="st">  </span><span class="kw">swimmer_lines</span>(<span class="dt">df_lines=</span>adtte_new,</a>
+<a class="sourceLine" id="cb53-3" title="3">                <span class="dt">id=</span><span class="st">&#39;USUBJID&#39;</span>,</a>
+<a class="sourceLine" id="cb53-4" title="4">                <span class="dt">start =</span><span class="st">&#39;AVAL&#39;</span>,</a>
+<a class="sourceLine" id="cb53-5" title="5">                <span class="dt">end=</span><span class="st">&#39;Resp_end&#39;</span>,</a>
+<a class="sourceLine" id="cb53-6" title="6">                <span class="dt">name_col=</span><span class="st">&#39;EVNTDESC&#39;</span>,</a>
+<a class="sourceLine" id="cb53-7" title="7">                <span class="dt">size=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb53-8" title="8">Response_plot</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+</div>
+<div id="customize-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.1.5</span> Customize plot<a href="examples.html#customize-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">Response_plot_with_points &lt;-<span class="st"> </span>Response_plot <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="st">  </span><span class="kw">swimmer_points_from_lines</span>(<span class="dt">df_lines=</span>adtte_new,</a>
+<a class="sourceLine" id="cb54-3" title="3">                            <span class="dt">id=</span><span class="st">&#39;USUBJID&#39;</span>,</a>
+<a class="sourceLine" id="cb54-4" title="4">                            <span class="dt">start=</span><span class="st">&#39;AVAL&#39;</span>,</a>
+<a class="sourceLine" id="cb54-5" title="5">                            <span class="dt">end=</span><span class="st">&#39;Resp_end&#39;</span>,</a>
+<a class="sourceLine" id="cb54-6" title="6">                            <span class="dt">name_col=</span><span class="st">&#39;EVNTDESC&#39;</span>,</a>
+<a class="sourceLine" id="cb54-7" title="7">                            <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-8" title="8"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Treatment&quot;</span>,</a>
+<a class="sourceLine" id="cb54-9" title="9">                    <span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span> =<span class="st">&quot;#A9342F&quot;</span>, </a>
+<a class="sourceLine" id="cb54-10" title="10">                             <span class="st">&quot;Xanomeline High Dose&quot;</span>=<span class="st">&quot;#5B7ACE&quot;</span>,</a>
+<a class="sourceLine" id="cb54-11" title="11">                             <span class="st">&quot;Xanomeline Low Dose&quot;</span>=<span class="st">&#39;#FFC300&#39;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb54-12" title="12"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">name=</span><span class="st">&quot;Response&quot;</span>,</a>
+<a class="sourceLine" id="cb54-13" title="13">                     <span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey20&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb54-14" title="14"><span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="dt">name=</span><span class="st">&#39;&#39;</span>,</a>
+<a class="sourceLine" id="cb54-15" title="15">                     <span class="dt">values=</span><span class="kw">c</span>(<span class="dv">17</span>,<span class="dv">15</span>),</a>
+<a class="sourceLine" id="cb54-16" title="16">                     <span class="dt">breaks=</span><span class="kw">c</span>(<span class="st">&#39;AVAL&#39;</span>,<span class="st">&#39;Resp_end&#39;</span>),</a>
+<a class="sourceLine" id="cb54-17" title="17">                     <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;Response start&#39;</span>,<span class="st">&#39;Response end&#39;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb54-18" title="18"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">override.aes =</span> <span class="kw">list</span>(<span class="dt">shape =</span> <span class="ot">NA</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-19" title="19"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Time since enrollment&quot;</span>)</a>
+<a class="sourceLine" id="cb54-20" title="20"></a>
+<a class="sourceLine" id="cb54-21" title="21">Response_plot_with_points</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+
+</div>
+</div>
+<div id="waterfall-plot" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.1.2</span> Waterfall Plot<a href="examples.html#waterfall-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="packages-and-sample-data-3" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.2.1</span> Packages and Sample Data<a href="examples.html#packages-and-sample-data-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># Packages</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="kw">library</span>(gridExtra)</a>
+<a class="sourceLine" id="cb55-3" title="3"><span class="kw">library</span>(grid)</a>
+<a class="sourceLine" id="cb55-4" title="4"></a>
+<a class="sourceLine" id="cb55-5" title="5"><span class="co"># Data</span></a>
+<a class="sourceLine" id="cb55-6" title="6">wp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">subjidn =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb55-7" title="7">                 <span class="dt">trtp =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&#39;Drug&#39;</span>,<span class="st">&#39;Placebo&#39;</span>), <span class="dt">replace =</span> T, <span class="dv">30</span>),</a>
+<a class="sourceLine" id="cb55-8" title="8">                 <span class="dt">aval =</span> <span class="kw">runif</span>(<span class="dv">30</span>, <span class="dt">min =</span> <span class="dv">-40</span>, <span class="dt">max =</span> <span class="dv">40</span>))</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+subjidn
+</th>
+<th style="text-align:center;">
+trtp
+</th>
+<th style="text-align:center;">
+aval
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+Drug
+</td>
+<td style="text-align:center;">
+-19.412809
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+Drug
+</td>
+<td style="text-align:center;">
+-14.201551
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+Placebo
+</td>
+<td style="text-align:center;">
+-7.884947
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+Drug
+</td>
+<td style="text-align:center;">
+-25.427595
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+Placebo
+</td>
+<td style="text-align:center;">
+-5.597729
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+Placebo
+</td>
+<td style="text-align:center;">
+34.603566
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="basic-waterfall-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.2.2</span> Basic Waterfall Plot<a href="examples.html#basic-waterfall-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Create an initial waterfall plot</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">basic_waterfall &lt;-<span class="st"> </span><span class="kw">ggplot</span>(wp, <span class="kw">aes</span>(<span class="dt">y =</span> aval,<span class="dt">x =</span> <span class="kw">reorder</span>(subjidn, <span class="op">-</span>aval))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>)</a>
+<a class="sourceLine" id="cb56-3" title="3"></a>
+<a class="sourceLine" id="cb56-4" title="4">basic_waterfall</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+</div>
+<div id="adding-customizations" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.2.3</span> Adding Customizations<a href="examples.html#adding-customizations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Add a few customizations to the waterfall plot</p>
+<ol style="list-style-type: decimal">
+<li>Bar fill color is determined by trtp value</li>
+<li>Specify custom colors, name the legend</li>
+<li>Specify Y-axis goes from -40 to 40, by increments of 10</li>
+<li>Add in a Y-axis label</li>
+<li>Specify a base theme</li>
+<li>Remove the X-axis</li>
+<li>Move legend to bottom of graph</li>
+</ol>
+</div>
+<div id="customized-waterfall-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.2.4</span> Customized Waterfall Plot<a href="examples.html#customized-waterfall-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">custom_waterfall &lt;-<span class="st"> </span><span class="kw">ggplot</span>(wp, <span class="kw">aes</span>(<span class="dt">y =</span> aval, <span class="dt">x =</span> <span class="kw">reorder</span>(subjidn, <span class="op">-</span>aval), <span class="dt">fill =</span> trtp)) <span class="op">+</span><span class="st">                            </span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb57-3" title="3"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="st">&quot;Planned Treatment Arm&quot;</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&#39;#00bbff&#39;</span>,<span class="st">&#39;#89d329&#39;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb57-4" title="4"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">40</span>,<span class="dv">40</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>, <span class="dt">by =</span> <span class="dv">10</span>)) <span class="op">+</span><span class="st">      </span></a>
+<a class="sourceLine" id="cb57-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Maximum reduction of tumor size (%)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st">                              </span></a>
+<a class="sourceLine" id="cb57-6" title="6"><span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span><span class="st">                                                               </span></a>
+<a class="sourceLine" id="cb57-7" title="7"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>(),                                         </a>
+<a class="sourceLine" id="cb57-8" title="8">        <span class="dt">axis.line.x  =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb57-9" title="9">        <span class="dt">axis.text.x  =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb57-10" title="10">        <span class="dt">axis.ticks.x =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb57-11" title="11">        <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)                                             </a>
+<a class="sourceLine" id="cb57-12" title="12">          </a>
+<a class="sourceLine" id="cb57-13" title="13">custom_waterfall</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+</div>
+<div id="study-example" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.2.5</span> Study Example<a href="examples.html#study-example" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p>A special waterfall plot layout is needed in a real study. In this layout, biomarker information in the subject level needs to be added at the bottom of the waterfall plots.</p></li>
+<li><p>The dataset for the plot was derived from ADRS and ADSL in SAS; simulated data is used in this demo.</p></li>
+</ul>
+<p>Simulate Data:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">set.seed</span>(<span class="dv">100</span>)  </a>
+<a class="sourceLine" id="cb58-2" title="2"></a>
+<a class="sourceLine" id="cb58-3" title="3">n &lt;-<span class="st"> </span><span class="dv">120</span>   <span class="co"># size/records of simulated data</span></a>
+<a class="sourceLine" id="cb58-4" title="4"></a>
+<a class="sourceLine" id="cb58-5" title="5">dat_all &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb58-6" title="6"><span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">SUBJID =</span> <span class="dv">120010100</span><span class="op">:</span>(<span class="dv">120010100</span><span class="op">+</span>n<span class="dv">-1</span>),</a>
+<a class="sourceLine" id="cb58-7" title="7">           <span class="dt">AVAL =</span> <span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="kw">round</span>(<span class="fl">0.8</span><span class="op">*</span>n), <span class="dv">0</span>, <span class="dv">20</span>), <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">round</span>(<span class="fl">0.2</span><span class="op">*</span>n))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(),</a>
+<a class="sourceLine" id="cb58-8" title="8">           <span class="dt">OVERALLRESP =</span> <span class="kw">c</span>(<span class="st">&quot;PR&quot;</span>, <span class="st">&quot;SD&quot;</span>,<span class="st">&quot;PD&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(<span class="dt">size=</span>n, <span class="dt">replace=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb58-9" title="9">           <span class="dt">AMEDGRPN =</span> <span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(<span class="dt">size=</span>n, <span class="dt">replace=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb58-10" title="10">           <span class="dt">DOR =</span> <span class="kw">rpois</span>(n, <span class="dv">40</span>),</a>
+<a class="sourceLine" id="cb58-11" title="11">           <span class="dt">AVISIT =</span> <span class="kw">c</span>(<span class="st">&quot;C1&quot;</span>, <span class="st">&quot;C2&quot;</span>, <span class="st">&quot;C3&quot;</span>,<span class="st">&quot;EOT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(<span class="dt">size=</span>n, <span class="dt">replace=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb58-12" title="12">           <span class="dt">ATMLOSS_L =</span> <span class="kw">c</span>(<span class="st">&quot;E&quot;</span>, <span class="st">&quot;L&quot;</span>, <span class="st">&quot;Data unavailable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(<span class="dt">size=</span>n, <span class="dt">replace=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb58-13" title="13">           <span class="dt">ATMLOSS_P =</span> <span class="kw">c</span>(<span class="st">&quot;E&quot;</span>, <span class="st">&quot;L&quot;</span>, <span class="st">&quot;Data unavailable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(<span class="dt">size=</span>n, <span class="dt">replace=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb58-14" title="14">           <span class="dt">ATMLOSS_R =</span> <span class="kw">c</span>(<span class="st">&quot;E&quot;</span>, <span class="st">&quot;L&quot;</span>, <span class="st">&quot;Data unavailable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(<span class="dt">size=</span>n, <span class="dt">replace=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb58-15" title="15">           <span class="dt">IDFOOT =</span> <span class="st">&quot;Bayer: /study/path/.../f_waterfall.sas               30NOV2021 16:06&quot;</span></a>
+<a class="sourceLine" id="cb58-16" title="16">           ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-17" title="17"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="st">&quot;OVERALLRESP&quot;</span>, <span class="st">&quot;DOR&quot;</span>, <span class="st">&quot;IDFOOT&quot;</span>), as.character)</a></code></pre></div>
+<ul>
+<li>X: SUBJID</li>
+<li>Y: AVAL (derived from ADRS.AVAL when ADRS.PARAM = “Maximum Tumor Reduction (%)”)</li>
+<li>Label: OVERALLRESP (derived from ADRS.AVAL when ADRS.PARAM = “Best Overall Response”)</li>
+<li>Subset: AMEDGRPN (5 groups)</li>
+<li>A graph function is created in the real study for different analysis groups, in this demo, we subset data to AMEDGRPN = 50.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+SUBJID
+</th>
+<th style="text-align:center;">
+AVAL
+</th>
+<th style="text-align:center;">
+OVERALLRESP
+</th>
+<th style="text-align:center;">
+AMEDGRPN
+</th>
+<th style="text-align:center;">
+DOR
+</th>
+<th style="text-align:center;">
+AVISIT
+</th>
+<th style="text-align:center;">
+ATMLOSS_L
+</th>
+<th style="text-align:center;">
+ATMLOSS_P
+</th>
+<th style="text-align:center;">
+ATMLOSS_R
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+120010100
+</td>
+<td style="text-align:center;">
+28.56603
+</td>
+<td style="text-align:center;">
+SD
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+31
+</td>
+<td style="text-align:center;">
+EOT
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+<td style="text-align:center;">
+E
+</td>
+<td style="text-align:center;">
+L
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+120010120
+</td>
+<td style="text-align:center;">
+35.14751
+</td>
+<td style="text-align:center;">
+PD
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+36
+</td>
+<td style="text-align:center;">
+C3
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+<td style="text-align:center;">
+E
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+120010121
+</td>
+<td style="text-align:center;">
+-23.24839
+</td>
+<td style="text-align:center;">
+PD
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+EOT
+</td>
+<td style="text-align:center;">
+E
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+120010128
+</td>
+<td style="text-align:center;">
+46.20594
+</td>
+<td style="text-align:center;">
+PR
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+44
+</td>
+<td style="text-align:center;">
+C2
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+<td style="text-align:center;">
+E
+</td>
+<td style="text-align:center;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+120010134
+</td>
+<td style="text-align:center;">
+0.00000
+</td>
+<td style="text-align:center;">
+PD
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+58
+</td>
+<td style="text-align:center;">
+C3
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+<td style="text-align:center;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+120010135
+</td>
+<td style="text-align:center;">
+-45.43851
+</td>
+<td style="text-align:center;">
+PR
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+31
+</td>
+<td style="text-align:center;">
+C2
+</td>
+<td style="text-align:center;">
+Data unavailable
+</td>
+<td style="text-align:center;">
+L
+</td>
+<td style="text-align:center;">
+L
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Create a waterfall plot with simulated data and below customization</strong></p>
+<ol style="list-style-type: decimal">
+<li>Add x/y-axis labels through function “labs”</li>
+<li>SUBJID has long digits, below functions are used to avoid overlapping at x-axis:
+<ul>
+<li>function stringr::str_wrap: add split character “” between digits</li>
+<li>function gsub: add space between digits to enable the use of str_wrap</li>
+<li>function stringr::str_replace_all: remove space</li>
+</ul></li>
+<li>Specify legend title, order/colors (similar to SAS sgplot - dattrmap)</li>
+<li>Annotation on the top of the bar when Y=0<br />
+</li>
+<li>Adjust background, legend, and size/color/font of x/y-axis aesthetics through Theme</li>
+</ol>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">waterfall.plot &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">reorder</span>(SUBJID, <span class="op">-</span>AVAL), AVAL, <span class="dt">fill =</span>OVERALLRESP)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Subject&quot;</span>, </a>
+<a class="sourceLine" id="cb59-4" title="4">       <span class="dt">y =</span> <span class="st">&quot;Best % Change from baseline </span><span class="ch">\n</span><span class="st"> in sum of diameters </span><span class="ch">\n</span><span class="st"> (target lesions)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-5" title="5"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) stringr<span class="op">::</span><span class="kw">str_wrap</span>(<span class="kw">gsub</span>(<span class="st">&quot;([0-9])([0-9])&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1 </span><span class="ch">\\</span><span class="st">2 &quot;</span>, x), </a>
+<a class="sourceLine" id="cb59-6" title="6">                                                     <span class="dt">width =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-7" title="7"><span class="st">                     </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-8" title="8"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="st">&quot;Best Response&quot;</span>,</a>
+<a class="sourceLine" id="cb59-9" title="9">                    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;PR&quot;</span>, <span class="st">&quot;SD&quot;</span>,<span class="st">&quot;PD&quot;</span>),</a>
+<a class="sourceLine" id="cb59-10" title="10">                    <span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;PR&quot;</span>=<span class="st">&#39;#89d329&#39;</span>,</a>
+<a class="sourceLine" id="cb59-11" title="11">                             <span class="st">&quot;SD&quot;</span>=<span class="st">&quot;#756bb1&quot;</span>,</a>
+<a class="sourceLine" id="cb59-12" title="12">                             <span class="st">&quot;PD&quot;</span>=<span class="st">&#39;#00bbff&#39;</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-13" title="13"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">if_else</span>(AVAL <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,OVERALLRESP,<span class="st">&quot;&quot;</span>),<span class="dt">fontface=</span><span class="st">&quot;bold&quot;</span>), </a>
+<a class="sourceLine" id="cb59-14" title="14">            <span class="dt">vjust =</span> <span class="dv">-1</span>,</a>
+<a class="sourceLine" id="cb59-15" title="15">            <span class="dt">size=</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb59-16" title="16">            <span class="dt">color=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st">     </span></a>
+<a class="sourceLine" id="cb59-17" title="17"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb59-18" title="18">    <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">12</span>,<span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),  </a>
+<a class="sourceLine" id="cb59-19" title="19">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">12</span>, <span class="dt">face=</span><span class="st">&quot;bold&quot;</span>), </a>
+<a class="sourceLine" id="cb59-20" title="20">    <span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>(),  </a>
+<a class="sourceLine" id="cb59-21" title="21">    <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>),</a>
+<a class="sourceLine" id="cb59-22" title="22">    <span class="dt">legend.justification =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb59-23" title="23">    <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb59-24" title="24">    <span class="dt">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>,</a>
+<a class="sourceLine" id="cb59-25" title="25">    <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">8</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb59-26" title="26">    <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">8</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),  </a>
+<a class="sourceLine" id="cb59-27" title="27">    <span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>), </a>
+<a class="sourceLine" id="cb59-28" title="28">    <span class="dt">plot.caption.position =</span>  <span class="st">&quot;plot&quot;</span></a>
+<a class="sourceLine" id="cb59-29" title="29">  ) </a>
+<a class="sourceLine" id="cb59-30" title="30"></a>
+<a class="sourceLine" id="cb59-31" title="31">waterfall.plot</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-67-1.png" width="864" /></p>
+<p>As requested from the study, more information at subject level needs to be added in the bottom of the waterfall plots. Thus, two more plots are created (add-in plot1/2) to display the subject level information.</p>
+<ul>
+<li>Add-in plot 1: visit and duration of response information at subject level</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">var &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DOR&quot;</span>, <span class="st">&quot;AVISIT&quot;</span>)</a>
+<a class="sourceLine" id="cb60-2" title="2">var_label &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Duration (days)&quot;</span>, <span class="st">&quot;Timepoint&quot;</span>)</a>
+<a class="sourceLine" id="cb60-3" title="3"></a>
+<a class="sourceLine" id="cb60-4" title="4">add.plot1 &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">measure.vars =</span> <span class="kw">eval</span>(var), <span class="dt">value.name =</span> <span class="st">&quot;label&quot;</span>, <span class="dt">variable.name =</span> <span class="st">&quot;layer&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">layer =</span> <span class="kw">factor</span>(layer, <span class="dt">levels =</span> var, <span class="dt">labels =</span> var_label)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">reorder</span>(SUBJID, <span class="op">-</span>AVAL))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb60-8" title="8"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y =</span> layer, <span class="dt">label =</span> label), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">fontface =</span> <span class="st">&quot;bold&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb60-9" title="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;&quot;</span>, <span class="dt">x =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb60-10" title="10"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb60-11" title="11"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb60-12" title="12">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(</a>
+<a class="sourceLine" id="cb60-13" title="13">      <span class="dt">size =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb60-14" title="14">      <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb60-15" title="15">      <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span></a>
+<a class="sourceLine" id="cb60-16" title="16">    ),</a>
+<a class="sourceLine" id="cb60-17" title="17">    <span class="dt">axis.line =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb60-18" title="18">    <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb60-19" title="19">    <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb60-20" title="20">    <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb60-21" title="21">    <span class="dt">strip.text =</span> <span class="kw">element_blank</span>()</a>
+<a class="sourceLine" id="cb60-22" title="22">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb60-23" title="23"><span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio =</span> <span class="fl">.8</span>)</a>
+<a class="sourceLine" id="cb60-24" title="24">add.plot1</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-68-1.png" width="864" /></p>
+<ul>
+<li>Add-in plot 2: biomarker-related information at subject level, footnotes are added in this plot
+<ul>
+<li>wrap long footnote by adding "\n" or using stringr::str_wrap</li>
+<li>display SAS macro variable “&amp;idfoot.”</li>
+</ul></li>
+</ul>
+<p>Footnotes:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">footnote1 &lt;-<span class="st"> &#39;Footnote1: &quot;</span><span class="ch">\\</span><span class="st">n</span><span class="ch">\&quot;</span><span class="st"> can be used to split long footnote into next line.&#39;</span></a>
+<a class="sourceLine" id="cb61-2" title="2">footnote2 &lt;-<span class="st"> &quot;Footnote2: To avoid manually adding split character. The function stringr::str_wrap   can be used here to wrap the long text with a specified width.&quot;</span></a>
+<a class="sourceLine" id="cb61-3" title="3">footnote &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">c</span>(footnote1,</a>
+<a class="sourceLine" id="cb61-4" title="4">                     footnote2,</a>
+<a class="sourceLine" id="cb61-5" title="5">                     <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb61-6" title="6">                     dat<span class="op">$</span>IDFOOT[<span class="dv">1</span>]),</a>
+<a class="sourceLine" id="cb61-7" title="7">                   <span class="cf">function</span>(x) stringr<span class="op">::</span><span class="kw">str_wrap</span>(x, <span class="dt">width=</span><span class="dv">120</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># apply str_wrap to individual footnote</span></a>
+<a class="sourceLine" id="cb61-8" title="8"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># convert list structure to vector</span></a>
+<a class="sourceLine" id="cb61-9" title="9"><span class="st">  </span>stringr<span class="op">::</span><span class="kw">str_flatten</span>(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)  <span class="co"># add split character(new line) between footnotes</span></a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">var &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ATMLOSS_L&quot;</span>, <span class="st">&quot;ATMLOSS_P&quot;</span>,<span class="st">&quot;ATMLOSS_R&quot;</span>)</a>
+<a class="sourceLine" id="cb62-2" title="2">var_label &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Local&quot;</span>, <span class="st">&quot;Prospective&quot;</span>, <span class="st">&quot;Retrospective&quot;</span>)</a>
+<a class="sourceLine" id="cb62-3" title="3"></a>
+<a class="sourceLine" id="cb62-4" title="4">add.plot2 &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb62-5" title="5"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">measure.vars =</span> <span class="kw">eval</span>(var), </a>
+<a class="sourceLine" id="cb62-6" title="6">                 <span class="dt">value.name =</span> <span class="st">&quot;label&quot;</span>,</a>
+<a class="sourceLine" id="cb62-7" title="7">                 <span class="dt">variable.name =</span> <span class="st">&quot;layer&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb62-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">label=</span><span class="kw">case_when</span>(</a>
+<a class="sourceLine" id="cb62-9" title="9">    label <span class="op">==</span><span class="st"> &quot;L&quot;</span> <span class="op">~</span><span class="st"> &quot;ATM Loss&quot;</span>,</a>
+<a class="sourceLine" id="cb62-10" title="10">    label <span class="op">==</span><span class="st"> &quot;E&quot;</span> <span class="op">~</span><span class="st"> &quot;ATM Expressed&quot;</span>,      </a>
+<a class="sourceLine" id="cb62-11" title="11">    label <span class="op">==</span><span class="st"> &quot;9&quot;</span> <span class="op">~</span><span class="st"> &quot;Data unavailable&quot;</span>,</a>
+<a class="sourceLine" id="cb62-12" title="12">    <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>label</a>
+<a class="sourceLine" id="cb62-13" title="13">  )) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb62-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">layer =</span> <span class="kw">factor</span>(layer, <span class="dt">levels =</span> <span class="kw">rev</span>(var), <span class="dt">labels =</span> <span class="kw">rev</span>(var_label))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb62-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-16" title="16"><span class="st">  </span><span class="kw">aes</span>(<span class="kw">reorder</span>(SUBJID, <span class="op">-</span>AVAL), layer, <span class="dt">color=</span>label,<span class="dt">shape=</span>label) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-17" title="17"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-18" title="18"><span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;ATM Loss&quot;</span>,<span class="st">&quot;ATM Expressed&quot;</span>, <span class="st">&quot;Data unavailable&quot;</span>), </a>
+<a class="sourceLine" id="cb62-19" title="19">                     <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;ATM Loss&quot;</span>=<span class="dv">15</span>,<span class="st">&quot;ATM Expressed&quot;</span>=<span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb62-20" title="20">                                <span class="st">&quot;Data unavailable&quot;</span>=<span class="dv">7</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-21" title="21"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;ATM Loss&quot;</span>=<span class="st">&quot;black&quot;</span>, <span class="st">&quot;ATM Expressed&quot;</span>=<span class="st">&quot;black&quot;</span>, </a>
+<a class="sourceLine" id="cb62-22" title="22">                                <span class="st">&quot;Data unavailable&quot;</span>=<span class="st"> &#39;black&#39;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-23" title="23"><span class="st">  </span><span class="kw">theme_classic</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-24" title="24"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>,<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb62-25" title="25">        <span class="dt">axis.title=</span><span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb62-26" title="26">        <span class="dt">axis.line =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb62-27" title="27">        <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb62-28" title="28">        <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb62-29" title="29">        <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb62-30" title="30">        <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb62-31" title="31">        <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</a>
+<a class="sourceLine" id="cb62-32" title="32">        <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb62-33" title="33">        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(), </a>
+<a class="sourceLine" id="cb62-34" title="34">        <span class="dt">strip.text =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb62-35" title="35">        <span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>, <span class="dt">size =</span> <span class="dv">10</span>), </a>
+<a class="sourceLine" id="cb62-36" title="36">        <span class="dt">plot.caption.position =</span>  <span class="st">&quot;plot&quot;</span></a>
+<a class="sourceLine" id="cb62-37" title="37">  )<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-38" title="38"><span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span>.<span class="dv">9</span>)<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb62-39" title="39"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">caption =</span> footnote)</a>
+<a class="sourceLine" id="cb62-40" title="40">add.plot2</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-70-1.png" width="864" /></p>
+<ul>
+<li>The following functions are used to combine three plots aligned with x value.
+<ul>
+<li>ggplot2::ggplotGrob</li>
+<li>gridExtra::gtable_rbind</li>
+<li>grid::grid.draw</li>
+</ul></li>
+<li>Align the three plots with the same x-axis (SUBJID).
+<ul>
+<li>waterfall.plot</li>
+<li>add.plot1</li>
+<li>add.plot2</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">p1 &lt;-<span class="st"> </span>waterfall.plot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplotGrob</span>()</a>
+<a class="sourceLine" id="cb63-2" title="2">p2 &lt;-<span class="st"> </span>add.plot1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplotGrob</span>()</a>
+<a class="sourceLine" id="cb63-3" title="3">p3 &lt;-<span class="st"> </span>add.plot2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplotGrob</span>()</a>
+<a class="sourceLine" id="cb63-4" title="4"><span class="kw">gtable_rbind</span>(p1, p2, p3,</a>
+<a class="sourceLine" id="cb63-5" title="5">             <span class="dt">size=</span><span class="st">&#39;first&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">grid.draw</span>()</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-71-1.png" width="960" /></p>
+
+</div>
+</div>
+<div id="spaghetti-plot" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.1.3</span> Spaghetti Plot<a href="examples.html#spaghetti-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="packages-and-sample-data-4" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.3.1</span> Packages and Sample Data<a href="examples.html#packages-and-sample-data-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="co"># Packages</span></a>
+<a class="sourceLine" id="cb64-2" title="2"><span class="kw">library</span>(gg.gap)</a>
+<a class="sourceLine" id="cb64-3" title="3"></a>
+<a class="sourceLine" id="cb64-4" title="4"><span class="co"># Data</span></a>
+<a class="sourceLine" id="cb64-5" title="5"><span class="kw">set.seed</span>(<span class="dv">100</span>)  </a>
+<a class="sourceLine" id="cb64-6" title="6"></a>
+<a class="sourceLine" id="cb64-7" title="7">n &lt;-<span class="st"> </span><span class="dv">50</span>   <span class="co"># number of subjects, each subject has 12 data points</span></a>
+<a class="sourceLine" id="cb64-8" title="8"></a>
+<a class="sourceLine" id="cb64-9" title="9">spaghetti_sim &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">SUBJIDN =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>n,<span class="dt">each=</span><span class="dv">12</span>),</a>
+<a class="sourceLine" id="cb64-10" title="10">                            <span class="dt">X =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,n),</a>
+<a class="sourceLine" id="cb64-11" title="11">                            <span class="dt">Y =</span> <span class="kw">c</span>(<span class="kw">rgamma</span>((n<span class="op">*</span><span class="dv">12-5</span>), <span class="dv">5</span>, <span class="dv">1</span>), <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">200</span>,<span class="dv">40</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(),</a>
+<a class="sourceLine" id="cb64-12" title="12">                            <span class="dt">TRT01AN =</span> <span class="kw">c</span>(<span class="st">&quot;Drug&quot;</span>,<span class="st">&quot;Placebo&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample</span>(<span class="dt">size=</span>n<span class="op">*</span><span class="dv">12</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>))</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+SUBJIDN
+</th>
+<th style="text-align:center;">
+X
+</th>
+<th style="text-align:center;">
+Y
+</th>
+<th style="text-align:center;">
+TRT01AN
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+6.998788
+</td>
+<td style="text-align:center;">
+Placebo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+5.381833
+</td>
+<td style="text-align:center;">
+Drug
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+8.597700
+</td>
+<td style="text-align:center;">
+Drug
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+5.774989
+</td>
+<td style="text-align:center;">
+Drug
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+5.275945
+</td>
+<td style="text-align:center;">
+Drug
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+2.945667
+</td>
+<td style="text-align:center;">
+Drug
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="basic-spaghetti-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.3.2</span> Basic Spaghetti plot<a href="examples.html#basic-spaghetti-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">p_spaghetti &lt;-<span class="st"> </span>spaghetti_sim <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(X, Y, <span class="dt">group =</span> SUBJIDN, <span class="dt">colour =</span> TRT01AN)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Y values&quot;</span>, </a>
+<a class="sourceLine" id="cb65-5" title="5">       <span class="dt">x=</span><span class="st">&quot;Months since start of study treatment&quot;</span>,</a>
+<a class="sourceLine" id="cb65-6" title="6">       <span class="dt">colour =</span> <span class="st">&quot;Actual Treatment for Period 01 (N)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb65-7" title="7"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">size=</span><span class="fl">0.1</span>, <span class="dt">linetype=</span><span class="st">&quot;solid&quot;</span>, </a>
+<a class="sourceLine" id="cb65-8" title="8">                                         <span class="dt">colour =</span><span class="st">&quot;black&quot;</span>),</a>
+<a class="sourceLine" id="cb65-9" title="9">        <span class="dt">legend.position=</span><span class="st">&quot;bottom&quot;</span>, <span class="dt">legend.box =</span> <span class="st">&quot;horizontal&quot;</span>)</a>
+<a class="sourceLine" id="cb65-10" title="10">p_spaghetti</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-74-1.png" width="960" /></p>
+</div>
+<div id="spaghetti-plot-with-broken-y" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.3.3</span> Spaghetti Plot with Broken Y<a href="examples.html#spaghetti-plot-with-broken-y" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Different scales presented in the same plot when outliers are presented, to enlarge the detailed part of small values.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="co">#library(gg.gap)</span></a>
+<a class="sourceLine" id="cb66-2" title="2"></a>
+<a class="sourceLine" id="cb66-3" title="3">p_spaghetti_break &lt;-<span class="st"> </span><span class="kw">gg.gap</span>(<span class="dt">plot=</span>p_spaghetti, <span class="dt">tick_width=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">70</span>),</a>
+<a class="sourceLine" id="cb66-4" title="4">         <span class="dt">segments=</span><span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">25</span>), <span class="dt">rel_heights=</span><span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb66-5" title="5">         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">235</span>)) </a>
+<a class="sourceLine" id="cb66-6" title="6">p_spaghetti_break</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-75-1.png" width="960" /></p>
+
+</div>
+</div>
+<div id="spider-plot" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.1.4</span> Spider Plot<a href="examples.html#spider-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="packages-and-sample-data-5" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.4.1</span> Packages and Sample Data<a href="examples.html#packages-and-sample-data-5" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Create a sample data set to visualize</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># Packages</span></a>
+<a class="sourceLine" id="cb67-2" title="2"><span class="kw">library</span>(ggrepel)</a>
+<a class="sourceLine" id="cb67-3" title="3"></a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="co"># Data</span></a>
+<a class="sourceLine" id="cb67-5" title="5">sp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">subjidn =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">times =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">4</span>)),</a>
+<a class="sourceLine" id="cb67-6" title="6">                 <span class="dt">trtp =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;drug&#39;</span>,<span class="st">&#39;placebo&#39;</span>), <span class="dt">times =</span> <span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">13</span>)),</a>
+<a class="sourceLine" id="cb67-7" title="7">                 <span class="dt">avisit =</span> <span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">0</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">0</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">0</span><span class="op">:</span><span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb67-8" title="8">                 <span class="dt">aval =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb67-9" title="9">                          <span class="dv">0</span>,<span class="op">-</span><span class="dv">10</span>,<span class="op">-</span><span class="dv">20</span>,<span class="op">-</span><span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb67-10" title="10">                          <span class="dv">0</span>,<span class="op">-</span><span class="dv">30</span>,<span class="op">-</span><span class="dv">25</span>,<span class="op">-</span><span class="dv">35</span>,<span class="op">-</span><span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb67-11" title="11">                          <span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb67-12" title="12">                          <span class="dv">0</span>,<span class="op">-</span><span class="dv">20</span>,<span class="op">-</span><span class="dv">15</span>,<span class="op">-</span><span class="dv">20</span>))</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+subjidn
+</th>
+<th style="text-align:center;">
+trtp
+</th>
+<th style="text-align:center;">
+avisit
+</th>
+<th style="text-align:center;">
+aval
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+drug
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+drug
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+drug
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+drug
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+drug
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="basic-spider-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.4.2</span> Basic Spider Plot<a href="examples.html#basic-spider-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">basic_spider &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sp, <span class="kw">aes</span>(<span class="dt">x =</span> avisit, <span class="dt">y =</span> aval, <span class="dt">group =</span> subjidn)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="st">  </span><span class="kw">geom_line</span>()</a>
+<a class="sourceLine" id="cb68-3" title="3"></a>
+<a class="sourceLine" id="cb68-4" title="4">basic_spider</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+</div>
+<div id="adding-customizations-1" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.4.3</span> Adding Customizations<a href="examples.html#adding-customizations-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Add a few customizations to the spider plot</p>
+<ol style="list-style-type: decimal">
+<li>Line color is determined by <code>trtp</code> value</li>
+<li>Add points to each line</li>
+<li>Add a dashed reference line at Y = 0</li>
+<li>Specify custom colors, name the legend</li>
+<li>Specify Y-axis goes from -40 to 40, by increments of 10</li>
+<li>Add in a Y-axis label</li>
+<li>Add in a X-axis label</li>
+<li>Specify a base theme</li>
+<li>Move legend to bottom of graph</li>
+</ol>
+</div>
+<div id="customized-spider-plot" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.4.4</span> Customized Spider Plot<a href="examples.html#customized-spider-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">custom_spider &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sp, <span class="kw">aes</span>(<span class="dt">x =</span> avisit, <span class="dt">y =</span> aval, <span class="dt">group =</span> subjidn, <span class="dt">color =</span> trtp)) <span class="op">+</span><span class="st">                             </span></a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb69-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb69-4" title="4"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb69-5" title="5"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="st">&quot;Planned Treatment Arm&quot;</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&#39;#00bbff&#39;</span>,<span class="st">&#39;#89d329&#39;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb69-6" title="6"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">40</span>,<span class="dv">40</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>, <span class="dt">by =</span> <span class="dv">10</span>)) <span class="op">+</span><span class="st">      </span></a>
+<a class="sourceLine" id="cb69-7" title="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Change in Target Lesion from Baseline (%)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st">                         </span></a>
+<a class="sourceLine" id="cb69-8" title="8"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Time (weeks)&quot;</span>) <span class="op">+</span><span class="st">                                                        </span></a>
+<a class="sourceLine" id="cb69-9" title="9"><span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span><span class="st">                                                               </span></a>
+<a class="sourceLine" id="cb69-10" title="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)                                             </a>
+<a class="sourceLine" id="cb69-11" title="11">  </a>
+<a class="sourceLine" id="cb69-12" title="12">custom_spider</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+</div>
+<div id="subject-labels-customization" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.4.5</span> Subject Labels Customization<a href="examples.html#subject-labels-customization" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Add subject Labels (IDs) at the end of each line</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">sp_ends &lt;-<span class="st"> </span>sp <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(subjidn) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-3" title="3"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">1</span>, avisit) </a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+subjidn
+</th>
+<th style="text-align:center;">
+trtp
+</th>
+<th style="text-align:center;">
+avisit
+</th>
+<th style="text-align:center;">
+aval
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+drug
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+placebo
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+-15
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+placebo
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+-30
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+placebo
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+placebo
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+-20
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="co"># library(ggrepel)</span></a>
+<a class="sourceLine" id="cb71-2" title="2"></a>
+<a class="sourceLine" id="cb71-3" title="3">custom_spider <span class="op">+</span></a>
+<a class="sourceLine" id="cb71-4" title="4"><span class="st">  </span><span class="kw">geom_text_repel</span>(</a>
+<a class="sourceLine" id="cb71-5" title="5">    <span class="kw">aes</span>(<span class="dt">label =</span> subjidn),</a>
+<a class="sourceLine" id="cb71-6" title="6">    <span class="dt">color=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb71-7" title="7">    <span class="dt">data=</span>sp_ends,</a>
+<a class="sourceLine" id="cb71-8" title="8">    <span class="dt">size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb71-9" title="9">    <span class="dt">direction =</span> <span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb71-10" title="10">    <span class="dt">hjust =</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb71-11" title="11">  )</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+
+</div>
+</div>
+<div id="survival-plot" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.1.5</span> Survival Plot<a href="examples.html#survival-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="kaplan-meier-statistics-and-plotting" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.5.1</span> Kaplan-Meier statistics and plotting<a href="examples.html#kaplan-meier-statistics-and-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In the following example the <em>survfit</em> function from the <em>survival</em> package is used to calculate Kaplan-Meier statistics from time-to-event data. The model statistics can be inspected (using <em>broom</em> - a generic function to extract statistics from R models).</p>
+<p>Passing the model to the <em>ggsurvplot</em> function from the <em>survminer</em> package creates a Kaplan-Meier curve. The configuration tries to mimic the known SAS output as close as possible (e.g. number at risk table style etc.).</p>
+</div>
+<div id="packages-and-sample-data-6" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.5.2</span> Packages and Sample Data<a href="examples.html#packages-and-sample-data-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="co"># Packages</span></a>
+<a class="sourceLine" id="cb72-2" title="2"><span class="kw">library</span>(survminer)</a>
+<a class="sourceLine" id="cb72-3" title="3"><span class="kw">library</span>(survival)</a>
+<a class="sourceLine" id="cb72-4" title="4"><span class="kw">library</span>(broom)</a>
+<a class="sourceLine" id="cb72-5" title="5"><span class="kw">library</span>(flextable)</a>
+<a class="sourceLine" id="cb72-6" title="6"></a>
+<a class="sourceLine" id="cb72-7" title="7"><span class="co"># Data</span></a>
+<a class="sourceLine" id="cb72-8" title="8">adtte &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_xpt</span>(</a>
+<a class="sourceLine" id="cb72-9" title="9">  <span class="kw">paste0</span>(<span class="st">&quot;https://github.com/phuse-org/TestDataFactory/&quot;</span>,</a>
+<a class="sourceLine" id="cb72-10" title="10">         <span class="st">&quot;raw/main/Updated/TDF_ADaM/adtte.xpt&quot;</span>))</a></code></pre></div>
+<p>Filter time-to-event parameter and select required variables. The piping command directly passed filtered and selected data to the <code>survfit</code> function and creates the model.</p>
+<blockquote>
+<p><strong>Note:</strong> The event parameter from survival function (survival::Surv) is the status indicator, normally 0=alive, 1=death; while ADTTE.CNSR=0 usually means event occurred(e.g., death), ADTTE.CNSR=1 represents censoring. Thus, “1-CNSR” is used here to accommodate the CDISC ADaM standard.</p>
+</blockquote>
+<div class="attention">
+<p>This section is under construction</p>
+</div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">surv_model &lt;-<span class="st"> </span>adtte <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb73-2" title="2"><span class="st">  </span><span class="kw">filter</span>(PARAMCD <span class="op">==</span><span class="st"> &quot;TTDE&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="st">  </span><span class="kw">select</span>(STUDYID, USUBJID, PARAMCD, AVAL, CNSR, TRTA) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb73-4" title="4"><span class="st">  </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(AVAL, <span class="dv">1</span><span class="op">-</span>CNSR) <span class="op">~</span><span class="st"> </span>TRTA, <span class="dt">data =</span> .)</a></code></pre></div>
+</div>
+<div id="inspecting-fitted-survival-model" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.5.3</span> Inspecting fitted survival model<a href="examples.html#inspecting-fitted-survival-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">head</span>(<span class="kw">tidy</span>(surv_model))  </a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+time
+</th>
+<th style="text-align:center;">
+n.risk
+</th>
+<th style="text-align:center;">
+n.event
+</th>
+<th style="text-align:center;">
+n.censor
+</th>
+<th style="text-align:center;">
+estimate
+</th>
+<th style="text-align:center;">
+std.error
+</th>
+<th style="text-align:center;">
+conf.high
+</th>
+<th style="text-align:center;">
+conf.low
+</th>
+<th style="text-align:center;">
+strata
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+86
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.9883721
+</td>
+<td style="text-align:center;">
+0.0116961
+</td>
+<td style="text-align:center;">
+1.0000000
+</td>
+<td style="text-align:center;">
+0.9659724
+</td>
+<td style="text-align:center;">
+TRTA=Placebo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+85
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.9767442
+</td>
+<td style="text-align:center;">
+0.0166390
+</td>
+<td style="text-align:center;">
+1.0000000
+</td>
+<td style="text-align:center;">
+0.9454046
+</td>
+<td style="text-align:center;">
+TRTA=Placebo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+84
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.9534884
+</td>
+<td style="text-align:center;">
+0.0238163
+</td>
+<td style="text-align:center;">
+0.9990514
+</td>
+<td style="text-align:center;">
+0.9100033
+</td>
+<td style="text-align:center;">
+TRTA=Placebo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+82
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.9418605
+</td>
+<td style="text-align:center;">
+0.0267913
+</td>
+<td style="text-align:center;">
+0.9926390
+</td>
+<td style="text-align:center;">
+0.8936795
+</td>
+<td style="text-align:center;">
+TRTA=Placebo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+81
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.9418605
+</td>
+<td style="text-align:center;">
+0.0267913
+</td>
+<td style="text-align:center;">
+0.9926390
+</td>
+<td style="text-align:center;">
+0.8936795
+</td>
+<td style="text-align:center;">
+TRTA=Placebo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+80
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.9300872
+</td>
+<td style="text-align:center;">
+0.0295973
+</td>
+<td style="text-align:center;">
+0.9856369
+</td>
+<td style="text-align:center;">
+0.8776683
+</td>
+<td style="text-align:center;">
+TRTA=Placebo
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="plotting-custom-configured-kaplan-meier-curves-without-confidence-intervals" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.5.4</span> Plotting custom configured Kaplan-Meier curves without confidence intervals<a href="examples.html#plotting-custom-configured-kaplan-meier-curves-without-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<blockquote>
+<p><strong>Note:</strong> Let´s assume a month is defined as 30.4375 (days);
+The xscale parameter d_m converts days (input) to month.
+If six months breaks are required for the numbers-at-risk table this would mean:
+break.x.by = 182.625 (6*30.4375).</p>
+</blockquote>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"> <span class="kw">ggsurvplot</span>(</a>
+<a class="sourceLine" id="cb75-2" title="2">   <span class="dt">fit =</span> surv_model,</a>
+<a class="sourceLine" id="cb75-3" title="3">   <span class="dt">data =</span> adtte,</a>
+<a class="sourceLine" id="cb75-4" title="4">   <span class="dt">risk.table =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb75-5" title="5">   <span class="co">#ylab = ylabs,</span></a>
+<a class="sourceLine" id="cb75-6" title="6">   <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>,</a>
+<a class="sourceLine" id="cb75-7" title="7">   <span class="dt">linetype =</span> <span class="st">&quot;strata&quot;</span>,</a>
+<a class="sourceLine" id="cb75-8" title="8">   <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb75-9" title="9">   <span class="dt">legend.title =</span> <span class="st">&quot;Randomized Treatment&quot;</span>,</a>
+<a class="sourceLine" id="cb75-10" title="10">   <span class="dt">legend =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>),</a>
+<a class="sourceLine" id="cb75-11" title="11">   <span class="co">#palette = c(color_trt1,color_trt2),</span></a>
+<a class="sourceLine" id="cb75-12" title="12">   <span class="dt">risk.table.title =</span> <span class="st">&quot;Number of subjects at risk&quot;</span>,</a>
+<a class="sourceLine" id="cb75-13" title="13">   <span class="dt">risk.table.y.text =</span> F,</a>
+<a class="sourceLine" id="cb75-14" title="14">   <span class="dt">risk.table.height =</span> <span class="fl">.15</span>,</a>
+<a class="sourceLine" id="cb75-15" title="15">   <span class="dt">censor.shape =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb75-16" title="16">   <span class="dt">censor.size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb75-17" title="17">   <span class="dt">ncensor.plot =</span> F,</a>
+<a class="sourceLine" id="cb75-18" title="18">   <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">250</span>),</a>
+<a class="sourceLine" id="cb75-19" title="19">   <span class="dt">xscale =</span> <span class="st">&quot;d_m&quot;</span>,</a>
+<a class="sourceLine" id="cb75-20" title="20">   <span class="dt">break.x.by =</span> <span class="fl">30.4375</span>,</a>
+<a class="sourceLine" id="cb75-21" title="21">   <span class="dt">break.y.by =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb75-22" title="22">   <span class="dt">ggtheme =</span> <span class="kw">theme_survminer</span>(</a>
+<a class="sourceLine" id="cb75-23" title="23">     <span class="dt">font.main =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb75-24" title="24">     <span class="dt">font.submain =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb75-25" title="25">     <span class="dt">font.x =</span> <span class="kw">c</span>(<span class="dv">12</span>, <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb75-26" title="26">     <span class="dt">font.y =</span> <span class="kw">c</span>(<span class="dv">12</span>, <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb75-27" title="27">   ) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="ot">NA</span>)),</a>
+<a class="sourceLine" id="cb75-28" title="28">   <span class="dt">tables.theme =</span> <span class="kw">theme_cleantable</span>()</a>
+<a class="sourceLine" id="cb75-29" title="29"> )</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-87-1.png" width="680px" /></p>
+</div>
+<div id="plotting-custom-configured-kaplan-meier-curves-with-confidence-intervals" class="section level4 hasAnchor">
+<h4><span class="header-section-number">6.1.5.5</span> Plotting custom configured Kaplan-Meier curves with confidence intervals<a href="examples.html#plotting-custom-configured-kaplan-meier-curves-with-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"> <span class="kw">ggsurvplot</span>(</a>
+<a class="sourceLine" id="cb76-2" title="2">   <span class="dt">fit =</span> surv_model,</a>
+<a class="sourceLine" id="cb76-3" title="3">   <span class="dt">data =</span> adtte,</a>
+<a class="sourceLine" id="cb76-4" title="4">   <span class="dt">risk.table =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb76-5" title="5">   <span class="co">#ylab = ylabs,</span></a>
+<a class="sourceLine" id="cb76-6" title="6">   <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>,</a>
+<a class="sourceLine" id="cb76-7" title="7">   <span class="dt">linetype =</span> <span class="st">&quot;strata&quot;</span>,</a>
+<a class="sourceLine" id="cb76-8" title="8">   <span class="dt">conf.int =</span> T,</a>
+<a class="sourceLine" id="cb76-9" title="9">   <span class="dt">legend.title =</span> <span class="st">&quot;Randomized Treatment&quot;</span>,</a>
+<a class="sourceLine" id="cb76-10" title="10">   <span class="dt">legend =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>),</a>
+<a class="sourceLine" id="cb76-11" title="11">   <span class="co">#palette = c(color_trt1,color_trt2),</span></a>
+<a class="sourceLine" id="cb76-12" title="12">   <span class="dt">risk.table.title =</span> <span class="st">&quot;Number of subjects at risk&quot;</span>,</a>
+<a class="sourceLine" id="cb76-13" title="13">   <span class="dt">risk.table.y.text =</span> F,</a>
+<a class="sourceLine" id="cb76-14" title="14">   <span class="dt">risk.table.height =</span> <span class="fl">.15</span>,</a>
+<a class="sourceLine" id="cb76-15" title="15">   <span class="dt">censor.shape =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb76-16" title="16">   <span class="dt">censor.size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb76-17" title="17">   <span class="dt">ncensor.plot =</span> F,</a>
+<a class="sourceLine" id="cb76-18" title="18">   <span class="co">#xlim = c(0,250),</span></a>
+<a class="sourceLine" id="cb76-19" title="19">   <span class="dt">xscale =</span> <span class="st">&quot;d_m&quot;</span>,</a>
+<a class="sourceLine" id="cb76-20" title="20">   <span class="dt">break.x.by =</span> <span class="fl">30.4375</span>,</a>
+<a class="sourceLine" id="cb76-21" title="21">   <span class="dt">break.y.by =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb76-22" title="22">   <span class="dt">ggtheme =</span> <span class="kw">theme_survminer</span>(</a>
+<a class="sourceLine" id="cb76-23" title="23">     <span class="dt">font.main =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb76-24" title="24">     <span class="dt">font.submain =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb76-25" title="25">     <span class="dt">font.x =</span> <span class="kw">c</span>(<span class="dv">12</span>, <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb76-26" title="26">     <span class="dt">font.y =</span> <span class="kw">c</span>(<span class="dv">12</span>, <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb76-27" title="27">   ) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="ot">NA</span>)),</a>
+<a class="sourceLine" id="cb76-28" title="28">   <span class="dt">tables.theme =</span> <span class="kw">theme_cleantable</span>()</a>
+<a class="sourceLine" id="cb76-29" title="29"> )</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-88-1.png" width="680px" /></p>
+
+</div>
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="figures-plots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="future.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/bayer-int/ocs.early.sas2r/blob/dev/07-plots-examples-swimmer.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

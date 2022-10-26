@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+/* Some CSS borrowed and/or adapted from https://github.com/rstudio4edu/rstudio4edu-book */
+
+/* align */
+.summary > li:first-child {
+    height: 50px;
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.07);
+}
+
+.book .book-summary ul.summary li.divider {
+    height: 0px;
+}
+
+/* body font */
+.book.font-family-1 {
+  font-family: 'Montserrat', sans-serif;
+}
+ 
+/* menu font */
+.summary {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* menu bg */
+.book .book-summary {
+  background-image: linear-gradient(to right, #D3D3D3 , #FFFFFF);
+}
+
+/* links in body*/
+.book .book-body .page-wrapper .page-inner section.normal a {
+  color: #ff0044;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal a:hover {
+  color: #000000; 
+  text-decoration: none;
+}
+
+/* links in menu */
+.book .book-summary a:hover {
+  color: #ff0044 !important; 
+  text-decoration: none;
+}
+
+.book .book-summary ul.summary li a:hover, .book .book-summary ul.summary li.active>a {
+  color: #ff0044 !important; 
+}
+
+/* font awesome */
+.fa {
+  color: #ff0044;
+}
+
+/* call out */
+div.attention {
+  border: 3px #ff0044;  
+  border-style: dotted;
+  padding: 1em;
+  margin: 1em 0;
+  padding-left: 100px;
+  padding-top: 20px;
+  background-size: 70px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  min-height: 120px;
+  color: #000000;  
+  background-color: #D3D3D3;
+  background-image: url("attention.png");
+}
+
+/* hero image css */
+.hero-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background-color: linear-gradient(to right, #D3D3D3 , #FFFFFF);
+}
+
+.hero-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.page-inner {
+  padding-top: 400px !important;
+}
