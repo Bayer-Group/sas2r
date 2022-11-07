@@ -54,16 +54,3 @@ jobs:
       with:
         branch: gh-pages
         folder: site
-
-  publish_to_intranet:
-    name: "Publish to DevDocs on Intranet"
-    needs: build_bookdown
-    if: ${{github.ref}} == "main" &  github.event_name != 'pull_request'
-    
-    # See the full reference for available parameters https://docs.int.bayer.com/ref/
-    uses: bayer-int/actions-workflows/.github/workflows/publish-docs.yml@main
-    with:
-      artifact: site
-      dir:      site
-      preview:  ${{ github.ref != 'refs/heads/main' && github.run_id || '' }}
-      # namespace:  'example' # add a custom path your documentation will be available on
