@@ -1,5 +1,5 @@
 on:
-  push: main
+  push: 
   pull_request:
 
 name: Build and deploy book
