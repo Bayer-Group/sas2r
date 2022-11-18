@@ -23,7 +23,7 @@ jobs:
           
       - name: Install System Dependencies
         run: |
-          sudo apt-get install pandoc libnlopt-dev
+          sudo apt-get install pandoc libnlopt-dev libcurl4
         
       - name: Render Book
         run: |
