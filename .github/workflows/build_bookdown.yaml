@@ -23,7 +23,7 @@ jobs:
           
       - name: Install System Dependencies
         run: |
-          sudo apt-get install pandoc libnlopt-dev libcurl4 r-cran-rcurl
+          sudo apt-get install pandoc libnlopt-dev libcurl4-openssl-dev r-cran-rcurl
         
       - name: Render Book
         run: |
