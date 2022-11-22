@@ -1,6 +1,6 @@
 bookdown::gitbook:
   includes:
-    before_body: content/hero-image.html
+    before_body: content/hero-image.html    
   css: content/style.css
   split_by: section
   config:
@@ -9,8 +9,9 @@ bookdown::gitbook:
         <li class="toc-logo"><a href="./"> SAS and R</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/bayer-int/ocs.early.sas2r/blob/dev/%s
+    edit: https://github.com/Bayer-Group/sas2r/blob/dev/%s
     download: ["pdf", "epub"]
+    sharing: null
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
