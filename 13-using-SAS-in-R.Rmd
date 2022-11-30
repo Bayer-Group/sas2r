@@ -1,0 +1,65 @@
+# Hybrid Programming with SAS and R
+
+This section contains current solutions of hybrid programming.
+
+## Use {sasr}
+
+{[sasr](https://github.com/insightsengineering/sasr)} is a package built on {reticulate} so that the python package {[saspy](https://github.com/sassoftware/saspy)} can be called from R.
+It adds some simple wrappers to the {saspy} functionalities to make the syntax similar to R.
+
+Here are some simple examples of how you can use it.
+```{r eval = FALSE}
+library(sasr)
+# transfer data from R to SAS
+df2sd(mtcars)
+
+# execute SAS commands
+
+run_sas("
+  data test;
+    set work.mtcars;
+  run;
+")
+
+# transfer data back to R
+
+sd2df("test")
+
+```
+This solution is based on {[saspy](https://github.com/sassoftware/saspy)}, an official python interface to connect SAS.
+
+## Use {jupyter}/{quarto} and {saspy}
+
+[jupyter](http://www.jupyter.org/) and [quarto](https://quarto.org/) are both capable of creating dynamic outputs from multiple languages.
+Although official SAS kernel is not supported, it can be installed through package [sas_kernel](https://github.com/sassoftware/sas_kernel) provided by [SAS software](https://github.com/sassoftware).
+
+A quick example can be found at [Harvey Lieberman's blog](https://www.harveyl888.com/post/2022-06-27-quarto_sas_01/).
+
+## Use {SASmarkdown}
+
+{[SASmarkdown](https://github.com/Hemken/SASmarkdown)} is a pacakge that installs SAS engine to {knitr} so that in your .Rmd files
+using SAS engines is possible.
+
+However, this requires that SAS is installed on your machine.
+
+## SAS with command line or ssh (not recommended)
+
+As SAS can be called through command line, we can actually use the following to execute SAS codes
+
+```{sh eval = FALSE}
+sas script.sas
+```
+
+or, we can call SAS in R side
+
+```{r eval = FALSE}
+system("sas script.sas")
+# using ssh
+
+library(ssh)
+ssh_connect()
+scp_upload()
+ssh_exec("sas script.sas")
+```
+
+Please note that using command line, you will need to have SAS installed on your machine.
