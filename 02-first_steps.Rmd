@@ -249,11 +249,13 @@ Missing values in SAS and R:
   
 * R
   + Missing data in R appears as `NA`. `NA` is not a string nor a numeric value, but an indicator of missingness;
-  + `NA` and " " are different in R: " " is a blank string, while `NA` is missing;
+  + `NA` and "" are different in R: "" is a blank string, while `NA` is missing;
   + "Missing values (`NA`) and `NaN` values are regarded as non-comparable even to themselves, so comparisons involving them will always result in `NA`" 
   + `admiral::convert_blanks_to_na()` can turn SAS blank strings into proper R `NA` (from admiral documentation).  
 
 ```{r, eval = T}
+# Unlike SAS, space(s) != blank string in R, 
+" " == ""
 # is.na to check if it's missing
 c(" ", "Y", NA_character_) %>% is.na()
 # NA is non-comparable, result in NA
