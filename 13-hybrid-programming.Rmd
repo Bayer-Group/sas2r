@@ -32,7 +32,7 @@ This requires that you have a machine with SAS and it accessible through specifi
 ## Use {jupyter}/{quarto} and {saspy}
 
 [jupyter](http://www.jupyter.org/) and [quarto](https://quarto.org/) are both capable of creating dynamic outputs from multiple languages.
-Although official SAS kernel is not supported, it can be installed through package [sas_kernel](https://github.com/sassoftware/sas_kernel) provided by [SAS software](https://github.com/sassoftware).
+Although the official SAS kernel is not supported, it can be installed through package [sas_kernel](https://github.com/sassoftware/sas_kernel) provided by [SAS software](https://github.com/sassoftware).
 
 A quick example can be found at [Harvey Lieberman's blog](https://www.harveyl888.com/post/2022-06-27-quarto_sas_01/).
 
