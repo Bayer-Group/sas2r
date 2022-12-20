@@ -43,7 +43,7 @@ The requirement is the same as {sasr} as they both use {saspy} as the backend.
 {[SASmarkdown](https://github.com/Hemken/SASmarkdown)} is a pacakge that installs SAS engine to {knitr} so that in your .Rmd files
 using SAS engines is possible.
 
-However, this requires that SAS is installed on your machine.
+However, this requires that SAS is installed locally on your machine.
 
 ## SAS with command line or ssh (not recommended)
 
