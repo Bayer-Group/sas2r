@@ -4,7 +4,7 @@ This section contains current solutions of hybrid programming.
 
 ## Use {sasr}
 
-{[sasr](https://github.com/insightsengineering/sasr)} is a package built on {reticulate} so that the python package {[saspy](https://github.com/sassoftware/saspy)} can be called from R.
+`{[sasr](https://github.com/insightsengineering/sasr)}` is a package built on `{reticulate}` so that the Python package `{[saspy](https://github.com/sassoftware/saspy)}` can be called from R.
 It adds some simple wrappers to the {saspy} functionalities to make the syntax similar to R.
 
 Here are some simple examples of how you can use it.
