@@ -10,21 +10,18 @@ It adds some simple wrappers to the {saspy} functionalities to make the syntax s
 Here are some simple examples of how you can use it.
 ```{r eval = FALSE}
 library(sasr)
-# transfer data from R to SAS
+# Transfer data from R to SAS.
 df2sd(mtcars)
 
-# execute SAS commands
-
+# Execute SAS commands.
 run_sas("
   data test;
     set work.mtcars;
   run;
 ")
 
-# transfer data back to R
-
+# Transfer data back to R.
 sd2df("test")
-
 ```
 This solution is based on {[saspy](https://github.com/sassoftware/saspy)}, an official python interface to connect SAS.
 This requires that you have a machine with SAS and it accessible through specific [connection types](https://sassoftware.github.io/saspy/configuration.html).
