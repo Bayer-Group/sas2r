@@ -4,7 +4,9 @@ This section contains current solutions of hybrid programming.
 
 ## Use {sasr}
 
-`{[sasr](https://github.com/insightsengineering/sasr)}` is a package built on `{reticulate}` so that the Python package `{[saspy](https://github.com/sassoftware/saspy)}` can be called from R.
+`{[sasr](https://github.com/insightsengineering/sasr)}` is a package built on
+`{[reticulate](https://rstudio.github.io/reticulate/index.html)}` so that the Python package
+`{[saspy](https://github.com/sassoftware/saspy)}`, an official python interface to connect SAS, can be called from R.
 It adds some simple wrappers to the {saspy} functionalities to make the syntax similar to R.
 
 Here are some simple examples of how you can use it.
@@ -23,8 +25,9 @@ run_sas("
 # Transfer data back to R.
 sd2df("test")
 ```
-This solution is based on {[saspy](https://github.com/sassoftware/saspy)}, an official python interface to connect SAS.
-This requires that you have a machine with SAS and it accessible through specific [connection types](https://sassoftware.github.io/saspy/configuration.html).
+This requires that you have a machine with SAS and it accessible through specific
+[connection types](https://sassoftware.github.io/saspy/configuration.html),
+where `ssh` is a common type of connection.
 
 ## Use {jupyter}/{quarto} and {saspy}
 
@@ -40,7 +43,7 @@ The requirement is the same as {sasr} as they both use {saspy} as the backend.
 {[SASmarkdown](https://github.com/Hemken/SASmarkdown)} is a package that installs the SAS engine to {knitr} so that in your `.Rmd` files
 using SAS engines is possible.
 
-However, this requires that SAS is installed locally on your machine.
+However, this requires that SAS is installed locally on your machine, in contrast to client to a server.
 
 ## SAS with command line or ssh (not recommended)
 
