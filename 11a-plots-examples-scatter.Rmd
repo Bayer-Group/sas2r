@@ -172,7 +172,7 @@ f17_alt <- ggplot(all, aes(x = BASE, y = AVAL, linetype = TRTA)) +
     axis.text = element_text(face = "bold")
   ) 
 
-# plot body + title/captions as separate entities
+# Use the patchwork package to specify title, caption (e.g. footers) and footers position (i.e. left align) to get a closer aesthetic feel.
 library(patchwork)
 f17_alt + patchwork::plot_annotation(title = header_alt,
                                      caption = paste(footer1_alt, footer2_alt, sep = "\n"),
