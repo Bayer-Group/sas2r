@@ -48,6 +48,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -58,25 +59,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -85,9 +87,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,22 +140,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
-<li class="chapter" data-level="2" data-path="about.html"><a href="about.html"><i class="fa fa-check"></i><b>2</b> About</a><ul>
-<li class="chapter" data-level="2.1" data-path="organization.html"><a href="organization.html"><i class="fa fa-check"></i><b>2.1</b> Organization</a><ul>
+<li class="chapter" data-level="2" data-path="about.html"><a href="about.html"><i class="fa fa-check"></i><b>2</b> About</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="organization.html"><a href="organization.html"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="organization.html"><a href="organization.html#first-steps"><i class="fa fa-check"></i><b>2.1.1</b> First Steps</a></li>
 <li class="chapter" data-level="2.1.2" data-path="organization.html"><a href="organization.html#data"><i class="fa fa-check"></i><b>2.1.2</b> Data</a></li>
 <li class="chapter" data-level="2.1.3" data-path="organization.html"><a href="organization.html#tables"><i class="fa fa-check"></i><b>2.1.3</b> Tables</a></li>
 <li class="chapter" data-level="2.1.4" data-path="organization.html"><a href="organization.html#plots"><i class="fa fa-check"></i><b>2.1.4</b> Plots</a></li>
 <li class="chapter" data-level="2.1.5" data-path="organization.html"><a href="organization.html#packages"><i class="fa fa-check"></i><b>2.1.5</b> Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="house-keeping.html"><a href="house-keeping.html"><i class="fa fa-check"></i><b>2.2</b> House Keeping</a><ul>
+<li class="chapter" data-level="2.2" data-path="house-keeping.html"><a href="house-keeping.html"><i class="fa fa-check"></i><b>2.2</b> House Keeping</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="house-keeping.html"><a href="house-keeping.html#philosophy"><i class="fa fa-check"></i><b>2.2.1</b> Philosophy</a></li>
 <li class="chapter" data-level="2.2.2" data-path="house-keeping.html"><a href="house-keeping.html#approach"><i class="fa fa-check"></i><b>2.2.2</b> Approach</a></li>
 <li class="chapter" data-level="2.2.3" data-path="house-keeping.html"><a href="house-keeping.html#contributing"><i class="fa fa-check"></i><b>2.2.3</b> Contributing</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="first-steps-in-r.html"><a href="first-steps-in-r.html"><i class="fa fa-check"></i><b>3</b> First Steps in R</a><ul>
-<li class="chapter" data-level="3.1" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html"><i class="fa fa-check"></i><b>3.1</b> R and SAS Syntax</a><ul>
+<li class="chapter" data-level="3" data-path="first-steps-in-r.html"><a href="first-steps-in-r.html"><i class="fa fa-check"></i><b>3</b> First Steps in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html"><i class="fa fa-check"></i><b>3.1</b> R and SAS Syntax</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#packages-and-sample-data"><i class="fa fa-check"></i><b>3.1.1</b> Packages and Sample Data</a></li>
 <li class="chapter" data-level="3.1.2" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#proc-contents-rightarrow-summary"><i class="fa fa-check"></i><b>3.1.2</b> PROC CONTENTS <span class="math inline">\(\rightarrow\)</span> summary()</a></li>
 <li class="chapter" data-level="3.1.3" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#proc-freq-rightarrow-count"><i class="fa fa-check"></i><b>3.1.3</b> PROC FREQ <span class="math inline">\(\rightarrow\)</span> count()</a></li>
@@ -165,30 +172,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.9</b> Concatenating Data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>4</b> Data</a><ul>
-<li class="chapter" data-level="4.1" data-path="external-data.html"><a href="external-data.html"><i class="fa fa-check"></i><b>4.1</b> External Data</a><ul>
+<li class="chapter" data-level="4" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>4</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="external-data.html"><a href="external-data.html"><i class="fa fa-check"></i><b>4.1</b> External Data</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="external-data.html"><a href="external-data.html#cdisc-datasets"><i class="fa fa-check"></i><b>4.1.1</b> CDISC Datasets</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="internal-data.html"><a href="internal-data.html"><i class="fa fa-check"></i><b>4.2</b> Internal Data</a><ul>
+<li class="chapter" data-level="4.2" data-path="internal-data.html"><a href="internal-data.html"><i class="fa fa-check"></i><b>4.2</b> Internal Data</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="internal-data.html"><a href="internal-data.html#package-data"><i class="fa fa-check"></i><b>4.2.1</b> Package Data</a></li>
 <li class="chapter" data-level="4.2.2" data-path="internal-data.html"><a href="internal-data.html#simulating-your-own"><i class="fa fa-check"></i><b>4.2.2</b> Simulating Your Own</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="tables-1.html"><a href="tables-1.html"><i class="fa fa-check"></i><b>5</b> Tables</a><ul>
-<li class="chapter" data-level="5.1" data-path="building.html"><a href="building.html"><i class="fa fa-check"></i><b>5.1</b> Building</a><ul>
+<li class="chapter" data-level="5" data-path="tables-1.html"><a href="tables-1.html"><i class="fa fa-check"></i><b>5</b> Tables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="building.html"><a href="building.html"><i class="fa fa-check"></i><b>5.1</b> Building</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="building.html"><a href="building.html#dataset-source"><i class="fa fa-check"></i><b>5.1.1</b> Dataset Source</a></li>
 <li class="chapter" data-level="5.1.2" data-path="building.html"><a href="building.html#string-formatting"><i class="fa fa-check"></i><b>5.1.2</b> String Formatting</a></li>
 <li class="chapter" data-level="5.1.3" data-path="building.html"><a href="building.html#create"><i class="fa fa-check"></i><b>5.1.3</b> Create</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="formatting.html"><a href="formatting.html"><i class="fa fa-check"></i><b>5.2</b> Formatting</a><ul>
+<li class="chapter" data-level="5.2" data-path="formatting.html"><a href="formatting.html"><i class="fa fa-check"></i><b>5.2</b> Formatting</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="formatting.html"><a href="formatting.html#post-processing"><i class="fa fa-check"></i><b>5.2.1</b> Post Processing</a></li>
 <li class="chapter" data-level="5.2.2" data-path="formatting.html"><a href="formatting.html#displaying"><i class="fa fa-check"></i><b>5.2.2</b> Displaying</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="exporting.html"><a href="exporting.html"><i class="fa fa-check"></i><b>5.3</b> Exporting</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="figures-plots.html"><a href="figures-plots.html"><i class="fa fa-check"></i><b>6</b> Figures &amp; Plots</a><ul>
+<li class="chapter" data-level="6" data-path="figures-plots.html"><a href="figures-plots.html"><i class="fa fa-check"></i><b>6</b> Figures &amp; Plots</a>
+<ul>
 <li class="chapter" data-level="6.0.1" data-path="figures-plots.html"><a href="figures-plots.html#exporting-plots"><i class="fa fa-check"></i><b>6.0.1</b> Exporting plots</a></li>
-<li class="chapter" data-level="6.1" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>6.1</b> Examples</a><ul>
+<li class="chapter" data-level="6.1" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>6.1</b> Examples</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="examples.html"><a href="examples.html#swimmer-plot"><i class="fa fa-check"></i><b>6.1.1</b> Swimmer Plot</a></li>
 <li class="chapter" data-level="6.1.2" data-path="examples.html"><a href="examples.html#waterfall-plot"><i class="fa fa-check"></i><b>6.1.2</b> Waterfall Plot</a></li>
 <li class="chapter" data-level="6.1.3" data-path="examples.html"><a href="examples.html#spaghetti-plot"><i class="fa fa-check"></i><b>6.1.3</b> Spaghetti Plot</a></li>
@@ -196,7 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.5" data-path="examples.html"><a href="examples.html#survival-plot"><i class="fa fa-check"></i><b>6.1.5</b> Survival Plot</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>7</b> Future</a><ul>
+<li class="chapter" data-level="7" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>7</b> Future</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="use-renv.html"><a href="use-renv.html"><i class="fa fa-check"></i><b>7.1</b> Use {renv}</a></li>
 <li class="chapter" data-level="7.2" data-path="areas-of-expansion.html"><a href="areas-of-expansion.html"><i class="fa fa-check"></i><b>7.2</b> Areas of Expansion</a></li>
 <li class="chapter" data-level="7.3" data-path="content.html"><a href="content.html"><i class="fa fa-check"></i><b>7.3</b> Content</a></li>
@@ -226,26 +242,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="content/hero.png">
 </div>
-<div id="r-and-sas-syntax" class="section level2 hasAnchor">
+<div id="r-and-sas-syntax" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> R and SAS Syntax<a href="r-and-sas-syntax.html#r-and-sas-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Below are some examples that use <code>adsl</code> to show how common operations are done in SAS and R.</p>
-<div id="packages-and-sample-data" class="section level3 hasAnchor">
+<div id="packages-and-sample-data" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Packages and Sample Data<a href="r-and-sas-syntax.html#packages-and-sample-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Data</span></a>
-<a class="sourceLine" id="cb1-2" title="2">adam_path &lt;-<span class="st"> &quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/&quot;</span></a>
-<a class="sourceLine" id="cb1-3" title="3">adsl &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adsl.xpt&quot;</span>))</a>
-<a class="sourceLine" id="cb1-4" title="4"></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co"># Select a few variables</span></a>
-<a class="sourceLine" id="cb1-6" title="6">adsl &lt;-<span class="st"> </span>adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(STUDYID, USUBJID, SUBJID, AGE, TRT01P, TRTSDT, TRTEDT, RACE, SEX)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r-and-sas-syntax.html#cb1-1" aria-hidden="true"></a><span class="co"># Data</span></span>
+<span id="cb1-2"><a href="r-and-sas-syntax.html#cb1-2" aria-hidden="true"></a>adam_path &lt;-<span class="st"> &quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/&quot;</span></span>
+<span id="cb1-3"><a href="r-and-sas-syntax.html#cb1-3" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adsl.xpt&quot;</span>))</span>
+<span id="cb1-4"><a href="r-and-sas-syntax.html#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="r-and-sas-syntax.html#cb1-5" aria-hidden="true"></a><span class="co"># Select a few variables</span></span>
+<span id="cb1-6"><a href="r-and-sas-syntax.html#cb1-6" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span>adsl <span class="op">%&gt;%</span></span>
+<span id="cb1-7"><a href="r-and-sas-syntax.html#cb1-7" aria-hidden="true"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(STUDYID, USUBJID, SUBJID, AGE, TRT01P, TRTSDT, TRTEDT, RACE, SEX)</span></code></pre></div>
 </div>
-<div id="proc-contents-rightarrow-summary" class="section level3 hasAnchor">
+<div id="proc-contents-rightarrow-summary" class="section level3 hasAnchor" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> PROC CONTENTS <span class="math inline">\(\rightarrow\)</span> summary()<a href="r-and-sas-syntax.html#proc-contents-rightarrow-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To explore the variables of your dataset you can use PROC contents in SAS:</p>
 <pre class="sas"><code>proc contents data = adsl;
 run;</code></pre>
 <p>In R, you can use <code>str()</code> and <code>summary()</code> instead:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">str</span>(adsl)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-and-sas-syntax.html#cb3-1" aria-hidden="true"></a><span class="kw">str</span>(adsl)</span></code></pre></div>
 <pre><code>## tibble [254 × 9] (S3: tbl_df/tbl/data.frame)
 ##  $ STUDYID: chr [1:254] &quot;CDISCPILOT01&quot; &quot;CDISCPILOT01&quot; &quot;CDISCPILOT01&quot; &quot;CDISCPILOT01&quot; ...
 ##   ..- attr(*, &quot;label&quot;)= chr &quot;Study Identifier&quot;
@@ -263,7 +279,7 @@ run;</code></pre>
 ##   ..- attr(*, &quot;label&quot;)= chr &quot;Race&quot;
 ##  $ SEX    : chr [1:254] &quot;F&quot; &quot;M&quot; &quot;M&quot; &quot;M&quot; ...
 ##   ..- attr(*, &quot;label&quot;)= chr &quot;Sex&quot;</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">summary</span>(adsl) </a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-and-sas-syntax.html#cb5-1" aria-hidden="true"></a><span class="kw">summary</span>(adsl) </span></code></pre></div>
 <pre><code>##    STUDYID            USUBJID             SUBJID               AGE       
 ##  Length:254         Length:254         Length:254         Min.   :51.00  
 ##  Class :character   Class :character   Class :character   1st Qu.:70.00  
@@ -286,7 +302,7 @@ run;</code></pre>
 ##                                       
 ## </code></pre>
 </div>
-<div id="proc-freq-rightarrow-count" class="section level3 hasAnchor">
+<div id="proc-freq-rightarrow-count" class="section level3 hasAnchor" number="3.1.3">
 <h3><span class="header-section-number">3.1.3</span> PROC FREQ <span class="math inline">\(\rightarrow\)</span> count()<a href="r-and-sas-syntax.html#proc-freq-rightarrow-count" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In order to get the frequencies for one variables you use PROC FREQ in SAS.</p>
 <pre class="sas"><code>PROC FREQ data = adsl;
@@ -298,14 +314,14 @@ RUN;</code></pre>
 RUN;</code></pre>
 <p>In R we use <code>table()</code> or <code>count()</code> from the tidyverse package:</p>
 <p><strong>For One Variable</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">table</span>(adsl<span class="op">$</span>SEX)</a>
-<a class="sourceLine" id="cb9-2" title="2"></a>
-<a class="sourceLine" id="cb9-3" title="3">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span><span class="kw">count</span>(SEX)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-and-sas-syntax.html#cb9-1" aria-hidden="true"></a><span class="kw">table</span>(adsl<span class="op">$</span>SEX)</span>
+<span id="cb9-2"><a href="r-and-sas-syntax.html#cb9-2" aria-hidden="true"></a></span>
+<span id="cb9-3"><a href="r-and-sas-syntax.html#cb9-3" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb9-4"><a href="r-and-sas-syntax.html#cb9-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(SEX)</span></code></pre></div>
 <pre><code>## 
 ##   F   M 
 ## 143 111</code></pre>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -336,11 +352,11 @@ M
 </tbody>
 </table>
 <p><strong>For Multiple Variables</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co">#for multiple variables</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw">table</span>(adsl<span class="op">$</span>SEX, adsl<span class="op">$</span>TRT01P, adsl<span class="op">$</span>RACE) </a>
-<a class="sourceLine" id="cb11-3" title="3"></a>
-<a class="sourceLine" id="cb11-4" title="4">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="st">  </span><span class="kw">count</span>(SEX, TRT01P, RACE)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="r-and-sas-syntax.html#cb11-1" aria-hidden="true"></a><span class="co">#for multiple variables</span></span>
+<span id="cb11-2"><a href="r-and-sas-syntax.html#cb11-2" aria-hidden="true"></a><span class="kw">table</span>(adsl<span class="op">$</span>SEX, adsl<span class="op">$</span>TRT01P, adsl<span class="op">$</span>RACE) </span>
+<span id="cb11-3"><a href="r-and-sas-syntax.html#cb11-3" aria-hidden="true"></a></span>
+<span id="cb11-4"><a href="r-and-sas-syntax.html#cb11-4" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb11-5"><a href="r-and-sas-syntax.html#cb11-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(SEX, TRT01P, RACE)</span></code></pre></div>
 <pre><code>## , ,  = AMERICAN INDIAN OR ALASKA NATIVE
 ## 
 ##    
@@ -361,7 +377,7 @@ M
 ##     Placebo Xanomeline High Dose Xanomeline Low Dose
 ##   F      48                   34                  44
 ##   M      30                   40                  34</code></pre>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -550,23 +566,23 @@ WHITE
 </tbody>
 </table>
 </div>
-<div id="keepdrop-rightarrow-select" class="section level3 hasAnchor">
+<div id="keepdrop-rightarrow-select" class="section level3 hasAnchor" number="3.1.4">
 <h3><span class="header-section-number">3.1.4</span> KEEP/DROP <span class="math inline">\(\rightarrow\)</span> select()<a href="r-and-sas-syntax.html#keepdrop-rightarrow-select" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre class="sas"><code>DATA adsl2;
   SET adsl;
   KEEP subjidn; *or drop subjidn;
 RUN;</code></pre>
 <p>In R we use the <code>select()</code> function from the tidyverse package.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># to keep (only) SUBJID</span></a>
-<a class="sourceLine" id="cb14-2" title="2">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span><span class="kw">select</span>(SUBJID) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw">head</span>() <span class="co"># keep only first 6 rows</span></a>
-<a class="sourceLine" id="cb14-5" title="5"></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="co"># to keep all variables except SUBJID</span></a>
-<a class="sourceLine" id="cb14-7" title="7">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-8" title="8"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>SUBJID) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r-and-sas-syntax.html#cb14-1" aria-hidden="true"></a><span class="co"># to keep (only) SUBJID</span></span>
+<span id="cb14-2"><a href="r-and-sas-syntax.html#cb14-2" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb14-3"><a href="r-and-sas-syntax.html#cb14-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(SUBJID) <span class="op">%&gt;%</span></span>
+<span id="cb14-4"><a href="r-and-sas-syntax.html#cb14-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>() <span class="co"># keep only first 6 rows</span></span>
+<span id="cb14-5"><a href="r-and-sas-syntax.html#cb14-5" aria-hidden="true"></a></span>
+<span id="cb14-6"><a href="r-and-sas-syntax.html#cb14-6" aria-hidden="true"></a><span class="co"># to keep all variables except SUBJID</span></span>
+<span id="cb14-7"><a href="r-and-sas-syntax.html#cb14-7" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb14-8"><a href="r-and-sas-syntax.html#cb14-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>SUBJID) <span class="op">%&gt;%</span></span>
+<span id="cb14-9"><a href="r-and-sas-syntax.html#cb14-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -607,7 +623,7 @@ SUBJID
 </tr>
 </tbody>
 </table>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -796,21 +812,21 @@ F
 </tbody>
 </table>
 </div>
-<div id="subsetting-data-whereif-rightarrow-filter" class="section level3 hasAnchor">
+<div id="subsetting-data-whereif-rightarrow-filter" class="section level3 hasAnchor" number="3.1.5">
 <h3><span class="header-section-number">3.1.5</span> Subsetting data (WHERE/IF) <span class="math inline">\(\rightarrow\)</span> filter()<a href="r-and-sas-syntax.html#subsetting-data-whereif-rightarrow-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre class="sas"><code>DATA female;
   SET adsl;
   WHERE SEX = &#39;F&#39;;
 RUN;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw">head</span>() </a>
-<a class="sourceLine" id="cb16-4" title="4"></a>
-<a class="sourceLine" id="cb16-5" title="5"><span class="co"># multiple conditions:</span></a>
-<a class="sourceLine" id="cb16-6" title="6">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-7" title="7"><span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span> <span class="op">&amp;</span><span class="st"> </span>AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-8" title="8"><span class="st">  </span><span class="kw">head</span>() </a></code></pre></div>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="r-and-sas-syntax.html#cb16-1" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb16-2"><a href="r-and-sas-syntax.html#cb16-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb16-3"><a href="r-and-sas-syntax.html#cb16-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>() </span>
+<span id="cb16-4"><a href="r-and-sas-syntax.html#cb16-4" aria-hidden="true"></a></span>
+<span id="cb16-5"><a href="r-and-sas-syntax.html#cb16-5" aria-hidden="true"></a><span class="co"># multiple conditions:</span></span>
+<span id="cb16-6"><a href="r-and-sas-syntax.html#cb16-6" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb16-7"><a href="r-and-sas-syntax.html#cb16-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span> <span class="op">&amp;</span><span class="st"> </span>AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>) <span class="op">%&gt;%</span></span>
+<span id="cb16-8"><a href="r-and-sas-syntax.html#cb16-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>() </span></code></pre></div>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -1019,7 +1035,7 @@ F
 </tr>
 </tbody>
 </table>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -1229,22 +1245,22 @@ F
 </tbody>
 </table>
 </div>
-<div id="sorting-data" class="section level3 hasAnchor">
+<div id="sorting-data" class="section level3 hasAnchor" number="3.1.6">
 <h3><span class="header-section-number">3.1.6</span> Sorting data<a href="r-and-sas-syntax.html#sorting-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre class="sas"><code>PROC SORT data=adsl out=adsl_sort_age;
   BY AGE; 
 RUN;</code></pre>
 <p>In R we use the <code>arrange()</code> function from tidyverse:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># ascending</span></a>
-<a class="sourceLine" id="cb18-2" title="2">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="st">  </span><span class="kw">arrange</span>(AGE)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-4" title="4"><span class="st">  </span><span class="kw">head</span>() </a>
-<a class="sourceLine" id="cb18-5" title="5"></a>
-<a class="sourceLine" id="cb18-6" title="6"><span class="co"># descending</span></a>
-<a class="sourceLine" id="cb18-7" title="7">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-8" title="8"><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>AGE)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-9" title="9"><span class="st">  </span><span class="kw">head</span>() </a></code></pre></div>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r-and-sas-syntax.html#cb18-1" aria-hidden="true"></a><span class="co"># ascending</span></span>
+<span id="cb18-2"><a href="r-and-sas-syntax.html#cb18-2" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb18-3"><a href="r-and-sas-syntax.html#cb18-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(AGE)<span class="op">%&gt;%</span></span>
+<span id="cb18-4"><a href="r-and-sas-syntax.html#cb18-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>() </span>
+<span id="cb18-5"><a href="r-and-sas-syntax.html#cb18-5" aria-hidden="true"></a></span>
+<span id="cb18-6"><a href="r-and-sas-syntax.html#cb18-6" aria-hidden="true"></a><span class="co"># descending</span></span>
+<span id="cb18-7"><a href="r-and-sas-syntax.html#cb18-7" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb18-8"><a href="r-and-sas-syntax.html#cb18-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>AGE)<span class="op">%&gt;%</span></span>
+<span id="cb18-9"><a href="r-and-sas-syntax.html#cb18-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>() </span></code></pre></div>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -1453,7 +1469,7 @@ F
 </tr>
 </tbody>
 </table>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -1663,7 +1679,7 @@ F
 </tbody>
 </table>
 </div>
-<div id="creating-new-variables" class="section level3 hasAnchor">
+<div id="creating-new-variables" class="section level3 hasAnchor" number="3.1.7">
 <h3><span class="header-section-number">3.1.7</span> Creating new variables<a href="r-and-sas-syntax.html#creating-new-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre class="sas"><code>DATA adsl;
   SET adsl;
@@ -1672,13 +1688,13 @@ F
   ELSE if age &lt;= 50 then AGEGR1 = ‘&lt;= 50 years old’;
 run;</code></pre>
 <p>In R we use the <code>mutate()</code> function:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">AGEGR1 =</span> <span class="kw">case_when</span>(</a>
-<a class="sourceLine" id="cb20-3" title="3">    AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span> <span class="op">~</span><span class="st">&quot;&gt; 50 years old&quot;</span>,</a>
-<a class="sourceLine" id="cb20-4" title="4">    AGE <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span> <span class="op">~</span><span class="st">&quot;&lt;= 50 years old&quot;</span>,</a>
-<a class="sourceLine" id="cb20-5" title="5">  )) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb20-6" title="6"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
-<table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-and-sas-syntax.html#cb20-1" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb20-2"><a href="r-and-sas-syntax.html#cb20-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">AGEGR1 =</span> <span class="kw">case_when</span>(</span>
+<span id="cb20-3"><a href="r-and-sas-syntax.html#cb20-3" aria-hidden="true"></a>    AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span> <span class="op">~</span><span class="st">&quot;&gt; 50 years old&quot;</span>,</span>
+<span id="cb20-4"><a href="r-and-sas-syntax.html#cb20-4" aria-hidden="true"></a>    AGE <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span> <span class="op">~</span><span class="st">&quot;&lt;= 50 years old&quot;</span>,</span>
+<span id="cb20-5"><a href="r-and-sas-syntax.html#cb20-5" aria-hidden="true"></a>  )) <span class="op">%&gt;%</span></span>
+<span id="cb20-6"><a href="r-and-sas-syntax.html#cb20-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -1909,13 +1925,13 @@ F
 </tbody>
 </table>
 </div>
-<div id="merging-data" class="section level3 hasAnchor">
+<div id="merging-data" class="section level3 hasAnchor" number="3.1.8">
 <h3><span class="header-section-number">3.1.8</span> Merging Data<a href="r-and-sas-syntax.html#merging-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We create another data set with weight information for some of the subjects:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">SUBJID &lt;-<span class="st"> </span><span class="kw">sample</span>(adsl<span class="op">$</span>SUBJID, <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb21-2" title="2">WEIGHT &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">50</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb21-3" title="3"></a>
-<a class="sourceLine" id="cb21-4" title="4">adsl_weight &lt;-<span class="st"> </span><span class="kw">data.frame</span>(SUBJID, WEIGHT)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="r-and-sas-syntax.html#cb21-1" aria-hidden="true"></a>SUBJID &lt;-<span class="st"> </span><span class="kw">sample</span>(adsl<span class="op">$</span>SUBJID, <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb21-2"><a href="r-and-sas-syntax.html#cb21-2" aria-hidden="true"></a>WEIGHT &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">50</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb21-3"><a href="r-and-sas-syntax.html#cb21-3" aria-hidden="true"></a></span>
+<span id="cb21-4"><a href="r-and-sas-syntax.html#cb21-4" aria-hidden="true"></a>adsl_weight &lt;-<span class="st"> </span><span class="kw">data.frame</span>(SUBJID, WEIGHT)</span></code></pre></div>
 <p>Now, we would like to join the weight column to our adsl data set.</p>
 <p>In SAS, we use the merge function:</p>
 <pre class="sas"><code>* inner join;
@@ -1939,34 +1955,34 @@ by subjidn;
 if inadsl;
 run;</code></pre>
 <p>In R, we use again the tidyverse package:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># inner join</span></a>
-<a class="sourceLine" id="cb23-2" title="2">adsl<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">inner_join</span>(adsl_weight, <span class="dt">by =</span> <span class="st">&quot;SUBJID&quot;</span>) </a>
-<a class="sourceLine" id="cb23-4" title="4"></a>
-<a class="sourceLine" id="cb23-5" title="5"><span class="co"># outer join</span></a>
-<a class="sourceLine" id="cb23-6" title="6">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-7" title="7"><span class="st">  </span><span class="kw">full_join</span>(adsl_weight, <span class="dt">by =</span> <span class="st">&quot;SUBJID&quot;</span>)</a>
-<a class="sourceLine" id="cb23-8" title="8"></a>
-<a class="sourceLine" id="cb23-9" title="9"><span class="co"># left join</span></a>
-<a class="sourceLine" id="cb23-10" title="10">adsl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-11" title="11"><span class="st">  </span><span class="kw">left_join</span>(adsl_weight, <span class="dt">by =</span> <span class="st">&quot;SUBJID&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="r-and-sas-syntax.html#cb23-1" aria-hidden="true"></a><span class="co"># inner join</span></span>
+<span id="cb23-2"><a href="r-and-sas-syntax.html#cb23-2" aria-hidden="true"></a>adsl<span class="op">%&gt;%</span></span>
+<span id="cb23-3"><a href="r-and-sas-syntax.html#cb23-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">inner_join</span>(adsl_weight, <span class="dt">by =</span> <span class="st">&quot;SUBJID&quot;</span>) </span>
+<span id="cb23-4"><a href="r-and-sas-syntax.html#cb23-4" aria-hidden="true"></a></span>
+<span id="cb23-5"><a href="r-and-sas-syntax.html#cb23-5" aria-hidden="true"></a><span class="co"># outer join</span></span>
+<span id="cb23-6"><a href="r-and-sas-syntax.html#cb23-6" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb23-7"><a href="r-and-sas-syntax.html#cb23-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">full_join</span>(adsl_weight, <span class="dt">by =</span> <span class="st">&quot;SUBJID&quot;</span>)</span>
+<span id="cb23-8"><a href="r-and-sas-syntax.html#cb23-8" aria-hidden="true"></a></span>
+<span id="cb23-9"><a href="r-and-sas-syntax.html#cb23-9" aria-hidden="true"></a><span class="co"># left join</span></span>
+<span id="cb23-10"><a href="r-and-sas-syntax.html#cb23-10" aria-hidden="true"></a>adsl <span class="op">%&gt;%</span></span>
+<span id="cb23-11"><a href="r-and-sas-syntax.html#cb23-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">left_join</span>(adsl_weight, <span class="dt">by =</span> <span class="st">&quot;SUBJID&quot;</span>)</span></code></pre></div>
 </div>
-<div id="concatenating-data" class="section level3 hasAnchor">
+<div id="concatenating-data" class="section level3 hasAnchor" number="3.1.9">
 <h3><span class="header-section-number">3.1.9</span> Concatenating Data<a href="r-and-sas-syntax.html#concatenating-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To demonstrate stacking or concatenating data sets, we can first split adsl into two parts, each having 5 records with the same columns in common.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># first 5 records of adsl</span></a>
-<a class="sourceLine" id="cb24-2" title="2">adsl_<span class="dv">1</span> &lt;-<span class="st"> </span>adsl[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>),]</a>
-<a class="sourceLine" id="cb24-3" title="3"></a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="co"># the next 5 records of adsl</span></a>
-<a class="sourceLine" id="cb24-5" title="5">adsl_<span class="dv">2</span> &lt;-<span class="st"> </span>adsl[<span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">10</span>),]</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r-and-sas-syntax.html#cb24-1" aria-hidden="true"></a><span class="co"># first 5 records of adsl</span></span>
+<span id="cb24-2"><a href="r-and-sas-syntax.html#cb24-2" aria-hidden="true"></a>adsl_<span class="dv">1</span> &lt;-<span class="st"> </span>adsl[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>),]</span>
+<span id="cb24-3"><a href="r-and-sas-syntax.html#cb24-3" aria-hidden="true"></a></span>
+<span id="cb24-4"><a href="r-and-sas-syntax.html#cb24-4" aria-hidden="true"></a><span class="co"># the next 5 records of adsl</span></span>
+<span id="cb24-5"><a href="r-and-sas-syntax.html#cb24-5" aria-hidden="true"></a>adsl_<span class="dv">2</span> &lt;-<span class="st"> </span>adsl[<span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">10</span>),]</span></code></pre></div>
 <p>In SAS, you could use the set command:</p>
 <pre class="sas"><code>DATA adsl_stacked;
  SET adsl_1 adsl_2;
 RUN;</code></pre>
 <p>In R, you may accomplish this like so:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># tidyverse method - bind_rows()</span></a>
-<a class="sourceLine" id="cb26-2" title="2">adsl_stacked &lt;-<span class="st"> </span>adsl_<span class="dv">1</span> <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb26-3" title="3"><span class="st">  </span><span class="kw">bind_rows</span>(adsl_<span class="dv">2</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="r-and-sas-syntax.html#cb26-1" aria-hidden="true"></a><span class="co"># tidyverse method - bind_rows()</span></span>
+<span id="cb26-2"><a href="r-and-sas-syntax.html#cb26-2" aria-hidden="true"></a>adsl_stacked &lt;-<span class="st"> </span>adsl_<span class="dv">1</span> <span class="op">%&gt;%</span></span>
+<span id="cb26-3"><a href="r-and-sas-syntax.html#cb26-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">bind_rows</span>(adsl_<span class="dv">2</span>) </span></code></pre></div>
 
 </div>
 </div>
