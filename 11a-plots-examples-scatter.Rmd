@@ -44,7 +44,8 @@ post <- advs %>%
     PARAMCD == "SYSBP",
     ATPT == "AFTER LYING DOWN FOR 5 MINUTES",
     TRTA != "Placebo",
-    AVISIT != "Baseline"
+    AVISIT != "Baseline",
+    ANL01FL == "Y"
   ) %>%
   dplyr::select(USUBJID, AVAL) %>%
   group_by(USUBJID) %>%
