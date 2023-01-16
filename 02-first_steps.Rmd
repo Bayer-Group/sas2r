@@ -248,10 +248,10 @@ Missing values in SAS and R:
   + Missing value is a blank/a single decimal point for character/numeric variables, see details in [Missing Values in SAS](https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lrcon/p175x77t7k6kggn1io94yedqagl3.htm);
   
 * R
-  + Missing data in R appears as `NA`. `NA` is not a string nor a numeric value, but an indicator of missingness;
-  + `NA` and "" are different in R: "" is a blank string, while `NA` is missing;
+  + Missing data in R appears as `NA`. `NA` is not a string nor a numeric value, but an indicator of missingness, see detailed examples in [Advanced R #3.2.3 Missing values](https://adv-r.hadley.nz/vectors-chap.html#missing-values);
+  + `NA` and `""` are different in R: `""` is a blank string, while `NA` is missing;
   + "Missing values (`NA`) and `NaN` values are regarded as non-comparable even to themselves, so comparisons involving them will always result in `NA`" 
-  + `admiral::convert_blanks_to_na()` can turn SAS blank strings into proper R `NA` (from admiral documentation).  
+  + `admiral::convert_blanks_to_na()` can turn SAS blank strings into proper R `NA` (from [admiral documentation](https://pharmaverse.github.io/admiral/reference/convert_blanks_to_na.html)).  
 
 ```{r, eval = T}
 # Unlike SAS, space(s) != blank string in R, 
@@ -320,7 +320,7 @@ adsl_na_example %>% filter(DISCONFL != "Y" | is.na(DISCONFL)) %>%
 
 #### Sorting data
 
-In SAS, missing is treated as the smallest value in `proc sort`; while in R, NA is always at the bottom after ascending or descending sorting.
+In SAS, missing is treated as the smallest value in `proc sort`; while in R, `NA` is always at the bottom after ascending or descending sorting.
 
 Create demo data
 ```{r, eval = F}
