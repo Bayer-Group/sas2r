@@ -22,7 +22,7 @@ adsl <- haven::read_xpt(paste0(adam_path, "adsl.xpt"))
 
 # Select a few variables
 adsl <- adsl %>%
-  dplyr::select(STUDYID, USUBJID, SUBJID, AGE, TRT01P, TRTSDT, TRTEDT, RACE, SEX)
+  dplyr::select(STUDYID, USUBJID, SUBJID, AGE, TRT01P, TRTSDT, TRTEDT, RACE, SEX, DISCONFL)
 ```
 
 ### PROC CONTENTS $\rightarrow$ summary()
@@ -238,6 +238,177 @@ adsl %>%
   head() %>%
   kbl() %>%
   kable_classic_2(full_width = F)
+```
+
+### Handling of missing values
+
+Missing values in SAS and R:
+
+* SAS 
+  + Missing value is a blank/a single decimal point for character/numeric variables, see details in [Missing Values in SAS](https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lrcon/p175x77t7k6kggn1io94yedqagl3.htm);
+  
+* R
+  + Missing data in R appears as `NA`. `NA` is not a string nor a numeric value, but an indicator of missingness, see detailed examples in [Advanced R #3.2.3 Missing values](https://adv-r.hadley.nz/vectors-chap.html#missing-values);
+  + `NA` and `""` are different in R: `""` is a blank string, while `NA` is missing;
+  + "Missing values (`NA`) and `NaN` values are regarded as non-comparable even to themselves, so comparisons involving them will always result in `NA`" 
+  + `admiral::convert_blanks_to_na()` can turn SAS blank strings into proper R `NA` (from [admiral documentation](https://pharmaverse.github.io/admiral/reference/convert_blanks_to_na.html)).  
+
+```{r, eval = T}
+# Unlike SAS, space(s) != blank string in R, 
+" " == ""
+# is.na to check if it's missing
+c(" ", "Y", NA_character_) %>% is.na()
+# NA is non-comparable, result in NA
+c(" ", "Y", NA_character_) != "Y"
+```
+
+
+
+Unexpected results might occur with "SAS habits", below are three examples to illustrate the different handling of missing values in R. 
+
+#### Subsetting data
+
+`!=` is not the same in R when it involves `NA`
+```{r, eval = F}
+# add one more row to the data with missing AGE and DISCONFL, select the first 3 rows
+adsl_na_example <- adsl %>% 
+  add_row(SUBJID = "1", DISCONFL = NA_character_, .before = T) %>% 
+  slice(1:3) %>% 
+  select(SUBJID, DISCONFL)
+# demo data
+adsl_na_example
+```
+
+```{r, eval = T, echo = F}
+# add one more row to the data with missing AGE and DISCONFL, select the first 3 rows
+adsl_na_example <- adsl %>% 
+  add_row(SUBJID = "1", DISCONFL = NA_character_, .before = T) %>% 
+  slice(1:3) %>% 
+  select(SUBJID, DISCONFL)
+# demo data
+adsl_na_example %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+Subset to `DISCONFL != "Y"`, only `DISCONFL = " "` is selected, not `NA` 
+```{r, eval = F}
+adsl_na_example %>% filter(DISCONFL != "Y")
+```
+
+```{r, eval = T, echo = F}
+adsl_na_example %>% filter(DISCONFL != "Y") %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+To display `NA`, add `is.na(DISCONFL)` to the filter
+```{r, eval = F}
+# include is.na(DISCONFL) in the filter
+adsl_na_example %>% filter(DISCONFL != "Y" | is.na(DISCONFL))
+```
+
+```{r, eval = T, echo = F}
+adsl_na_example %>% filter(DISCONFL != "Y" | is.na(DISCONFL)) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+
+
+
+
+#### Sorting data
+
+In SAS, missing is treated as the smallest value in `proc sort`; while in R, `NA` is always at the bottom after ascending or descending sorting.
+
+Create demo data
+```{r, eval = F}
+# add one more row to the data with missing AGE and DISCONFL 
+# select the first 3 rows
+adsl_na_sort <- adsl %>% 
+  add_row(SUBJID = "1", AGE = NA_integer_, .before = T) %>% 
+  slice(1:5) %>% 
+  select(SUBJID, AGE)
+```
+
+```{r, eval = T, echo = F}
+# add one more row to the data with missing AGE and DISCONFL 
+# select the first 3 rows
+adsl_na_sort <- adsl %>% 
+  add_row(SUBJID = "1", AGE = NA_integer_, .before = T) %>% 
+  slice(1:5) %>% 
+  select(SUBJID, AGE) 
+adsl_na_sort %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+Sort by ascending order of AGE
+```{r, eval = F}
+# ascending
+adsl_na_sort %>%
+  arrange(AGE)
+```
+
+```{r, eval = T, echo = F}
+# ascending
+adsl_na_sort %>%
+  arrange(AGE) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+Sort by descending order of AGE
+```{r, eval = F}
+# descending
+adsl_na_sort %>%
+  arrange(-AGE)
+```
+
+```{r, eval = T, echo = F}
+# descending
+adsl_na_sort %>%
+  arrange(-AGE) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+`NA` can also be placed at the top with below workaround
+```{r, eval = F}
+# to be consistent with SAS - NA at the top when ascending
+adsl_na_sort %>%
+  arrange(!is.na(AGE), AGE)
+```
+
+```{r, eval = T, echo = F}
+# to be consistent with SAS - NA at the top when ascending
+adsl_na_sort %>%
+  arrange(!is.na(AGE), AGE) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F)
+```
+
+
+#### Creating new variables
+
+When AGE is missing, AGEGR1 is set to '<= 50 years old' in SAS; while in R it is set to `NA_character_`.
+```{r, eval = F}
+adsl_na_sort %>%
+  mutate(AGEGR1 = case_when(
+    AGE > 50 ~"> 50 years old",
+    AGE <= 50 ~"<= 50 years old",
+  )) 
+```
+
+```{r, eval = T, echo = F}
+adsl_na_sort %>%
+  mutate(AGEGR1 = case_when(
+    AGE > 50 ~"> 50 years old",
+    AGE <= 50 ~"<= 50 years old",
+  )) %>%
+  kbl() %>%
+  kable_classic_2(full_width = F) 
 ```
 
 ### Merging Data
