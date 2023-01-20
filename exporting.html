@@ -168,8 +168,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.5" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#subsetting-data-whereif-rightarrow-filter"><i class="fa fa-check"></i><b>3.1.5</b> Subsetting data (WHERE/IF) <span class="math inline">\(\rightarrow\)</span> filter()</a></li>
 <li class="chapter" data-level="3.1.6" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#sorting-data"><i class="fa fa-check"></i><b>3.1.6</b> Sorting data</a></li>
 <li class="chapter" data-level="3.1.7" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#creating-new-variables"><i class="fa fa-check"></i><b>3.1.7</b> Creating new variables</a></li>
-<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.8</b> Merging Data</a></li>
-<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.9</b> Concatenating Data</a></li>
+<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#handling-of-missing-values"><i class="fa fa-check"></i><b>3.1.8</b> Handling of missing values</a></li>
+<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.9</b> Merging Data</a></li>
+<li class="chapter" data-level="3.1.10" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.10</b> Concatenating Data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>4</b> Data</a>
@@ -245,12 +246,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exporting" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Exporting<a href="exporting.html#exporting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To export our table to MS Word (.docx), we may use the <code>officer</code> package. This package simplifies working with various Microsoft Office formats and integrates nicely with <code>flextable</code>.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="exporting.html#cb42-1" aria-hidden="true"></a><span class="kw">library</span>(officer)</span>
-<span id="cb42-2"><a href="exporting.html#cb42-2" aria-hidden="true"></a></span>
-<span id="cb42-3"><a href="exporting.html#cb42-3" aria-hidden="true"></a><span class="co"># send the flextable to .docx output</span></span>
-<span id="cb42-4"><a href="exporting.html#cb42-4" aria-hidden="true"></a><span class="kw">read_docx</span>() <span class="op">%&gt;%</span></span>
-<span id="cb42-5"><a href="exporting.html#cb42-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">body_add_flextable</span>(my_flextable) <span class="op">%&gt;%</span></span>
-<span id="cb42-6"><a href="exporting.html#cb42-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">print</span>(<span class="dt">target =</span> <span class="st">&quot;my_document.docx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="exporting.html#cb56-1" aria-hidden="true"></a><span class="kw">library</span>(officer)</span>
+<span id="cb56-2"><a href="exporting.html#cb56-2" aria-hidden="true"></a></span>
+<span id="cb56-3"><a href="exporting.html#cb56-3" aria-hidden="true"></a><span class="co"># send the flextable to .docx output</span></span>
+<span id="cb56-4"><a href="exporting.html#cb56-4" aria-hidden="true"></a><span class="kw">read_docx</span>() <span class="op">%&gt;%</span></span>
+<span id="cb56-5"><a href="exporting.html#cb56-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">body_add_flextable</span>(my_flextable) <span class="op">%&gt;%</span></span>
+<span id="cb56-6"><a href="exporting.html#cb56-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">print</span>(<span class="dt">target =</span> <span class="st">&quot;my_document.docx&quot;</span>)</span></code></pre></div>
 <p>In your working directory, you should now see the file <code>my_document.docx</code> has been created and contains your table.</p>
 
 </div>

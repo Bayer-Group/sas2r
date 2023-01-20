@@ -168,8 +168,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.5" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#subsetting-data-whereif-rightarrow-filter"><i class="fa fa-check"></i><b>3.1.5</b> Subsetting data (WHERE/IF) <span class="math inline">\(\rightarrow\)</span> filter()</a></li>
 <li class="chapter" data-level="3.1.6" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#sorting-data"><i class="fa fa-check"></i><b>3.1.6</b> Sorting data</a></li>
 <li class="chapter" data-level="3.1.7" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#creating-new-variables"><i class="fa fa-check"></i><b>3.1.7</b> Creating new variables</a></li>
-<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.8</b> Merging Data</a></li>
-<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.9</b> Concatenating Data</a></li>
+<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#handling-of-missing-values"><i class="fa fa-check"></i><b>3.1.8</b> Handling of missing values</a></li>
+<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.9</b> Merging Data</a></li>
+<li class="chapter" data-level="3.1.10" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.10</b> Concatenating Data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>4</b> Data</a>
@@ -249,37 +250,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ### Building a plot using ggplot2</p>
 <div id="packages-and-sample-data-1" class="section level4 hasAnchor" number="6.0.0.1">
 <h4><span class="header-section-number">6.0.0.1</span> Packages and Sample Data<a href="figures-plots.html#packages-and-sample-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="figures-plots.html#cb43-1" aria-hidden="true"></a><span class="co"># Packages</span></span>
-<span id="cb43-2"><a href="figures-plots.html#cb43-2" aria-hidden="true"></a><span class="kw">library</span>(haven)</span>
-<span id="cb43-3"><a href="figures-plots.html#cb43-3" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb43-4"><a href="figures-plots.html#cb43-4" aria-hidden="true"></a></span>
-<span id="cb43-5"><a href="figures-plots.html#cb43-5" aria-hidden="true"></a><span class="co"># Data</span></span>
-<span id="cb43-6"><a href="figures-plots.html#cb43-6" aria-hidden="true"></a>adam_path &lt;-<span class="st"> &quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/&quot;</span></span>
-<span id="cb43-7"><a href="figures-plots.html#cb43-7" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(haven<span class="op">::</span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adsl.xpt&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="figures-plots.html#cb57-1" aria-hidden="true"></a><span class="co"># Packages</span></span>
+<span id="cb57-2"><a href="figures-plots.html#cb57-2" aria-hidden="true"></a><span class="kw">library</span>(haven)</span>
+<span id="cb57-3"><a href="figures-plots.html#cb57-3" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb57-4"><a href="figures-plots.html#cb57-4" aria-hidden="true"></a></span>
+<span id="cb57-5"><a href="figures-plots.html#cb57-5" aria-hidden="true"></a><span class="co"># Data</span></span>
+<span id="cb57-6"><a href="figures-plots.html#cb57-6" aria-hidden="true"></a>adam_path &lt;-<span class="st"> &quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/&quot;</span></span>
+<span id="cb57-7"><a href="figures-plots.html#cb57-7" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(haven<span class="op">::</span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adsl.xpt&quot;</span>)))</span></code></pre></div>
 <p>Let’s create a basic scatter plot of weight vs height.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="figures-plots.html#cb44-1" aria-hidden="true"></a><span class="co"># basic scatter plot of weight vs height</span></span>
-<span id="cb44-2"><a href="figures-plots.html#cb44-2" aria-hidden="true"></a>my_scatter_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(adsl, <span class="kw">aes</span>(<span class="dt">x =</span> HEIGHTBL, <span class="dt">y =</span> WEIGHTBL)) <span class="op">+</span></span>
-<span id="cb44-3"><a href="figures-plots.html#cb44-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>
-<span id="cb44-4"><a href="figures-plots.html#cb44-4" aria-hidden="true"></a>my_scatter_plot</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="figures-plots.html#cb58-1" aria-hidden="true"></a><span class="co"># basic scatter plot of weight vs height</span></span>
+<span id="cb58-2"><a href="figures-plots.html#cb58-2" aria-hidden="true"></a>my_scatter_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(adsl, <span class="kw">aes</span>(<span class="dt">x =</span> HEIGHTBL, <span class="dt">y =</span> WEIGHTBL)) <span class="op">+</span></span>
+<span id="cb58-3"><a href="figures-plots.html#cb58-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>
+<span id="cb58-4"><a href="figures-plots.html#cb58-4" aria-hidden="true"></a>my_scatter_plot</span></code></pre></div>
 </div>
 <div id="exporting-plots" class="section level3 hasAnchor" number="6.0.1">
 <h3><span class="header-section-number">6.0.1</span> Exporting plots<a href="figures-plots.html#exporting-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You may export plots as png files a few ways. If your plot is created in ggplot2, you can use the <code>ggsave()</code> function to export as png:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="figures-plots.html#cb45-1" aria-hidden="true"></a><span class="co"># save plot as a png file</span></span>
-<span id="cb45-2"><a href="figures-plots.html#cb45-2" aria-hidden="true"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_scatter_plot, </span>
-<span id="cb45-3"><a href="figures-plots.html#cb45-3" aria-hidden="true"></a>       <span class="dt">filename =</span> <span class="st">&quot;my_plot_output_1.png&quot;</span>, </span>
-<span id="cb45-4"><a href="figures-plots.html#cb45-4" aria-hidden="true"></a>       <span class="dt">width =</span> <span class="dv">7</span>, </span>
-<span id="cb45-5"><a href="figures-plots.html#cb45-5" aria-hidden="true"></a>       <span class="dt">height =</span> <span class="dv">5</span>, </span>
-<span id="cb45-6"><a href="figures-plots.html#cb45-6" aria-hidden="true"></a>       <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="figures-plots.html#cb59-1" aria-hidden="true"></a><span class="co"># save plot as a png file</span></span>
+<span id="cb59-2"><a href="figures-plots.html#cb59-2" aria-hidden="true"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_scatter_plot, </span>
+<span id="cb59-3"><a href="figures-plots.html#cb59-3" aria-hidden="true"></a>       <span class="dt">filename =</span> <span class="st">&quot;my_plot_output_1.png&quot;</span>, </span>
+<span id="cb59-4"><a href="figures-plots.html#cb59-4" aria-hidden="true"></a>       <span class="dt">width =</span> <span class="dv">7</span>, </span>
+<span id="cb59-5"><a href="figures-plots.html#cb59-5" aria-hidden="true"></a>       <span class="dt">height =</span> <span class="dv">5</span>, </span>
+<span id="cb59-6"><a href="figures-plots.html#cb59-6" aria-hidden="true"></a>       <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>)</span></code></pre></div>
 <p>The more general way to save plots as png files is to use the <code>png()</code> function. It can work with ggplot2, but also plots created in base R.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="figures-plots.html#cb46-1" aria-hidden="true"></a><span class="kw">png</span>(<span class="dt">filename =</span> <span class="st">&quot;my_plot_output_2.png&quot;</span>, </span>
-<span id="cb46-2"><a href="figures-plots.html#cb46-2" aria-hidden="true"></a>    <span class="dt">width =</span> <span class="dv">7</span>, </span>
-<span id="cb46-3"><a href="figures-plots.html#cb46-3" aria-hidden="true"></a>    <span class="dt">height =</span> <span class="dv">5</span>, </span>
-<span id="cb46-4"><a href="figures-plots.html#cb46-4" aria-hidden="true"></a>    <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>, </span>
-<span id="cb46-5"><a href="figures-plots.html#cb46-5" aria-hidden="true"></a>    <span class="dt">res =</span> <span class="dv">300</span>)</span>
-<span id="cb46-6"><a href="figures-plots.html#cb46-6" aria-hidden="true"></a></span>
-<span id="cb46-7"><a href="figures-plots.html#cb46-7" aria-hidden="true"></a><span class="kw">print</span>(my_scatter_plot)</span>
-<span id="cb46-8"><a href="figures-plots.html#cb46-8" aria-hidden="true"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="figures-plots.html#cb60-1" aria-hidden="true"></a><span class="kw">png</span>(<span class="dt">filename =</span> <span class="st">&quot;my_plot_output_2.png&quot;</span>, </span>
+<span id="cb60-2"><a href="figures-plots.html#cb60-2" aria-hidden="true"></a>    <span class="dt">width =</span> <span class="dv">7</span>, </span>
+<span id="cb60-3"><a href="figures-plots.html#cb60-3" aria-hidden="true"></a>    <span class="dt">height =</span> <span class="dv">5</span>, </span>
+<span id="cb60-4"><a href="figures-plots.html#cb60-4" aria-hidden="true"></a>    <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>, </span>
+<span id="cb60-5"><a href="figures-plots.html#cb60-5" aria-hidden="true"></a>    <span class="dt">res =</span> <span class="dv">300</span>)</span>
+<span id="cb60-6"><a href="figures-plots.html#cb60-6" aria-hidden="true"></a></span>
+<span id="cb60-7"><a href="figures-plots.html#cb60-7" aria-hidden="true"></a><span class="kw">print</span>(my_scatter_plot)</span>
+<span id="cb60-8"><a href="figures-plots.html#cb60-8" aria-hidden="true"></a><span class="kw">dev.off</span>()</span></code></pre></div>
 
 </div>
 </div>
