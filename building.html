@@ -168,9 +168,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.5" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#subsetting-data-whereif-rightarrow-filter"><i class="fa fa-check"></i><b>3.1.5</b> Subsetting data (WHERE/IF) <span class="math inline">\(\rightarrow\)</span> filter()</a></li>
 <li class="chapter" data-level="3.1.6" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#sorting-data"><i class="fa fa-check"></i><b>3.1.6</b> Sorting data</a></li>
 <li class="chapter" data-level="3.1.7" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#creating-new-variables"><i class="fa fa-check"></i><b>3.1.7</b> Creating new variables</a></li>
-<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#handling-of-missing-values"><i class="fa fa-check"></i><b>3.1.8</b> Handling of missing values</a></li>
-<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.9</b> Merging Data</a></li>
-<li class="chapter" data-level="3.1.10" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.10</b> Concatenating Data</a></li>
+<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.8</b> Merging Data</a></li>
+<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.9</b> Concatenating Data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>4</b> Data</a>
@@ -219,9 +218,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="content.html"><a href="content.html"><i class="fa fa-check"></i><b>7.3</b> Content</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>8</b> License</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -248,9 +244,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="dataset-source" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Dataset Source<a href="building.html#dataset-source" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For demonstration purposes, we will use the <code>adsl</code> from the <a href="https://advance.phuse.global/display/WEL/Test+Dataset+Factory">PHUSE Test Datasets Factory</a> repository.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="building.html#cb45-1" aria-hidden="true"></a><span class="kw">library</span>(haven)</span>
-<span id="cb45-2"><a href="building.html#cb45-2" aria-hidden="true"></a></span>
-<span id="cb45-3"><a href="building.html#cb45-3" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span><span class="kw">read_xpt</span>(<span class="st">&quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/adsl.xpt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="building.html#cb31-1" aria-hidden="true"></a><span class="kw">library</span>(haven)</span>
+<span id="cb31-2"><a href="building.html#cb31-2" aria-hidden="true"></a></span>
+<span id="cb31-3"><a href="building.html#cb31-3" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span><span class="kw">read_xpt</span>(<span class="st">&quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/adsl.xpt&quot;</span>)</span></code></pre></div>
 </div>
 <div id="string-formatting" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> String Formatting<a href="building.html#string-formatting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -261,41 +257,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>How should the summary statistic(s) be formatted for display?</li>
 </ol>
 <p>Once set, these formats are carried over to your table automatically.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="building.html#cb46-1" aria-hidden="true"></a><span class="kw">library</span>(Tplyr)</span>
-<span id="cb46-2"><a href="building.html#cb46-2" aria-hidden="true"></a></span>
-<span id="cb46-3"><a href="building.html#cb46-3" aria-hidden="true"></a><span class="kw">options</span>(</span>
-<span id="cb46-4"><a href="building.html#cb46-4" aria-hidden="true"></a>  <span class="co"># Categorical variable defaults</span></span>
-<span id="cb46-5"><a href="building.html#cb46-5" aria-hidden="true"></a>  <span class="dt">tplyr.count_layer_default_formats =</span></span>
-<span id="cb46-6"><a href="building.html#cb46-6" aria-hidden="true"></a>    <span class="kw">list</span>(<span class="dt">n_counts =</span> <span class="kw">f_str</span>(<span class="st">&quot;xxx [xx.xx%]&quot;</span>, n, pct)),</span>
-<span id="cb46-7"><a href="building.html#cb46-7" aria-hidden="true"></a>  </span>
-<span id="cb46-8"><a href="building.html#cb46-8" aria-hidden="true"></a>  <span class="co"># Continuous variable defaults</span></span>
-<span id="cb46-9"><a href="building.html#cb46-9" aria-hidden="true"></a>  <span class="dt">tplyr.desc_layer_default_formats =</span></span>
-<span id="cb46-10"><a href="building.html#cb46-10" aria-hidden="true"></a>    <span class="kw">list</span>(<span class="st">&#39;N&#39;</span>         =<span class="st"> </span><span class="kw">f_str</span>(<span class="st">&#39;xx&#39;</span>, n),</span>
-<span id="cb46-11"><a href="building.html#cb46-11" aria-hidden="true"></a>         <span class="st">&#39;Mean [SD]&#39;</span> =<span class="st"> </span><span class="kw">f_str</span>(<span class="st">&#39;xx.xx [xx.xxx]&#39;</span>, mean, sd),</span>
-<span id="cb46-12"><a href="building.html#cb46-12" aria-hidden="true"></a>         <span class="st">&#39;Median&#39;</span>    =<span class="st"> </span><span class="kw">f_str</span>(<span class="st">&#39;xx.x&#39;</span>, median),</span>
-<span id="cb46-13"><a href="building.html#cb46-13" aria-hidden="true"></a>         <span class="st">&#39;Min, Max&#39;</span>  =<span class="st"> </span><span class="kw">f_str</span>(<span class="st">&#39;xx, xx&#39;</span>, min, max))</span>
-<span id="cb46-14"><a href="building.html#cb46-14" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="building.html#cb32-1" aria-hidden="true"></a><span class="kw">library</span>(Tplyr)</span>
+<span id="cb32-2"><a href="building.html#cb32-2" aria-hidden="true"></a></span>
+<span id="cb32-3"><a href="building.html#cb32-3" aria-hidden="true"></a><span class="kw">options</span>(</span>
+<span id="cb32-4"><a href="building.html#cb32-4" aria-hidden="true"></a>  <span class="co"># Categorical variable defaults</span></span>
+<span id="cb32-5"><a href="building.html#cb32-5" aria-hidden="true"></a>  <span class="dt">tplyr.count_layer_default_formats =</span></span>
+<span id="cb32-6"><a href="building.html#cb32-6" aria-hidden="true"></a>    <span class="kw">list</span>(<span class="dt">n_counts =</span> <span class="kw">f_str</span>(<span class="st">&quot;xxx [xx.xx%]&quot;</span>, n, pct)),</span>
+<span id="cb32-7"><a href="building.html#cb32-7" aria-hidden="true"></a>  </span>
+<span id="cb32-8"><a href="building.html#cb32-8" aria-hidden="true"></a>  <span class="co"># Continuous variable defaults</span></span>
+<span id="cb32-9"><a href="building.html#cb32-9" aria-hidden="true"></a>  <span class="dt">tplyr.desc_layer_default_formats =</span></span>
+<span id="cb32-10"><a href="building.html#cb32-10" aria-hidden="true"></a>    <span class="kw">list</span>(<span class="st">&#39;N&#39;</span>         =<span class="st"> </span><span class="kw">f_str</span>(<span class="st">&#39;xx&#39;</span>, n),</span>
+<span id="cb32-11"><a href="building.html#cb32-11" aria-hidden="true"></a>         <span class="st">&#39;Mean [SD]&#39;</span> =<span class="st"> </span><span class="kw">f_str</span>(<span class="st">&#39;xx.xx [xx.xxx]&#39;</span>, mean, sd),</span>
+<span id="cb32-12"><a href="building.html#cb32-12" aria-hidden="true"></a>         <span class="st">&#39;Median&#39;</span>    =<span class="st"> </span><span class="kw">f_str</span>(<span class="st">&#39;xx.x&#39;</span>, median),</span>
+<span id="cb32-13"><a href="building.html#cb32-13" aria-hidden="true"></a>         <span class="st">&#39;Min, Max&#39;</span>  =<span class="st"> </span><span class="kw">f_str</span>(<span class="st">&#39;xx, xx&#39;</span>, min, max))</span>
+<span id="cb32-14"><a href="building.html#cb32-14" aria-hidden="true"></a>)</span></code></pre></div>
 </div>
 <div id="create" class="section level3 hasAnchor" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> Create<a href="building.html#create" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For demonstration purposes, we will select a handful of variables from the adsl dataset to work with.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="building.html#cb47-1" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb47-2"><a href="building.html#cb47-2" aria-hidden="true"></a></span>
-<span id="cb47-3"><a href="building.html#cb47-3" aria-hidden="true"></a><span class="co"># Initiate Tplyr, specify treatment variable, optional where condition</span></span>
-<span id="cb47-4"><a href="building.html#cb47-4" aria-hidden="true"></a>my_table &lt;-<span class="st">  </span><span class="kw">tplyr_table</span>(adsl, TRT01P, <span class="dt">where =</span> SAFFL <span class="op">==</span><span class="st"> &quot;Y&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb47-5"><a href="building.html#cb47-5" aria-hidden="true"></a><span class="st">  </span></span>
-<span id="cb47-6"><a href="building.html#cb47-6" aria-hidden="true"></a><span class="st">  </span><span class="co"># Add a total group column</span></span>
-<span id="cb47-7"><a href="building.html#cb47-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_total_group</span>() <span class="op">%&gt;%</span></span>
-<span id="cb47-8"><a href="building.html#cb47-8" aria-hidden="true"></a><span class="st">  </span></span>
-<span id="cb47-9"><a href="building.html#cb47-9" aria-hidden="true"></a><span class="st">  </span><span class="co"># Add individual variables here</span></span>
-<span id="cb47-10"><a href="building.html#cb47-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_desc</span>(AGE, <span class="dt">b =</span> <span class="st">&quot;Age (years)&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb47-11"><a href="building.html#cb47-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_count</span>(AGEGR1, <span class="dt">b =</span> <span class="st">&quot;Age Group 1 (years)&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb47-12"><a href="building.html#cb47-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_count</span>(SEX, <span class="dt">b =</span> <span class="st">&quot;Gender&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb47-13"><a href="building.html#cb47-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_count</span>(ETHNIC, <span class="dt">b =</span> <span class="st">&quot;Ethnicity&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb47-14"><a href="building.html#cb47-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_desc</span>(BMIBL, <span class="dt">b =</span> <span class="st">&quot;Baseline Body Mass Index (kg/m2)&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb47-15"><a href="building.html#cb47-15" aria-hidden="true"></a><span class="st">  </span></span>
-<span id="cb47-16"><a href="building.html#cb47-16" aria-hidden="true"></a><span class="st">  </span><span class="co"># Build</span></span>
-<span id="cb47-17"><a href="building.html#cb47-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">build</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="building.html#cb33-1" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb33-2"><a href="building.html#cb33-2" aria-hidden="true"></a></span>
+<span id="cb33-3"><a href="building.html#cb33-3" aria-hidden="true"></a><span class="co"># Initiate Tplyr, specify treatment variable, optional where condition</span></span>
+<span id="cb33-4"><a href="building.html#cb33-4" aria-hidden="true"></a>my_table &lt;-<span class="st">  </span><span class="kw">tplyr_table</span>(adsl, TRT01P, <span class="dt">where =</span> SAFFL <span class="op">==</span><span class="st"> &quot;Y&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb33-5"><a href="building.html#cb33-5" aria-hidden="true"></a><span class="st">  </span></span>
+<span id="cb33-6"><a href="building.html#cb33-6" aria-hidden="true"></a><span class="st">  </span><span class="co"># Add a total group column</span></span>
+<span id="cb33-7"><a href="building.html#cb33-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_total_group</span>() <span class="op">%&gt;%</span></span>
+<span id="cb33-8"><a href="building.html#cb33-8" aria-hidden="true"></a><span class="st">  </span></span>
+<span id="cb33-9"><a href="building.html#cb33-9" aria-hidden="true"></a><span class="st">  </span><span class="co"># Add individual variables here</span></span>
+<span id="cb33-10"><a href="building.html#cb33-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_desc</span>(AGE, <span class="dt">b =</span> <span class="st">&quot;Age (years)&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb33-11"><a href="building.html#cb33-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_count</span>(AGEGR1, <span class="dt">b =</span> <span class="st">&quot;Age Group 1 (years)&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb33-12"><a href="building.html#cb33-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_count</span>(SEX, <span class="dt">b =</span> <span class="st">&quot;Gender&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb33-13"><a href="building.html#cb33-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_count</span>(ETHNIC, <span class="dt">b =</span> <span class="st">&quot;Ethnicity&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb33-14"><a href="building.html#cb33-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">add_layer</span>(<span class="kw">group_desc</span>(BMIBL, <span class="dt">b =</span> <span class="st">&quot;Baseline Body Mass Index (kg/m2)&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb33-15"><a href="building.html#cb33-15" aria-hidden="true"></a><span class="st">  </span></span>
+<span id="cb33-16"><a href="building.html#cb33-16" aria-hidden="true"></a><span class="st">  </span><span class="co"># Build</span></span>
+<span id="cb33-17"><a href="building.html#cb33-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">build</span>()</span></code></pre></div>
 
 </div>
 </div>
@@ -319,14 +315,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": null,
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
 "fontsettings": {
 "theme": "white",
 "family": "sans",
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bayer-Group/sas2r/blob/main/04-tables-building.Rmd",
+"link": "https://github.com/Bayer-Group/sas2r/edit/master/04-tables-building.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -337,13 +343,17 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": ["sas2r.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
 "collapse": "subsection"
+},
+"toolbar": {
+"position": "fixed",
+"search": true
 }
 });
 });

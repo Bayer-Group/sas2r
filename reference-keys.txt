@@ -19,10 +19,6 @@ keepdrop-rightarrow-select
 subsetting-data-whereif-rightarrow-filter
 sorting-data
 creating-new-variables
-handling-of-missing-values
-subsetting-data
-sorting-data-1
-creating-new-variables-1
 merging-data
 concatenating-data
 data-1
