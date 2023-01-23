@@ -168,8 +168,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.5" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#subsetting-data-whereif-rightarrow-filter"><i class="fa fa-check"></i><b>3.1.5</b> Subsetting data (WHERE/IF) <span class="math inline">\(\rightarrow\)</span> filter()</a></li>
 <li class="chapter" data-level="3.1.6" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#sorting-data"><i class="fa fa-check"></i><b>3.1.6</b> Sorting data</a></li>
 <li class="chapter" data-level="3.1.7" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#creating-new-variables"><i class="fa fa-check"></i><b>3.1.7</b> Creating new variables</a></li>
-<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.8</b> Merging Data</a></li>
-<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.9</b> Concatenating Data</a></li>
+<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#handling-of-missing-values"><i class="fa fa-check"></i><b>3.1.8</b> Handling of missing values</a></li>
+<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.9</b> Merging Data</a></li>
+<li class="chapter" data-level="3.1.10" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.10</b> Concatenating Data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>4</b> Data</a>
@@ -218,6 +219,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="content.html"><a href="content.html"><i class="fa fa-check"></i><b>7.3</b> Content</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>8</b> License</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -263,24 +267,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": true,
-"twitter": true,
-"linkedin": true,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
+"sharing": null,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bayer-Group/sas2r/edit/master/12-future.Rmd",
+"link": "https://github.com/Bayer-Group/sas2r/blob/main/12-future.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -291,17 +285,13 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["sas2r.pdf"],
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
 "collapse": "subsection"
-},
-"toolbar": {
-"position": "fixed",
-"search": true
 }
 });
 });

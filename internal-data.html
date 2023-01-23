@@ -168,8 +168,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.5" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#subsetting-data-whereif-rightarrow-filter"><i class="fa fa-check"></i><b>3.1.5</b> Subsetting data (WHERE/IF) <span class="math inline">\(\rightarrow\)</span> filter()</a></li>
 <li class="chapter" data-level="3.1.6" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#sorting-data"><i class="fa fa-check"></i><b>3.1.6</b> Sorting data</a></li>
 <li class="chapter" data-level="3.1.7" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#creating-new-variables"><i class="fa fa-check"></i><b>3.1.7</b> Creating new variables</a></li>
-<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.8</b> Merging Data</a></li>
-<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.9</b> Concatenating Data</a></li>
+<li class="chapter" data-level="3.1.8" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#handling-of-missing-values"><i class="fa fa-check"></i><b>3.1.8</b> Handling of missing values</a></li>
+<li class="chapter" data-level="3.1.9" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#merging-data"><i class="fa fa-check"></i><b>3.1.9</b> Merging Data</a></li>
+<li class="chapter" data-level="3.1.10" data-path="r-and-sas-syntax.html"><a href="r-and-sas-syntax.html#concatenating-data"><i class="fa fa-check"></i><b>3.1.10</b> Concatenating Data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>4</b> Data</a>
@@ -218,6 +219,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="content.html"><a href="content.html"><i class="fa fa-check"></i><b>7.3</b> Content</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>8</b> License</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -246,10 +250,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.2.1</span> Package Data<a href="internal-data.html#package-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>datasets</code> package comes with your default installation of R and houses many example datasets you can utilize.</p>
 <p>Simply run the following to learn about the different ones included.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="internal-data.html#cb28-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="dt">help =</span> <span class="st">&quot;datasets&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="internal-data.html#cb42-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="dt">help =</span> <span class="st">&quot;datasets&quot;</span>)</span></code></pre></div>
 <p>Once you’ve made a selection, running the following will make that data available in your R session.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="internal-data.html#cb29-1" aria-hidden="true"></a><span class="co"># ToothGrowth looks interesting</span></span>
-<span id="cb29-2"><a href="internal-data.html#cb29-2" aria-hidden="true"></a><span class="kw">data</span>(ToothGrowth)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="internal-data.html#cb43-1" aria-hidden="true"></a><span class="co"># ToothGrowth looks interesting</span></span>
+<span id="cb43-2"><a href="internal-data.html#cb43-2" aria-hidden="true"></a><span class="kw">data</span>(ToothGrowth)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -328,11 +332,11 @@ VC
 <h3><span class="header-section-number">4.2.2</span> Simulating Your Own<a href="internal-data.html#simulating-your-own" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In some cases you may wish to simulate your own data. You can do so quite easily using a combination of <code>sample</code> and <code>r*</code> functions built into R.</p>
 <p>Below is an example of simulating a few variables typically found in an ADSL dataset.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="internal-data.html#cb30-1" aria-hidden="true"></a>my_sim_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">subjidn =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</span>
-<span id="cb30-2"><a href="internal-data.html#cb30-2" aria-hidden="true"></a>                          <span class="dt">sex =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&#39;M&#39;</span>,<span class="st">&#39;F&#39;</span>), <span class="dv">10</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb30-3"><a href="internal-data.html#cb30-3" aria-hidden="true"></a>                          <span class="dt">age =</span> <span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">30</span>, <span class="dt">sd =</span> <span class="dv">5</span>)),</span>
-<span id="cb30-4"><a href="internal-data.html#cb30-4" aria-hidden="true"></a>                          <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></span>
-<span id="cb30-5"><a href="internal-data.html#cb30-5" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="internal-data.html#cb44-1" aria-hidden="true"></a>my_sim_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">subjidn =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</span>
+<span id="cb44-2"><a href="internal-data.html#cb44-2" aria-hidden="true"></a>                          <span class="dt">sex =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&#39;M&#39;</span>,<span class="st">&#39;F&#39;</span>), <span class="dv">10</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb44-3"><a href="internal-data.html#cb44-3" aria-hidden="true"></a>                          <span class="dt">age =</span> <span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">30</span>, <span class="dt">sd =</span> <span class="dv">5</span>)),</span>
+<span id="cb44-4"><a href="internal-data.html#cb44-4" aria-hidden="true"></a>                          <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></span>
+<span id="cb44-5"><a href="internal-data.html#cb44-5" aria-hidden="true"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -356,7 +360,7 @@ age
 F
 </td>
 <td style="text-align:center;">
-32
+39
 </td>
 </tr>
 <tr>
@@ -367,7 +371,7 @@ F
 F
 </td>
 <td style="text-align:center;">
-26
+29
 </td>
 </tr>
 <tr>
@@ -375,10 +379,10 @@ F
 3
 </td>
 <td style="text-align:center;">
-M
+F
 </td>
 <td style="text-align:center;">
-31
+34
 </td>
 </tr>
 <tr>
@@ -389,7 +393,7 @@ M
 M
 </td>
 <td style="text-align:center;">
-33
+26
 </td>
 </tr>
 <tr>
@@ -400,7 +404,7 @@ M
 F
 </td>
 <td style="text-align:center;">
-33
+39
 </td>
 </tr>
 </tbody>
@@ -429,24 +433,14 @@ F
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": true,
-"twitter": true,
-"linkedin": true,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
+"sharing": null,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bayer-Group/sas2r/edit/master/03-data.Rmd",
+"link": "https://github.com/Bayer-Group/sas2r/blob/main/03-data.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -457,17 +451,13 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["sas2r.pdf"],
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
 "collapse": "subsection"
-},
-"toolbar": {
-"position": "fixed",
-"search": true
 }
 });
 });
