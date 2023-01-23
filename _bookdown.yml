@@ -3,3 +3,4 @@ language:
   ui:
     chapter_name: "Chapter "
 output_dir: doc
+book_filename: "sas2r"
