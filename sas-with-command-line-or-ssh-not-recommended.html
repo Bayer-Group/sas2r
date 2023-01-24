@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 License | SAS and R</title>
-  <meta name="description" content="Chapter 9 License | SAS and R" />
+  <title>8.4 SAS with command line or ssh (not recommended) | SAS and R</title>
+  <meta name="description" content="8.4 SAS with command line or ssh (not recommended) | SAS and R" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 License | SAS and R" />
+  <meta property="og:title" content="8.4 SAS with command line or ssh (not recommended) | SAS and R" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="bayer-int/ocs.sas2r" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 License | SAS and R" />
+  <meta name="twitter:title" content="8.4 SAS with command line or ssh (not recommended) | SAS and R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sas-with-command-line-or-ssh-not-recommended.html"/>
-
+<link rel="prev" href="use-sasmarkdown.html"/>
+<link rel="next" href="license.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -250,41 +250,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="content/hero.png">
 </div>
-<div id="license" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">Chapter 9</span> License<a href="license.html#license" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<details>
-<summary>Click to Expand</summary>
-<p>
-<p>Terms of Use</p>
-<p><strong>The MIT License (MIT)</strong></p>
-<p>Copyright © 2022 Bayer AG</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-“Software”), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.</p>
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-</p>
-</details>
+<div id="sas-with-command-line-or-ssh-not-recommended" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> SAS with command line or ssh (not recommended)<a href="sas-with-command-line-or-ssh-not-recommended.html#sas-with-command-line-or-ssh-not-recommended" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As SAS can be called through command line, we can actually use the following to execute SAS codes</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb93-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb93-1" aria-hidden="true"></a><span class="ex">sas</span> script.sas</span></code></pre></div>
+<p>or, we can call SAS in R side</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb94-1" aria-hidden="true"></a><span class="kw">system</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span>
+<span id="cb94-2"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb94-2" aria-hidden="true"></a><span class="co"># using ssh</span></span>
+<span id="cb94-3"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb94-3" aria-hidden="true"></a></span>
+<span id="cb94-4"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb94-4" aria-hidden="true"></a><span class="kw">library</span>(ssh)</span>
+<span id="cb94-5"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb94-5" aria-hidden="true"></a><span class="kw">ssh_connect</span>()</span>
+<span id="cb94-6"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb94-6" aria-hidden="true"></a><span class="kw">scp_upload</span>()</span>
+<span id="cb94-7"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb94-7" aria-hidden="true"></a><span class="kw">ssh_exec</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span></code></pre></div>
+<p>Please note that using command line, you will need to have SAS installed on your machine.</p>
 
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="sas-with-command-line-or-ssh-not-recommended.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="use-sasmarkdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="license.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -305,7 +293,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bayer-Group/sas2r/blob/main/14-license.Rmd",
+"link": "https://github.com/Bayer-Group/sas2r/blob/main/13-hybrid-programming.Rmd",
 "text": "Edit"
 },
 "history": {

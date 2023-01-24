@@ -76,4 +76,9 @@ future
 use-renv
 areas-of-expansion
 content
+hybrid-programming-with-sas-and-r
+use-sasr
+use-jupyterquarto-and-saspy
+use-sasmarkdown
+sas-with-command-line-or-ssh-not-recommended
 license
