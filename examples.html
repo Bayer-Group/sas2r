@@ -210,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.3" data-path="examples.html"><a href="examples.html#spaghetti-plot"><i class="fa fa-check"></i><b>6.1.3</b> Spaghetti Plot</a></li>
 <li class="chapter" data-level="6.1.4" data-path="examples.html"><a href="examples.html#spider-plot"><i class="fa fa-check"></i><b>6.1.4</b> Spider Plot</a></li>
 <li class="chapter" data-level="6.1.5" data-path="examples.html"><a href="examples.html#survival-plot"><i class="fa fa-check"></i><b>6.1.5</b> Survival Plot</a></li>
+<li class="chapter" data-level="6.1.6" data-path="examples.html"><a href="examples.html#scatter-plot"><i class="fa fa-check"></i><b>6.1.6</b> Scatter Plot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>7</b> Future</a>
@@ -406,7 +407,7 @@ aval
 Drug
 </td>
 <td style="text-align:center;">
--29.895243
+12.458263
 </td>
 </tr>
 <tr>
@@ -417,7 +418,7 @@ Drug
 Drug
 </td>
 <td style="text-align:center;">
-24.095459
+7.697416
 </td>
 </tr>
 <tr>
@@ -425,10 +426,10 @@ Drug
 3
 </td>
 <td style="text-align:center;">
-Placebo
+Drug
 </td>
 <td style="text-align:center;">
-1.894508
+-29.796594
 </td>
 </tr>
 <tr>
@@ -439,7 +440,7 @@ Placebo
 Drug
 </td>
 <td style="text-align:center;">
-31.368342
+-9.050673
 </td>
 </tr>
 <tr>
@@ -450,7 +451,7 @@ Drug
 Drug
 </td>
 <td style="text-align:center;">
--14.832060
+-4.614725
 </td>
 </tr>
 <tr>
@@ -461,7 +462,7 @@ Drug
 Placebo
 </td>
 <td style="text-align:center;">
--34.568733
+37.749300
 </td>
 </tr>
 </tbody>
@@ -1623,6 +1624,257 @@ break.x.by = 182.625 (6*30.4375).</p>
 <span id="cb90-28"><a href="examples.html#cb90-28" aria-hidden="true"></a>   <span class="dt">tables.theme =</span> <span class="kw">theme_cleantable</span>()</span>
 <span id="cb90-29"><a href="examples.html#cb90-29" aria-hidden="true"></a> )</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-105-1.png" width="680px" /></p>
+
+</div>
+</div>
+<div id="scatter-plot" class="section level3 hasAnchor" number="6.1.6">
+<h3><span class="header-section-number">6.1.6</span> Scatter Plot<a href="examples.html#scatter-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="overview" class="section level4 hasAnchor" number="6.1.6.1">
+<h4><span class="header-section-number">6.1.6.1</span> Overview<a href="examples.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>This article will demonstrate how to construct a scatter plot in ggplot2. We will use a sample figure from the recent <a href="https://downloads.regulations.gov/FDA-2022-N-1961-0002/attachment_1.pdf">Standard Safety Tables and Figures: Integrated Guide</a> released by the FDA as a guide.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-106"></span>
+<img src="additional%20resources/f17.png" alt="Sample figure from the SSTFIG (Figure 17)" width="800px" height="460px" />
+<p class="caption">
+Figure 6.1: Sample figure from the SSTFIG (Figure 17)
+</p>
+</div>
+</div>
+<div id="packages-and-sample-data-7" class="section level4 hasAnchor" number="6.1.6.2">
+<h4><span class="header-section-number">6.1.6.2</span> Packages and Sample Data<a href="examples.html#packages-and-sample-data-7" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s start with accessing ADVS from the PhUSE Test Data Factory repository.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="examples.html#cb91-1" aria-hidden="true"></a><span class="co"># Packages</span></span>
+<span id="cb91-2"><a href="examples.html#cb91-2" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb91-3"><a href="examples.html#cb91-3" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb91-4"><a href="examples.html#cb91-4" aria-hidden="true"></a></span>
+<span id="cb91-5"><a href="examples.html#cb91-5" aria-hidden="true"></a><span class="co"># Data</span></span>
+<span id="cb91-6"><a href="examples.html#cb91-6" aria-hidden="true"></a>advs &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_xpt</span>(</span>
+<span id="cb91-7"><a href="examples.html#cb91-7" aria-hidden="true"></a>  <span class="kw">paste0</span>(<span class="st">&quot;https://github.com/phuse-org/TestDataFactory/&quot;</span>,</span>
+<span id="cb91-8"><a href="examples.html#cb91-8" aria-hidden="true"></a>         <span class="st">&quot;raw/main/Updated/TDF_ADaM/advs.xpt&quot;</span>))</span></code></pre></div>
+</div>
+<div id="data-wrangling" class="section level4 hasAnchor" number="6.1.6.3">
+<h4><span class="header-section-number">6.1.6.3</span> Data Wrangling<a href="examples.html#data-wrangling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In order to make this example meaningful, data wrangling and processing steps will be covered here. In practice, you might have other considerations or processing steps that need to be considered.</p>
+<p>The first step is to obtain baseline values for each USUBJID for the parameter and analysis time point of interest.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="examples.html#cb92-1" aria-hidden="true"></a>baseline &lt;-<span class="st"> </span>advs <span class="op">%&gt;%</span></span>
+<span id="cb92-2"><a href="examples.html#cb92-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(</span>
+<span id="cb92-3"><a href="examples.html#cb92-3" aria-hidden="true"></a>    SAFFL <span class="op">==</span><span class="st"> &quot;Y&quot;</span>,</span>
+<span id="cb92-4"><a href="examples.html#cb92-4" aria-hidden="true"></a>    PARAMCD <span class="op">==</span><span class="st"> &quot;SYSBP&quot;</span>,</span>
+<span id="cb92-5"><a href="examples.html#cb92-5" aria-hidden="true"></a>    ATPT <span class="op">==</span><span class="st"> &quot;AFTER LYING DOWN FOR 5 MINUTES&quot;</span>,</span>
+<span id="cb92-6"><a href="examples.html#cb92-6" aria-hidden="true"></a>    TRTA <span class="op">!=</span><span class="st"> &quot;Placebo&quot;</span></span>
+<span id="cb92-7"><a href="examples.html#cb92-7" aria-hidden="true"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb92-8"><a href="examples.html#cb92-8" aria-hidden="true"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(USUBJID, TRTA, BASE) <span class="op">%&gt;%</span></span>
+<span id="cb92-9"><a href="examples.html#cb92-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">distinct</span>(USUBJID, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>The next step is to obtain the maximum value for each USUBJID post-baseline for the same parameter and analysis time point of interest.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="examples.html#cb93-1" aria-hidden="true"></a>post &lt;-<span class="st"> </span>advs <span class="op">%&gt;%</span></span>
+<span id="cb93-2"><a href="examples.html#cb93-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(</span>
+<span id="cb93-3"><a href="examples.html#cb93-3" aria-hidden="true"></a>    SAFFL <span class="op">==</span><span class="st"> &quot;Y&quot;</span>,</span>
+<span id="cb93-4"><a href="examples.html#cb93-4" aria-hidden="true"></a>    PARAMCD <span class="op">==</span><span class="st"> &quot;SYSBP&quot;</span>,</span>
+<span id="cb93-5"><a href="examples.html#cb93-5" aria-hidden="true"></a>    ATPT <span class="op">==</span><span class="st"> &quot;AFTER LYING DOWN FOR 5 MINUTES&quot;</span>,</span>
+<span id="cb93-6"><a href="examples.html#cb93-6" aria-hidden="true"></a>    TRTA <span class="op">!=</span><span class="st"> &quot;Placebo&quot;</span>,</span>
+<span id="cb93-7"><a href="examples.html#cb93-7" aria-hidden="true"></a>    AVISIT <span class="op">!=</span><span class="st"> &quot;Baseline&quot;</span>,</span>
+<span id="cb93-8"><a href="examples.html#cb93-8" aria-hidden="true"></a>    ANL01FL <span class="op">==</span><span class="st"> &quot;Y&quot;</span></span>
+<span id="cb93-9"><a href="examples.html#cb93-9" aria-hidden="true"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb93-10"><a href="examples.html#cb93-10" aria-hidden="true"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(USUBJID, AVAL) <span class="op">%&gt;%</span></span>
+<span id="cb93-11"><a href="examples.html#cb93-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(USUBJID) <span class="op">%&gt;%</span></span>
+<span id="cb93-12"><a href="examples.html#cb93-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(AVAL)) <span class="op">%&gt;%</span></span>
+<span id="cb93-13"><a href="examples.html#cb93-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb93-14"><a href="examples.html#cb93-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<p>The last step is to merge these two data frames together.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="examples.html#cb94-1" aria-hidden="true"></a>all &lt;-<span class="st"> </span>baseline <span class="op">%&gt;%</span></span>
+<span id="cb94-2"><a href="examples.html#cb94-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">left_join</span>(post)</span></code></pre></div>
+The resulting data frame should look like this.
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+USUBJID
+</th>
+<th style="text-align:center;">
+TRTA
+</th>
+<th style="text-align:center;">
+BASE
+</th>
+<th style="text-align:center;">
+AVAL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+01-701-1028
+</td>
+<td style="text-align:center;">
+Xanomeline High Dose
+</td>
+<td style="text-align:center;">
+138
+</td>
+<td style="text-align:center;">
+137
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+01-701-1033
+</td>
+<td style="text-align:center;">
+Xanomeline Low Dose
+</td>
+<td style="text-align:center;">
+136
+</td>
+<td style="text-align:center;">
+138
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+01-701-1034
+</td>
+<td style="text-align:center;">
+Xanomeline High Dose
+</td>
+<td style="text-align:center;">
+163
+</td>
+<td style="text-align:center;">
+188
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+01-701-1097
+</td>
+<td style="text-align:center;">
+Xanomeline Low Dose
+</td>
+<td style="text-align:center;">
+128
+</td>
+<td style="text-align:center;">
+137
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+01-701-1111
+</td>
+<td style="text-align:center;">
+Xanomeline Low Dose
+</td>
+<td style="text-align:center;">
+129
+</td>
+<td style="text-align:center;">
+125
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="basic-plot" class="section level4 hasAnchor" number="6.1.6.4">
+<h4><span class="header-section-number">6.1.6.4</span> Basic Plot<a href="examples.html#basic-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Now that we have some data, we can start with a basic scatter plot.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="examples.html#cb95-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> all, <span class="kw">aes</span>(<span class="dt">x =</span> BASE, <span class="dt">y =</span> AVAL)) <span class="op">+</span></span>
+<span id="cb95-2"><a href="examples.html#cb95-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+</div>
+<div id="customized-plot" class="section level4 hasAnchor" number="6.1.6.5">
+<h4><span class="header-section-number">6.1.6.5</span> Customized Plot<a href="examples.html#customized-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We have a few customization to be included in order to match the figure provided in the SSTFIG. Below we separate the code and annotations in two different steps for clarity.</p>
+<p>Let’s setup the plot annotations first. This includes headers, footers, and axis text.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="examples.html#cb96-1" aria-hidden="true"></a>yaxis_text &lt;-<span class="st"> &quot;</span><span class="ch">\n</span><span class="st">Maximum Post-baseline Systolic Blood Pressure (mmHg)</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb96-2"><a href="examples.html#cb96-2" aria-hidden="true"></a>xaxis_text &lt;-<span class="st"> &quot;</span><span class="ch">\n</span><span class="st">Baseline Systolic Blood Pressure (mmHg)&quot;</span></span>
+<span id="cb96-3"><a href="examples.html#cb96-3" aria-hidden="true"></a>header &lt;-<span class="st"> &quot;Figure 17. Baseline vs. Maximum Systolic Blood Pressure by Treatment Arm, Safety Population¹, Pooled Analysis</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb96-4"><a href="examples.html#cb96-4" aria-hidden="true"></a>footer1 &lt;-<span class="st"> &quot;Source: [include Applicant source, datasets and/or software tools used].&quot;</span></span>
+<span id="cb96-5"><a href="examples.html#cb96-5" aria-hidden="true"></a>footer2 &lt;-<span class="st"> &quot;¹Gray dotted line = no increase; blue line = high-dose treatment linear regression; orange dashed line = low-dose linear regression.&quot;</span></span></code></pre></div>
+<p>Next, let’s extend our basic plot to include customizations we desire. One notable customization involves the use of <code>stat_smooth()</code>. This function will automatically compute the linear regressions for each treatment arm and append the lines of best fit to the plot.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="examples.html#cb97-1" aria-hidden="true"></a>f17 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(all, <span class="kw">aes</span>(<span class="dt">x =</span> BASE, <span class="dt">y =</span> AVAL, <span class="dt">linetype =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb97-2"><a href="examples.html#cb97-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">0.6</span>, <span class="kw">aes</span>(<span class="dt">fill =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb97-3"><a href="examples.html#cb97-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="kw">aes</span>(<span class="dt">color =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb97-4"><a href="examples.html#cb97-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;skyblue&quot;</span>, <span class="st">&quot;orange&quot;</span>)) <span class="op">+</span></span>
+<span id="cb97-5"><a href="examples.html#cb97-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;skyblue&quot;</span>, <span class="st">&quot;orange&quot;</span>)) <span class="op">+</span></span>
+<span id="cb97-6"><a href="examples.html#cb97-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;#5A5A5A&quot;</span>) <span class="op">+</span></span>
+<span id="cb97-7"><a href="examples.html#cb97-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">90</span>, <span class="dv">210</span>, <span class="dv">30</span>), <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">210</span>)) <span class="op">+</span></span>
+<span id="cb97-8"><a href="examples.html#cb97-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">90</span>, <span class="dv">210</span>, <span class="dv">30</span>), <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">210</span>)) <span class="op">+</span></span>
+<span id="cb97-9"><a href="examples.html#cb97-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb97-10"><a href="examples.html#cb97-10" aria-hidden="true"></a>    <span class="dt">y =</span> yaxis_text,</span>
+<span id="cb97-11"><a href="examples.html#cb97-11" aria-hidden="true"></a>    <span class="dt">x =</span> xaxis_text,</span>
+<span id="cb97-12"><a href="examples.html#cb97-12" aria-hidden="true"></a>    <span class="dt">title =</span> header,</span>
+<span id="cb97-13"><a href="examples.html#cb97-13" aria-hidden="true"></a>    <span class="dt">caption =</span> <span class="kw">paste</span>(footer1, footer2, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb97-14"><a href="examples.html#cb97-14" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb97-15"><a href="examples.html#cb97-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span></span>
+<span id="cb97-16"><a href="examples.html#cb97-16" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb97-17"><a href="examples.html#cb97-17" aria-hidden="true"></a>    <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">color =</span> <span class="st">&quot;skyblue3&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>),</span>
+<span id="cb97-18"><a href="examples.html#cb97-18" aria-hidden="true"></a>    <span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb97-19"><a href="examples.html#cb97-19" aria-hidden="true"></a>    <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb97-20"><a href="examples.html#cb97-20" aria-hidden="true"></a>    <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb97-21"><a href="examples.html#cb97-21" aria-hidden="true"></a>    <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
+<span id="cb97-22"><a href="examples.html#cb97-22" aria-hidden="true"></a>  ) </span>
+<span id="cb97-23"><a href="examples.html#cb97-23" aria-hidden="true"></a></span>
+<span id="cb97-24"><a href="examples.html#cb97-24" aria-hidden="true"></a>f17</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-114-1.png" width="1152" /></p>
+</div>
+<div id="confirmation" class="section level4 hasAnchor" number="6.1.6.6">
+<h4><span class="header-section-number">6.1.6.6</span> Confirmation<a href="examples.html#confirmation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Using <code>stat_smoooth()</code> is a handy shortcut to achieve what we wanted. We should take some care to verify the results of this function are inline with what we expect. We can achieve this by manually running an <code>lm()</code>.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="examples.html#cb98-1" aria-hidden="true"></a>coef &lt;-<span class="st"> </span>all <span class="op">%&gt;%</span></span>
+<span id="cb98-2"><a href="examples.html#cb98-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline High Dose&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb98-3"><a href="examples.html#cb98-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">lm</span>(<span class="dt">data =</span> ., AVAL <span class="op">~</span><span class="st"> </span>BASE) <span class="op">%&gt;%</span></span>
+<span id="cb98-4"><a href="examples.html#cb98-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">coefficients</span>()</span>
+<span id="cb98-5"><a href="examples.html#cb98-5" aria-hidden="true"></a></span>
+<span id="cb98-6"><a href="examples.html#cb98-6" aria-hidden="true"></a>coef</span></code></pre></div>
+<pre><code>## (Intercept)        BASE 
+##  58.6691789   0.6097608</code></pre>
+<p>The next step is to see if this is congruent with what <code>stat_smooth()</code> provided in our plot. We’ll plot the coefficients and check whether they overlap, which would indicate they are similar.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="examples.html#cb100-1" aria-hidden="true"></a>all <span class="op">%&gt;%</span></span>
+<span id="cb100-2"><a href="examples.html#cb100-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline High Dose&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb100-3"><a href="examples.html#cb100-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> BASE, <span class="dt">y =</span> AVAL)) <span class="op">+</span></span>
+<span id="cb100-4"><a href="examples.html#cb100-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb100-5"><a href="examples.html#cb100-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">size =</span> <span class="dv">5</span>) <span class="op">+</span></span>
+<span id="cb100-6"><a href="examples.html#cb100-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> coef[[<span class="dv">1</span>]], <span class="dt">slope =</span> coef[[<span class="dv">2</span>]], <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p>Looks okay!</p>
+</div>
+<div id="more-faithful-aesthetics" class="section level4 hasAnchor" number="6.1.6.7">
+<h4><span class="header-section-number">6.1.6.7</span> More faithful aesthetics<a href="examples.html#more-faithful-aesthetics" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>While the above plot matched the technical specification, it did differ in a few aesthetics namely colors, and the border of the main plot. Below is code to achieve a closer aesthetic match with what’s in the SSTIF for the interested.</p>
+<p>Line spaces have been removed from the beginning and end of text.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="examples.html#cb101-1" aria-hidden="true"></a><span class="co"># setup plot text</span></span>
+<span id="cb101-2"><a href="examples.html#cb101-2" aria-hidden="true"></a>yaxis_text_alt &lt;-<span class="st"> &quot;Maximum Post-baseline Systolic Blood Pressure (mmHg)&quot;</span></span>
+<span id="cb101-3"><a href="examples.html#cb101-3" aria-hidden="true"></a>xaxis_text_alt &lt;-<span class="st"> &quot;Baseline Systolic Blood Pressure (mmHg)&quot;</span></span>
+<span id="cb101-4"><a href="examples.html#cb101-4" aria-hidden="true"></a>header_alt &lt;-<span class="st"> &quot;Figure 17. Baseline vs. Maximum Systolic Blood Pressure by Treatment Arm, Safety Population¹, Pooled Analysis&quot;</span></span>
+<span id="cb101-5"><a href="examples.html#cb101-5" aria-hidden="true"></a>footer1_alt &lt;-<span class="st"> &quot;Source: [include Applicant source, datasets and/or software tools used].&quot;</span></span>
+<span id="cb101-6"><a href="examples.html#cb101-6" aria-hidden="true"></a>footer2_alt &lt;-<span class="st"> &quot;¹Gray dotted line = no increase; blue line = high-dose treatment linear regression; grey dashed line = low-dose linear regression.&quot;</span></span></code></pre></div>
+<p>Colors and border contexts have changed. Title/footers have been re-factored using <code>patchwork::plot_annotation()</code></p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="examples.html#cb102-1" aria-hidden="true"></a>f17_alt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(all, <span class="kw">aes</span>(<span class="dt">x =</span> BASE, <span class="dt">y =</span> AVAL, <span class="dt">linetype =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb102-2"><a href="examples.html#cb102-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">0.6</span>, <span class="kw">aes</span>(<span class="dt">fill =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb102-3"><a href="examples.html#cb102-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="kw">aes</span>(<span class="dt">color =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb102-4"><a href="examples.html#cb102-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;skyblue&quot;</span>, <span class="st">&quot;grey&quot;</span>)) <span class="op">+</span></span>
+<span id="cb102-5"><a href="examples.html#cb102-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;skyblue&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span></span>
+<span id="cb102-6"><a href="examples.html#cb102-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;#5A5A5A&quot;</span>) <span class="op">+</span></span>
+<span id="cb102-7"><a href="examples.html#cb102-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">90</span>, <span class="dv">210</span>, <span class="dv">30</span>), <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">210</span>)) <span class="op">+</span></span>
+<span id="cb102-8"><a href="examples.html#cb102-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">90</span>, <span class="dv">210</span>, <span class="dv">30</span>), <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">210</span>)) <span class="op">+</span></span>
+<span id="cb102-9"><a href="examples.html#cb102-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb102-10"><a href="examples.html#cb102-10" aria-hidden="true"></a>    <span class="dt">y =</span> yaxis_text_alt,</span>
+<span id="cb102-11"><a href="examples.html#cb102-11" aria-hidden="true"></a>    <span class="dt">x =</span> xaxis_text_alt</span>
+<span id="cb102-12"><a href="examples.html#cb102-12" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb102-13"><a href="examples.html#cb102-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb102-14"><a href="examples.html#cb102-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb102-15"><a href="examples.html#cb102-15" aria-hidden="true"></a>    <span class="dt">plot.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">color =</span> <span class="st">&quot;skyblue3&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>),</span>
+<span id="cb102-16"><a href="examples.html#cb102-16" aria-hidden="true"></a>    <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb102-17"><a href="examples.html#cb102-17" aria-hidden="true"></a>    <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb102-18"><a href="examples.html#cb102-18" aria-hidden="true"></a>    <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
+<span id="cb102-19"><a href="examples.html#cb102-19" aria-hidden="true"></a>  ) </span>
+<span id="cb102-20"><a href="examples.html#cb102-20" aria-hidden="true"></a></span>
+<span id="cb102-21"><a href="examples.html#cb102-21" aria-hidden="true"></a><span class="co"># Use the patchwork package to specify title, caption (e.g. footers) and footers position (i.e. left align) to get a closer aesthetic feel.</span></span>
+<span id="cb102-22"><a href="examples.html#cb102-22" aria-hidden="true"></a><span class="kw">library</span>(patchwork)</span>
+<span id="cb102-23"><a href="examples.html#cb102-23" aria-hidden="true"></a>f17_alt <span class="op">+</span><span class="st"> </span>patchwork<span class="op">::</span><span class="kw">plot_annotation</span>(<span class="dt">title =</span> header_alt,</span>
+<span id="cb102-24"><a href="examples.html#cb102-24" aria-hidden="true"></a>                                     <span class="dt">caption =</span> <span class="kw">paste</span>(footer1_alt, footer2_alt, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>),</span>
+<span id="cb102-25"><a href="examples.html#cb102-25" aria-hidden="true"></a>                                     <span class="dt">theme =</span> <span class="kw">theme</span>(<span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>)))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-118-1.png" width="1152" /></p>
 
 </div>
 </div>

@@ -1,3 +1,4 @@
+fig:unnamed-chunk-106
 welcome
 about
 organization
@@ -72,6 +73,14 @@ packages-and-sample-data-6
 inspecting-fitted-survival-model
 plotting-custom-configured-kaplan-meier-curves-without-confidence-intervals
 plotting-custom-configured-kaplan-meier-curves-with-confidence-intervals
+scatter-plot
+overview
+packages-and-sample-data-7
+data-wrangling
+basic-plot
+customized-plot
+confirmation
+more-faithful-aesthetics
 future
 use-renv
 areas-of-expansion
