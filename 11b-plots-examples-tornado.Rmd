@@ -1,0 +1,73 @@
+### Tornado Plot
+#### Overview
+This article will demonstrate how to construct a tornado plot in ggplot2. A tornado plot is useful for comparing counts (or percents) of events in a back to back fashion. They can highlight equalities or imbalances by symmetry between treatment arms and also provide a view of each distribution separately.
+
+#### Packages and Sample Data
+Let's start with accessing ADAE from the PhUSE Test Data Factory repository.
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+# Packages
+library(ggplot2)
+library(dplyr)
+library(ggh4x)
+# Data
+adae <- haven::read_xpt(
+  paste0("https://github.com/phuse-org/TestDataFactory/",
+         "raw/main/Updated/TDF_ADaM/adae.xpt"))
+```
+
+#### Data Wrangling
+In order to make this example meaningful, data wrangling and processing steps will be covered here. In practice, you might have other considerations or processing steps that need to be considered.
+
+The first step is to prepare the data for wrangling. For this example, we will limit our focus on only 2 of 3 treatment arms and select relevant variables for tabulation.
+```{r message = FALSE, warning = FALSE, error = FALSE}
+start <- adae %>%
+  select(TRTA, USUBJID, AESEV, AEBODSYS) %>%
+  filter(TRTA != "Placebo")
+```
+
+The next step is to tabulate unique counts, per subject, of the adverse event (AEBODSYS) by severity combinations.
+```{r message = FALSE, warning = FALSE, error = FALSE}
+event_counts <- start %>%
+  distinct(USUBJID, AEBODSYS, AESEV, .keep_all = TRUE) %>%
+  count(TRTA, AEBODSYS, AESEV)
+```
+
+#### Basic Plot
+Now that we have some data, we can start with a basic tornado plot. We will rely on the `facetted_pos_scales()` function from the `{ggh4x}` package to help position scales.
+```{r message = FALSE, warning = FALSE, error = FALSE, fig.width=12, fig.height= 8}
+ggplot(event_counts, aes(fill = AESEV, y = n, x = reorder(AEBODSYS, n))) +
+  geom_bar(position="stack", stat="identity") +
+  coord_flip() +
+  facet_wrap(~ TRTA, scales = "free_x") +
+  facetted_pos_scales(y = list(
+    scale_y_reverse(),
+    scale_y_continuous())
+  )
+```
+
+#### Customized Plot
+We have a few customization to be included in order to make this plot more presentable. Specifically, we will:
+
+1. Specify a custom fill palette
+2. Set the y-scales of each individual facet. In the basic plot above, notice that they differ slightly. This is not ideal for visual comparisons.
+3. Modify a few elements related to the theme, including the legend and facet panels
+4. Add x and y axis test
+
+```{r message = FALSE, warning = FALSE, error = FALSE, fig.width=12, fig.height= 8}
+ggplot(event_counts, aes(fill = AESEV, y = n, x = reorder(AEBODSYS, n))) +
+  geom_bar(position="stack", stat="identity", color = "black") +
+  coord_flip() +
+  scale_fill_brewer(palette = "Blues") +
+  facet_wrap(~ TRTA, scales = "free_x") + 
+  facetted_pos_scales(y = list(
+    scale_y_reverse(breaks = seq(70,0,-10), limits = c(70,0)),
+    scale_y_continuous(breaks = seq(0,70,10), limits = c(0,70)))) +
+  theme_bw() + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        strip.text = element_text(color = "white"),
+        strip.background = element_rect(fill = "royalblue"),
+        axis.text = element_text(face="bold")) +
+  labs(y = "Number of Subjects", x = "System Organ Class")
+```
