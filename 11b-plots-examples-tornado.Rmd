@@ -1,6 +1,6 @@
 ### Tornado Plot
 #### Overview
-This article will demonstrate how to construct a tornado plot in ggplot2. A tornado plot is useful for comparing counts (or percents) of events in a back to back fashion. They can highlight equalities or imbalances by symmetry between treatment arms and also provide a view of each distribution separately.
+This article will demonstrate how to construct a tornado plot in `ggplot2`. A tornado plot is useful for comparing counts (or percents) of events in a back-to-back fashion. They can highlight equalities or imbalances by symmetry between treatment arms and also provide a view of each distribution separately.
 
 #### Packages and Sample Data
 Let's start with accessing ADAE from the PhUSE Test Data Factory repository.
@@ -10,6 +10,7 @@ Let's start with accessing ADAE from the PhUSE Test Data Factory repository.
 library(ggplot2)
 library(dplyr)
 library(ggh4x)
+
 # Data
 adae <- haven::read_xpt(
   paste0("https://github.com/phuse-org/TestDataFactory/",
