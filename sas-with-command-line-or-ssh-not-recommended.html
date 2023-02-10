@@ -211,6 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.4" data-path="examples.html"><a href="examples.html#spider-plot"><i class="fa fa-check"></i><b>6.1.4</b> Spider Plot</a></li>
 <li class="chapter" data-level="6.1.5" data-path="examples.html"><a href="examples.html#survival-plot"><i class="fa fa-check"></i><b>6.1.5</b> Survival Plot</a></li>
 <li class="chapter" data-level="6.1.6" data-path="examples.html"><a href="examples.html#scatter-plot"><i class="fa fa-check"></i><b>6.1.6</b> Scatter Plot</a></li>
+<li class="chapter" data-level="6.1.7" data-path="examples.html"><a href="examples.html#tornado-plot"><i class="fa fa-check"></i><b>6.1.7</b> Tornado Plot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>7</b> Future</a>
@@ -254,15 +255,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sas-with-command-line-or-ssh-not-recommended" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> SAS with command line or ssh (not recommended)<a href="sas-with-command-line-or-ssh-not-recommended.html#sas-with-command-line-or-ssh-not-recommended" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As SAS can be called through command line, we can actually use the following to execute SAS codes</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb105-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb105-1" aria-hidden="true"></a><span class="ex">sas</span> script.sas</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb113-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb113-1" aria-hidden="true"></a><span class="ex">sas</span> script.sas</span></code></pre></div>
 <p>or, we can call SAS in R side</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb106-1" aria-hidden="true"></a><span class="kw">system</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span>
-<span id="cb106-2"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb106-2" aria-hidden="true"></a><span class="co"># using ssh</span></span>
-<span id="cb106-3"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb106-3" aria-hidden="true"></a></span>
-<span id="cb106-4"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb106-4" aria-hidden="true"></a><span class="kw">library</span>(ssh)</span>
-<span id="cb106-5"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb106-5" aria-hidden="true"></a><span class="kw">ssh_connect</span>()</span>
-<span id="cb106-6"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb106-6" aria-hidden="true"></a><span class="kw">scp_upload</span>()</span>
-<span id="cb106-7"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb106-7" aria-hidden="true"></a><span class="kw">ssh_exec</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb114-1" aria-hidden="true"></a><span class="kw">system</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span>
+<span id="cb114-2"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb114-2" aria-hidden="true"></a><span class="co"># using ssh</span></span>
+<span id="cb114-3"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb114-3" aria-hidden="true"></a></span>
+<span id="cb114-4"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb114-4" aria-hidden="true"></a><span class="kw">library</span>(ssh)</span>
+<span id="cb114-5"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb114-5" aria-hidden="true"></a><span class="kw">ssh_connect</span>()</span>
+<span id="cb114-6"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb114-6" aria-hidden="true"></a><span class="kw">scp_upload</span>()</span>
+<span id="cb114-7"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb114-7" aria-hidden="true"></a><span class="kw">ssh_exec</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span></code></pre></div>
 <p>Please note that using command line, you will need to have SAS installed on your machine.</p>
 
 </div>

@@ -81,6 +81,12 @@ basic-plot
 customized-plot
 confirmation
 more-faithful-aesthetics
+tornado-plot
+overview-1
+packages-and-sample-data-8
+data-wrangling-1
+basic-plot-1
+customized-plot-1
 future
 use-renv
 areas-of-expansion
