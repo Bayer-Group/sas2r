@@ -275,26 +275,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb58-2"><a href="figures-plots.html#cb58-2" aria-hidden="true"></a>my_scatter_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(adsl, <span class="kw">aes</span>(<span class="dt">x =</span> HEIGHTBL, <span class="dt">y =</span> WEIGHTBL)) <span class="op">+</span></span>
 <span id="cb58-3"><a href="figures-plots.html#cb58-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>
 <span id="cb58-4"><a href="figures-plots.html#cb58-4" aria-hidden="true"></a>my_scatter_plot</span></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (`geom_point()`).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
 </div>
 <div id="exporting-plots" class="section level3 hasAnchor" number="6.0.2">
 <h3><span class="header-section-number">6.0.2</span> Exporting plots<a href="figures-plots.html#exporting-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You may export plots as png files a few ways. If your plot is created in ggplot2, you can use the <code>ggsave()</code> function to export as png:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="figures-plots.html#cb59-1" aria-hidden="true"></a><span class="co"># save plot as a png file</span></span>
-<span id="cb59-2"><a href="figures-plots.html#cb59-2" aria-hidden="true"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_scatter_plot, </span>
-<span id="cb59-3"><a href="figures-plots.html#cb59-3" aria-hidden="true"></a>       <span class="dt">filename =</span> <span class="st">&quot;my_plot_output_1.png&quot;</span>, </span>
-<span id="cb59-4"><a href="figures-plots.html#cb59-4" aria-hidden="true"></a>       <span class="dt">width =</span> <span class="dv">7</span>, </span>
-<span id="cb59-5"><a href="figures-plots.html#cb59-5" aria-hidden="true"></a>       <span class="dt">height =</span> <span class="dv">5</span>, </span>
-<span id="cb59-6"><a href="figures-plots.html#cb59-6" aria-hidden="true"></a>       <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="figures-plots.html#cb60-1" aria-hidden="true"></a><span class="co"># save plot as a png file</span></span>
+<span id="cb60-2"><a href="figures-plots.html#cb60-2" aria-hidden="true"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_scatter_plot, </span>
+<span id="cb60-3"><a href="figures-plots.html#cb60-3" aria-hidden="true"></a>       <span class="dt">filename =</span> <span class="st">&quot;my_plot_output_1.png&quot;</span>, </span>
+<span id="cb60-4"><a href="figures-plots.html#cb60-4" aria-hidden="true"></a>       <span class="dt">width =</span> <span class="dv">7</span>, </span>
+<span id="cb60-5"><a href="figures-plots.html#cb60-5" aria-hidden="true"></a>       <span class="dt">height =</span> <span class="dv">5</span>, </span>
+<span id="cb60-6"><a href="figures-plots.html#cb60-6" aria-hidden="true"></a>       <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>)</span></code></pre></div>
 <p>The more general way to save plots as png files is to use the <code>png()</code> function. It can work with ggplot2, but also plots created in base R.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="figures-plots.html#cb60-1" aria-hidden="true"></a><span class="kw">png</span>(<span class="dt">filename =</span> <span class="st">&quot;my_plot_output_2.png&quot;</span>, </span>
-<span id="cb60-2"><a href="figures-plots.html#cb60-2" aria-hidden="true"></a>    <span class="dt">width =</span> <span class="dv">7</span>, </span>
-<span id="cb60-3"><a href="figures-plots.html#cb60-3" aria-hidden="true"></a>    <span class="dt">height =</span> <span class="dv">5</span>, </span>
-<span id="cb60-4"><a href="figures-plots.html#cb60-4" aria-hidden="true"></a>    <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>, </span>
-<span id="cb60-5"><a href="figures-plots.html#cb60-5" aria-hidden="true"></a>    <span class="dt">res =</span> <span class="dv">300</span>)</span>
-<span id="cb60-6"><a href="figures-plots.html#cb60-6" aria-hidden="true"></a></span>
-<span id="cb60-7"><a href="figures-plots.html#cb60-7" aria-hidden="true"></a><span class="kw">print</span>(my_scatter_plot)</span>
-<span id="cb60-8"><a href="figures-plots.html#cb60-8" aria-hidden="true"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="figures-plots.html#cb61-1" aria-hidden="true"></a><span class="kw">png</span>(<span class="dt">filename =</span> <span class="st">&quot;my_plot_output_2.png&quot;</span>, </span>
+<span id="cb61-2"><a href="figures-plots.html#cb61-2" aria-hidden="true"></a>    <span class="dt">width =</span> <span class="dv">7</span>, </span>
+<span id="cb61-3"><a href="figures-plots.html#cb61-3" aria-hidden="true"></a>    <span class="dt">height =</span> <span class="dv">5</span>, </span>
+<span id="cb61-4"><a href="figures-plots.html#cb61-4" aria-hidden="true"></a>    <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>, </span>
+<span id="cb61-5"><a href="figures-plots.html#cb61-5" aria-hidden="true"></a>    <span class="dt">res =</span> <span class="dv">300</span>)</span>
+<span id="cb61-6"><a href="figures-plots.html#cb61-6" aria-hidden="true"></a></span>
+<span id="cb61-7"><a href="figures-plots.html#cb61-7" aria-hidden="true"></a><span class="kw">print</span>(my_scatter_plot)</span>
+<span id="cb61-8"><a href="figures-plots.html#cb61-8" aria-hidden="true"></a><span class="kw">dev.off</span>()</span></code></pre></div>
 
 </div>
 </div>
@@ -318,7 +320,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": null,
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
 "fontsettings": {
 "theme": "white",
 "family": "sans",
@@ -336,7 +348,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
