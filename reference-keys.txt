@@ -1,4 +1,4 @@
-fig:unnamed-chunk-106
+fig:unnamed-chunk-107
 welcome
 about
 organization
@@ -42,6 +42,7 @@ post-processing
 displaying
 exporting
 figures-plots
+building-a-plot-using-ggplot2
 packages-and-sample-data-1
 exporting-plots
 examples
@@ -87,6 +88,8 @@ packages-and-sample-data-8
 data-wrangling-1
 basic-plot-1
 customized-plot-1
+safety-plots
+clinical-statistics-in-r
 future
 use-renv
 areas-of-expansion
