@@ -17,7 +17,7 @@ adsl <- as.data.frame(haven::read_xpt(paste0(adam_path, "adsl.xpt")))
 ```
 
 Let's create a basic scatter plot of weight vs height.
-```{r, eval = F}
+```{r, eval = T}
 # basic scatter plot of weight vs height
 my_scatter_plot <- ggplot(adsl, aes(x = HEIGHTBL, y = WEIGHTBL)) +
   geom_point()
