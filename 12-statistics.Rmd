@@ -1,0 +1,6 @@
+# Clinical Statistics in R
+
+
+In the meantime, there are numerous R-packages that have been developed specifically for statistical analyses in the clinical field. Some packages will be presented here in more detail. First, however, attention should be drawn to a PHUSE initiative [(Clinical Statistical Reporting in a Multilingual World)](https://github.com/phuse-org/CSRMLW) that compared different methods between SAS and R. The goal was to work out differences and similarities in the outcome. For all users who use R to validate SAS output (or vice versa) it can be useful to know where different discrepancies can come from. 
+
+
