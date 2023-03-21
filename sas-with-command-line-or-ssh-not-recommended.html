@@ -261,15 +261,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sas-with-command-line-or-ssh-not-recommended" class="section level2 hasAnchor" number="9.4">
 <h2><span class="header-section-number">9.4</span> SAS with command line or ssh (not recommended)<a href="sas-with-command-line-or-ssh-not-recommended.html#sas-with-command-line-or-ssh-not-recommended" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As SAS can be called through command line, we can actually use the following to execute SAS codes</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb119-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb119-1" aria-hidden="true"></a><span class="ex">sas</span> script.sas</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb120-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb120-1" aria-hidden="true"></a><span class="ex">sas</span> script.sas</span></code></pre></div>
 <p>or, we can call SAS in R side</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb120-1" aria-hidden="true"></a><span class="kw">system</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span>
-<span id="cb120-2"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb120-2" aria-hidden="true"></a><span class="co"># using ssh</span></span>
-<span id="cb120-3"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb120-3" aria-hidden="true"></a></span>
-<span id="cb120-4"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb120-4" aria-hidden="true"></a><span class="kw">library</span>(ssh)</span>
-<span id="cb120-5"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb120-5" aria-hidden="true"></a><span class="kw">ssh_connect</span>()</span>
-<span id="cb120-6"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb120-6" aria-hidden="true"></a><span class="kw">scp_upload</span>()</span>
-<span id="cb120-7"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb120-7" aria-hidden="true"></a><span class="kw">ssh_exec</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb121-1" aria-hidden="true"></a><span class="kw">system</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span>
+<span id="cb121-2"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb121-2" aria-hidden="true"></a><span class="co"># using ssh</span></span>
+<span id="cb121-3"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb121-3" aria-hidden="true"></a></span>
+<span id="cb121-4"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb121-4" aria-hidden="true"></a><span class="kw">library</span>(ssh)</span>
+<span id="cb121-5"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb121-5" aria-hidden="true"></a><span class="kw">ssh_connect</span>()</span>
+<span id="cb121-6"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb121-6" aria-hidden="true"></a><span class="kw">scp_upload</span>()</span>
+<span id="cb121-7"><a href="sas-with-command-line-or-ssh-not-recommended.html#cb121-7" aria-hidden="true"></a><span class="kw">ssh_exec</span>(<span class="st">&quot;sas script.sas&quot;</span>)</span></code></pre></div>
 <p>Please note that using command line, you will need to have SAS installed on your machine.</p>
 
 </div>
@@ -312,7 +312,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
