@@ -257,26 +257,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="safety-plots" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Safety Plots<a href="safety-plots.html#safety-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Again, we refer to the FDA safety guide which you can find in the <a href="examples.html#scatter-plot">scatterplot section</a>. The <a href="https://github.com/pharmaverse/falcon">falcon</a> package aims to cover all tables and plots eventually. However, similar visualisation might be of interest also outside of this package. This is why we provide some code here to show how to combine a plot and a table using the <em>patchwork</em> package.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="safety-plots.html#cb112-1" aria-hidden="true"></a><span class="co">### load relevant libraries and data </span></span>
-<span id="cb112-2"><a href="safety-plots.html#cb112-2" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb112-3"><a href="safety-plots.html#cb112-3" aria-hidden="true"></a><span class="kw">library</span>(haven)</span>
-<span id="cb112-4"><a href="safety-plots.html#cb112-4" aria-hidden="true"></a><span class="kw">library</span>(patchwork)</span>
-<span id="cb112-5"><a href="safety-plots.html#cb112-5" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb112-6"><a href="safety-plots.html#cb112-6" aria-hidden="true"></a></span>
-<span id="cb112-7"><a href="safety-plots.html#cb112-7" aria-hidden="true"></a></span>
-<span id="cb112-8"><a href="safety-plots.html#cb112-8" aria-hidden="true"></a>adam_path &lt;-<span class="st"> &quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/&quot;</span></span>
-<span id="cb112-9"><a href="safety-plots.html#cb112-9" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adsl.xpt&quot;</span>))</span>
-<span id="cb112-10"><a href="safety-plots.html#cb112-10" aria-hidden="true"></a>adlb &lt;-<span class="st"> </span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adlbc.xpt&quot;</span>))</span>
-<span id="cb112-11"><a href="safety-plots.html#cb112-11" aria-hidden="true"></a></span>
-<span id="cb112-12"><a href="safety-plots.html#cb112-12" aria-hidden="true"></a></span>
-<span id="cb112-13"><a href="safety-plots.html#cb112-13" aria-hidden="true"></a></span>
-<span id="cb112-14"><a href="safety-plots.html#cb112-14" aria-hidden="true"></a><span class="co"># prepare lab data set for plotting</span></span>
-<span id="cb112-15"><a href="safety-plots.html#cb112-15" aria-hidden="true"></a>data &lt;-<span class="st"> </span>adlb <span class="op">%&gt;%</span></span>
-<span id="cb112-16"><a href="safety-plots.html#cb112-16" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(PARAMCD <span class="op">==</span><span class="st"> &quot;SODIUM&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(AVISIT)) <span class="op">%&gt;%</span></span>
-<span id="cb112-17"><a href="safety-plots.html#cb112-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(USUBJID, TRTA, AVISIT, PARAM, AVAL, BASE, CHG) <span class="op">%&gt;%</span></span>
-<span id="cb112-18"><a href="safety-plots.html#cb112-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">AVISIT =</span> <span class="kw">factor</span>(AVISIT, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;Week 2&quot;</span>, <span class="st">&quot;Week 4&quot;</span>, <span class="st">&quot;Week 6&quot;</span>, <span class="st">&quot;Week 8&quot;</span>, <span class="st">&quot;Week 12&quot;</span>,</span>
-<span id="cb112-19"><a href="safety-plots.html#cb112-19" aria-hidden="true"></a>                                            <span class="st">&quot;Week 16&quot;</span>, <span class="st">&quot;Week 20&quot;</span>, <span class="st">&quot;Week 24&quot;</span>, <span class="st">&quot;Week 26&quot;</span>, <span class="st">&quot;End of Treatment&quot;</span>)))</span></code></pre></div>
+<p>Again, we refer to the FDA safety guide which you can find int he <a href="examples.html#scatter-plot">scatterplot section</a>. The <a href="https://github.com/pharmaverse/falcon">falcon</a> package aims to cover all tables and plots eventually. However, similar visualisation might be of interest also outside of this package. This is why we provide some code here to show how to combine a plot and a table using the <em>patchwork</em> package.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="safety-plots.html#cb111-1" aria-hidden="true"></a><span class="co">### load relevant libraries and data </span></span>
+<span id="cb111-2"><a href="safety-plots.html#cb111-2" aria-hidden="true"></a></span>
+<span id="cb111-3"><a href="safety-plots.html#cb111-3" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb111-4"><a href="safety-plots.html#cb111-4" aria-hidden="true"></a><span class="kw">library</span>(haven)</span>
+<span id="cb111-5"><a href="safety-plots.html#cb111-5" aria-hidden="true"></a><span class="kw">library</span>(patchwork)</span>
+<span id="cb111-6"><a href="safety-plots.html#cb111-6" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb111-7"><a href="safety-plots.html#cb111-7" aria-hidden="true"></a></span>
+<span id="cb111-8"><a href="safety-plots.html#cb111-8" aria-hidden="true"></a></span>
+<span id="cb111-9"><a href="safety-plots.html#cb111-9" aria-hidden="true"></a>adam_path &lt;-<span class="st"> &quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/&quot;</span></span>
+<span id="cb111-10"><a href="safety-plots.html#cb111-10" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adsl.xpt&quot;</span>))</span>
+<span id="cb111-11"><a href="safety-plots.html#cb111-11" aria-hidden="true"></a>adlb &lt;-<span class="st"> </span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adlbc.xpt&quot;</span>))</span>
+<span id="cb111-12"><a href="safety-plots.html#cb111-12" aria-hidden="true"></a></span>
+<span id="cb111-13"><a href="safety-plots.html#cb111-13" aria-hidden="true"></a></span>
+<span id="cb111-14"><a href="safety-plots.html#cb111-14" aria-hidden="true"></a></span>
+<span id="cb111-15"><a href="safety-plots.html#cb111-15" aria-hidden="true"></a><span class="co"># prepare lab data set for plotting</span></span>
+<span id="cb111-16"><a href="safety-plots.html#cb111-16" aria-hidden="true"></a></span>
+<span id="cb111-17"><a href="safety-plots.html#cb111-17" aria-hidden="true"></a>data &lt;-<span class="st"> </span>adlb <span class="op">%&gt;%</span></span>
+<span id="cb111-18"><a href="safety-plots.html#cb111-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(PARAMCD <span class="op">==</span><span class="st"> &quot;SODIUM&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(AVISIT)) <span class="op">%&gt;%</span></span>
+<span id="cb111-19"><a href="safety-plots.html#cb111-19" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(USUBJID, TRTA, AVISIT, PARAM, AVAL, BASE, CHG) <span class="op">%&gt;%</span></span>
+<span id="cb111-20"><a href="safety-plots.html#cb111-20" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">AVISIT =</span> <span class="kw">factor</span>(AVISIT, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;Week 2&quot;</span>, <span class="st">&quot;Week 4&quot;</span>, <span class="st">&quot;Week 6&quot;</span>, <span class="st">&quot;Week 8&quot;</span>, <span class="st">&quot;Week 12&quot;</span>,</span>
+<span id="cb111-21"><a href="safety-plots.html#cb111-21" aria-hidden="true"></a>                                            <span class="st">&quot;Week 16&quot;</span>, <span class="st">&quot;Week 20&quot;</span>, <span class="st">&quot;Week 24&quot;</span>, <span class="st">&quot;Week 26&quot;</span>, <span class="st">&quot;End of Treatment&quot;</span>)))</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -421,49 +423,54 @@ Sodium (mmol/L)
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="safety-plots.html#cb113-1" aria-hidden="true"></a><span class="co"># create plot</span></span>
-<span id="cb113-2"><a href="safety-plots.html#cb113-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
-<span id="cb113-3"><a href="safety-plots.html#cb113-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>AVISIT <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;End of Treatment&quot;</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(AVISIT)) <span class="op">%&gt;%</span></span>
-<span id="cb113-4"><a href="safety-plots.html#cb113-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(AVISIT, TRTA) <span class="op">%&gt;%</span></span>
-<span id="cb113-5"><a href="safety-plots.html#cb113-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_chg =</span> <span class="kw">mean</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb113-6"><a href="safety-plots.html#cb113-6" aria-hidden="true"></a>         <span class="dt">se_chg =</span> <span class="kw">sd</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">length</span>(CHG))) <span class="op">%&gt;%</span></span>
-<span id="cb113-7"><a href="safety-plots.html#cb113-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
-<span id="cb113-8"><a href="safety-plots.html#cb113-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x=</span>AVISIT, <span class="dt">y=</span>mean_chg, <span class="dt">group=</span>TRTA, <span class="dt">linetype =</span> TRTA)) <span class="op">+</span></span>
-<span id="cb113-9"><a href="safety-plots.html#cb113-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>mean_chg<span class="op">-</span>se_chg, <span class="dt">ymax=</span>mean_chg<span class="op">+</span>se_chg, <span class="dt">color=</span>TRTA), <span class="dt">width=</span>.<span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb113-10"><a href="safety-plots.html#cb113-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span>TRTA)) <span class="op">+</span></span>
-<span id="cb113-11"><a href="safety-plots.html#cb113-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>TRTA)) <span class="op">+</span></span>
-<span id="cb113-12"><a href="safety-plots.html#cb113-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">0</span>, <span class="dt">linetype=</span><span class="st">&#39;dashed&#39;</span>)<span class="op">+</span></span>
-<span id="cb113-13"><a href="safety-plots.html#cb113-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_linetype_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;dashed&quot;</span>,<span class="kw">rep</span>(<span class="st">&quot;solid&quot;</span>,<span class="dv">2</span>))) <span class="op">+</span></span>
-<span id="cb113-14"><a href="safety-plots.html#cb113-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)) <span class="op">+</span></span>
-<span id="cb113-15"><a href="safety-plots.html#cb113-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Mean Change from Baseline (95% CI) </span><span class="ch">\n</span><span class="st"> Sodium (mmol/l)&quot;</span>) <span class="op">+</span></span>
-<span id="cb113-16"><a href="safety-plots.html#cb113-16" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
-<span id="cb113-17"><a href="safety-plots.html#cb113-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb113-18"><a href="safety-plots.html#cb113-18" aria-hidden="true"></a>        <span class="dt">legend.title=</span><span class="kw">element_blank</span>())  </span>
-<span id="cb113-19"><a href="safety-plots.html#cb113-19" aria-hidden="true"></a></span>
-<span id="cb113-20"><a href="safety-plots.html#cb113-20" aria-hidden="true"></a>p</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="safety-plots.html#cb112-1" aria-hidden="true"></a><span class="co"># create plot</span></span>
+<span id="cb112-2"><a href="safety-plots.html#cb112-2" aria-hidden="true"></a></span>
+<span id="cb112-3"><a href="safety-plots.html#cb112-3" aria-hidden="true"></a>p &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb112-4"><a href="safety-plots.html#cb112-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>AVISIT <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;End of Treatment&quot;</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(AVISIT)) <span class="op">%&gt;%</span></span>
+<span id="cb112-5"><a href="safety-plots.html#cb112-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(AVISIT, TRTA) <span class="op">%&gt;%</span></span>
+<span id="cb112-6"><a href="safety-plots.html#cb112-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_chg =</span> <span class="kw">mean</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb112-7"><a href="safety-plots.html#cb112-7" aria-hidden="true"></a>         <span class="dt">se_chg =</span> <span class="kw">sd</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">length</span>(CHG))) <span class="op">%&gt;%</span></span>
+<span id="cb112-8"><a href="safety-plots.html#cb112-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb112-9"><a href="safety-plots.html#cb112-9" aria-hidden="true"></a><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x=</span>AVISIT, <span class="dt">y=</span>mean_chg, <span class="dt">group=</span>TRTA, <span class="dt">linetype =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb112-10"><a href="safety-plots.html#cb112-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>mean_chg<span class="op">-</span>se_chg, <span class="dt">ymax=</span>mean_chg<span class="op">+</span>se_chg, <span class="dt">color=</span>TRTA), <span class="dt">width=</span>.<span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb112-11"><a href="safety-plots.html#cb112-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span>TRTA)) <span class="op">+</span></span>
+<span id="cb112-12"><a href="safety-plots.html#cb112-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>TRTA)) <span class="op">+</span></span>
+<span id="cb112-13"><a href="safety-plots.html#cb112-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">0</span>, <span class="dt">linetype=</span><span class="st">&#39;dashed&#39;</span>)<span class="op">+</span></span>
+<span id="cb112-14"><a href="safety-plots.html#cb112-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_linetype_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;dashed&quot;</span>,<span class="kw">rep</span>(<span class="st">&quot;solid&quot;</span>,<span class="dv">2</span>))) <span class="op">+</span></span>
+<span id="cb112-15"><a href="safety-plots.html#cb112-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)) <span class="op">+</span></span>
+<span id="cb112-16"><a href="safety-plots.html#cb112-16" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Mean Change from Baseline (95% CI) </span><span class="ch">\n</span><span class="st"> Sodium (mmol/l)&quot;</span>) <span class="op">+</span></span>
+<span id="cb112-17"><a href="safety-plots.html#cb112-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb112-18"><a href="safety-plots.html#cb112-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb112-19"><a href="safety-plots.html#cb112-19" aria-hidden="true"></a>        <span class="dt">legend.title=</span><span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb112-20"><a href="safety-plots.html#cb112-20" aria-hidden="true"></a><span class="st">  </span><span class="kw">coord_fixed</span>() <span class="op">+</span></span>
+<span id="cb112-21"><a href="safety-plots.html#cb112-21" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> <span class="fl">0.5</span>)</span>
+<span id="cb112-22"><a href="safety-plots.html#cb112-22" aria-hidden="true"></a></span>
+<span id="cb112-23"><a href="safety-plots.html#cb112-23" aria-hidden="true"></a>p</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="safety-plots.html#cb114-1" aria-hidden="true"></a><span class="co"># prepare data for table </span></span>
-<span id="cb114-2"><a href="safety-plots.html#cb114-2" aria-hidden="true"></a>table_data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
-<span id="cb114-3"><a href="safety-plots.html#cb114-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>AVISIT <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;End of Treatment&quot;</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(AVISIT)) <span class="op">%&gt;%</span></span>
-<span id="cb114-4"><a href="safety-plots.html#cb114-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(AVISIT, TRTA) <span class="op">%&gt;%</span></span>
-<span id="cb114-5"><a href="safety-plots.html#cb114-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_chg =</span> <span class="kw">mean</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb114-6"><a href="safety-plots.html#cb114-6" aria-hidden="true"></a>         <span class="dt">mean_aval  =</span> <span class="kw">mean</span>(AVAL, <span class="dt">na.rm  =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb114-7"><a href="safety-plots.html#cb114-7" aria-hidden="true"></a>         <span class="dt">n_patients =</span> <span class="kw">n_distinct</span>(USUBJID),</span>
-<span id="cb114-8"><a href="safety-plots.html#cb114-8" aria-hidden="true"></a>         <span class="dt">n_patients =</span> <span class="kw">n_distinct</span>(USUBJID), </span>
-<span id="cb114-9"><a href="safety-plots.html#cb114-9" aria-hidden="true"></a>         <span class="dt">TRTA =</span> <span class="kw">case_when</span>(</span>
-<span id="cb114-10"><a href="safety-plots.html#cb114-10" aria-hidden="true"></a>           TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline High Dose&quot;</span> <span class="op">~</span><span class="st">&quot;High Dose&quot;</span>,</span>
-<span id="cb114-11"><a href="safety-plots.html#cb114-11" aria-hidden="true"></a>           TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline Low Dose&quot;</span> <span class="op">~</span><span class="st"> &quot;Low Dose&quot;</span>,</span>
-<span id="cb114-12"><a href="safety-plots.html#cb114-12" aria-hidden="true"></a>           <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>TRTA)) <span class="op">%&gt;%</span></span>
-<span id="cb114-13"><a href="safety-plots.html#cb114-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
-<span id="cb114-14"><a href="safety-plots.html#cb114-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(TRTA, AVISIT, mean_chg, mean_aval, n_patients) <span class="op">%&gt;%</span></span>
-<span id="cb114-15"><a href="safety-plots.html#cb114-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">distinct</span>()</span>
-<span id="cb114-16"><a href="safety-plots.html#cb114-16" aria-hidden="true"></a></span>
-<span id="cb114-17"><a href="safety-plots.html#cb114-17" aria-hidden="true"></a>data_table1 &lt;-<span class="st"> </span>table_data <span class="op">%&gt;%</span></span>
-<span id="cb114-18"><a href="safety-plots.html#cb114-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n_patients) <span class="op">%&gt;%</span></span>
-<span id="cb114-19"><a href="safety-plots.html#cb114-19" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">paste0</span>(<span class="kw">round</span>(mean_chg, <span class="dv">2</span>), <span class="st">&quot;/&quot;</span>, <span class="kw">round</span>(mean_aval, <span class="dv">2</span>)))</span>
-<span id="cb114-20"><a href="safety-plots.html#cb114-20" aria-hidden="true"></a></span>
-<span id="cb114-21"><a href="safety-plots.html#cb114-21" aria-hidden="true"></a>data_table2 &lt;-<span class="st"> </span>table_data <span class="op">%&gt;%</span></span>
-<span id="cb114-22"><a href="safety-plots.html#cb114-22" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>mean_chg, <span class="op">-</span>mean_aval)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="safety-plots.html#cb113-1" aria-hidden="true"></a><span class="co"># prepare data for table </span></span>
+<span id="cb113-2"><a href="safety-plots.html#cb113-2" aria-hidden="true"></a></span>
+<span id="cb113-3"><a href="safety-plots.html#cb113-3" aria-hidden="true"></a></span>
+<span id="cb113-4"><a href="safety-plots.html#cb113-4" aria-hidden="true"></a>table_data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb113-5"><a href="safety-plots.html#cb113-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>AVISIT <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;End of Treatment&quot;</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(AVISIT)) <span class="op">%&gt;%</span></span>
+<span id="cb113-6"><a href="safety-plots.html#cb113-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(AVISIT, TRTA) <span class="op">%&gt;%</span></span>
+<span id="cb113-7"><a href="safety-plots.html#cb113-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_chg =</span> <span class="kw">mean</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb113-8"><a href="safety-plots.html#cb113-8" aria-hidden="true"></a>         <span class="dt">mean_aval  =</span> <span class="kw">mean</span>(AVAL, <span class="dt">na.rm  =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb113-9"><a href="safety-plots.html#cb113-9" aria-hidden="true"></a>         <span class="dt">n_patients =</span> <span class="kw">n_distinct</span>(USUBJID),</span>
+<span id="cb113-10"><a href="safety-plots.html#cb113-10" aria-hidden="true"></a>          <span class="dt">n_patients =</span> <span class="kw">n_distinct</span>(USUBJID), </span>
+<span id="cb113-11"><a href="safety-plots.html#cb113-11" aria-hidden="true"></a>         <span class="dt">TRTA =</span> <span class="kw">case_when</span>(</span>
+<span id="cb113-12"><a href="safety-plots.html#cb113-12" aria-hidden="true"></a>           TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline High Dose&quot;</span> <span class="op">~</span><span class="st">&quot;High Dose&quot;</span>,</span>
+<span id="cb113-13"><a href="safety-plots.html#cb113-13" aria-hidden="true"></a>           TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline Low Dose&quot;</span> <span class="op">~</span><span class="st"> &quot;Low Dose&quot;</span>,</span>
+<span id="cb113-14"><a href="safety-plots.html#cb113-14" aria-hidden="true"></a>           <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>TRTA)) <span class="op">%&gt;%</span></span>
+<span id="cb113-15"><a href="safety-plots.html#cb113-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb113-16"><a href="safety-plots.html#cb113-16" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(TRTA, AVISIT, mean_chg, mean_aval, n_patients) <span class="op">%&gt;%</span></span>
+<span id="cb113-17"><a href="safety-plots.html#cb113-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">distinct</span>()</span>
+<span id="cb113-18"><a href="safety-plots.html#cb113-18" aria-hidden="true"></a></span>
+<span id="cb113-19"><a href="safety-plots.html#cb113-19" aria-hidden="true"></a>data_table1 &lt;-<span class="st"> </span>table_data <span class="op">%&gt;%</span></span>
+<span id="cb113-20"><a href="safety-plots.html#cb113-20" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n_patients) <span class="op">%&gt;%</span></span>
+<span id="cb113-21"><a href="safety-plots.html#cb113-21" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">paste0</span>(<span class="kw">round</span>(mean_chg, <span class="dv">2</span>), <span class="st">&quot;/&quot;</span>, <span class="kw">round</span>(mean_aval, <span class="dv">2</span>)))</span>
+<span id="cb113-22"><a href="safety-plots.html#cb113-22" aria-hidden="true"></a></span>
+<span id="cb113-23"><a href="safety-plots.html#cb113-23" aria-hidden="true"></a>data_table2 &lt;-<span class="st"> </span>table_data <span class="op">%&gt;%</span></span>
+<span id="cb113-24"><a href="safety-plots.html#cb113-24" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>mean_chg, <span class="op">-</span>mean_aval)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -572,46 +579,48 @@ Week 12
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="safety-plots.html#cb115-1" aria-hidden="true"></a><span class="co"># plot table 1</span></span>
-<span id="cb115-2"><a href="safety-plots.html#cb115-2" aria-hidden="true"></a>p_table1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_table1, <span class="kw">aes</span>(<span class="dt">x =</span> AVISIT, <span class="dt">y =</span> TRTA)) <span class="op">+</span></span>
-<span id="cb115-3"><a href="safety-plots.html#cb115-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="dt">values =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(data_table1<span class="op">$</span>TRTA))<span class="op">+</span></span>
-<span id="cb115-4"><a href="safety-plots.html#cb115-4" aria-hidden="true"></a><span class="st">  </span>ggpubr<span class="op">::</span><span class="kw">geom_exec</span>(geom_text, <span class="dt">data =</span> data_table1, <span class="dt">label =</span> data_table1<span class="op">$</span>value, <span class="dt">color =</span> <span class="st">&quot;TRTA&quot;</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
-<span id="cb115-5"><a href="safety-plots.html#cb115-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb115-6"><a href="safety-plots.html#cb115-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Mean Change from Baseline / Mean Value&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span> ) <span class="op">+</span></span>
-<span id="cb115-7"><a href="safety-plots.html#cb115-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)) <span class="op">+</span></span>
-<span id="cb115-8"><a href="safety-plots.html#cb115-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)),</span>
-<span id="cb115-9"><a href="safety-plots.html#cb115-9" aria-hidden="true"></a>        <span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb115-10"><a href="safety-plots.html#cb115-10" aria-hidden="true"></a>        <span class="dt">axis.ticks.x=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb115-11"><a href="safety-plots.html#cb115-11" aria-hidden="true"></a>        <span class="dt">axis.ticks.y=</span><span class="kw">element_blank</span>()) <span class="op">+</span></span>
-<span id="cb115-12"><a href="safety-plots.html#cb115-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
-<span id="cb115-13"><a href="safety-plots.html#cb115-13" aria-hidden="true"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">size=</span><span class="dv">1</span>),</span>
-<span id="cb115-14"><a href="safety-plots.html#cb115-14" aria-hidden="true"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span>
-<span id="cb115-15"><a href="safety-plots.html#cb115-15" aria-hidden="true"></a></span>
-<span id="cb115-16"><a href="safety-plots.html#cb115-16" aria-hidden="true"></a>p_table1 </span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="safety-plots.html#cb114-1" aria-hidden="true"></a><span class="co"># plot table 1</span></span>
+<span id="cb114-2"><a href="safety-plots.html#cb114-2" aria-hidden="true"></a>p_table1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_table1, <span class="kw">aes</span>(<span class="dt">x =</span> AVISIT, <span class="dt">y =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb114-3"><a href="safety-plots.html#cb114-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="dt">values =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(data_table1<span class="op">$</span>TRTA))<span class="op">+</span></span>
+<span id="cb114-4"><a href="safety-plots.html#cb114-4" aria-hidden="true"></a><span class="st">  </span>ggpubr<span class="op">::</span><span class="kw">geom_exec</span>(geom_text, <span class="dt">data =</span> data_table1, <span class="dt">label =</span> data_table1<span class="op">$</span>value, <span class="dt">color =</span> <span class="st">&quot;TRTA&quot;</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb114-5"><a href="safety-plots.html#cb114-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></span>
+<span id="cb114-6"><a href="safety-plots.html#cb114-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Mean Change from Baseline / Mean Value&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span> ) <span class="op">+</span></span>
+<span id="cb114-7"><a href="safety-plots.html#cb114-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)) <span class="op">+</span></span>
+<span id="cb114-8"><a href="safety-plots.html#cb114-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)),</span>
+<span id="cb114-9"><a href="safety-plots.html#cb114-9" aria-hidden="true"></a>        <span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),</span>
+<span id="cb114-10"><a href="safety-plots.html#cb114-10" aria-hidden="true"></a>        <span class="dt">axis.ticks.x=</span><span class="kw">element_blank</span>(),</span>
+<span id="cb114-11"><a href="safety-plots.html#cb114-11" aria-hidden="true"></a>        <span class="dt">axis.ticks.y=</span><span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb114-12"><a href="safety-plots.html#cb114-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
+<span id="cb114-13"><a href="safety-plots.html#cb114-13" aria-hidden="true"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">size=</span><span class="dv">1</span>),</span>
+<span id="cb114-14"><a href="safety-plots.html#cb114-14" aria-hidden="true"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span>
+<span id="cb114-15"><a href="safety-plots.html#cb114-15" aria-hidden="true"></a></span>
+<span id="cb114-16"><a href="safety-plots.html#cb114-16" aria-hidden="true"></a>p_table1 <span class="op">+</span></span>
+<span id="cb114-17"><a href="safety-plots.html#cb114-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span>.<span class="dv">5</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="safety-plots.html#cb116-1" aria-hidden="true"></a><span class="co"># plot table 2</span></span>
-<span id="cb116-2"><a href="safety-plots.html#cb116-2" aria-hidden="true"></a>p_table2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_table2, <span class="kw">aes</span>(<span class="dt">x =</span> AVISIT, <span class="dt">y =</span> TRTA)) <span class="op">+</span></span>
-<span id="cb116-3"><a href="safety-plots.html#cb116-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="dt">values =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(data_table2<span class="op">$</span>TRTA))<span class="op">+</span></span>
-<span id="cb116-4"><a href="safety-plots.html#cb116-4" aria-hidden="true"></a><span class="st">  </span>ggpubr<span class="op">::</span><span class="kw">geom_exec</span>(geom_text, <span class="dt">data =</span> data_table2, <span class="dt">label =</span> data_table2<span class="op">$</span>n_patients, <span class="dt">color =</span> <span class="st">&quot;TRTA&quot;</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
-<span id="cb116-5"><a href="safety-plots.html#cb116-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb116-6"><a href="safety-plots.html#cb116-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Number of Patients with Data&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span> ) <span class="op">+</span></span>
-<span id="cb116-7"><a href="safety-plots.html#cb116-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)) <span class="op">+</span></span>
-<span id="cb116-8"><a href="safety-plots.html#cb116-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)),</span>
-<span id="cb116-9"><a href="safety-plots.html#cb116-9" aria-hidden="true"></a>        <span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb116-10"><a href="safety-plots.html#cb116-10" aria-hidden="true"></a>        <span class="dt">axis.ticks.x=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb116-11"><a href="safety-plots.html#cb116-11" aria-hidden="true"></a>        <span class="dt">axis.ticks.y=</span><span class="kw">element_blank</span>()) <span class="op">+</span></span>
-<span id="cb116-12"><a href="safety-plots.html#cb116-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
-<span id="cb116-13"><a href="safety-plots.html#cb116-13" aria-hidden="true"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">size=</span><span class="dv">1</span>),</span>
-<span id="cb116-14"><a href="safety-plots.html#cb116-14" aria-hidden="true"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span>
-<span id="cb116-15"><a href="safety-plots.html#cb116-15" aria-hidden="true"></a></span>
-<span id="cb116-16"><a href="safety-plots.html#cb116-16" aria-hidden="true"></a>p_table2</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="safety-plots.html#cb115-1" aria-hidden="true"></a><span class="co"># plot table 2</span></span>
+<span id="cb115-2"><a href="safety-plots.html#cb115-2" aria-hidden="true"></a></span>
+<span id="cb115-3"><a href="safety-plots.html#cb115-3" aria-hidden="true"></a>p_table2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_table2, <span class="kw">aes</span>(<span class="dt">x =</span> AVISIT, <span class="dt">y =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb115-4"><a href="safety-plots.html#cb115-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="dt">values =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(data_table2<span class="op">$</span>TRTA))<span class="op">+</span></span>
+<span id="cb115-5"><a href="safety-plots.html#cb115-5" aria-hidden="true"></a><span class="st">  </span>ggpubr<span class="op">::</span><span class="kw">geom_exec</span>(geom_text, <span class="dt">data =</span> data_table2, <span class="dt">label =</span> data_table2<span class="op">$</span>n_patients, <span class="dt">color =</span> <span class="st">&quot;TRTA&quot;</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb115-6"><a href="safety-plots.html#cb115-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></span>
+<span id="cb115-7"><a href="safety-plots.html#cb115-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Number of Patients with Data&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span> ) <span class="op">+</span></span>
+<span id="cb115-8"><a href="safety-plots.html#cb115-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)) <span class="op">+</span></span>
+<span id="cb115-9"><a href="safety-plots.html#cb115-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)),</span>
+<span id="cb115-10"><a href="safety-plots.html#cb115-10" aria-hidden="true"></a>        <span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),</span>
+<span id="cb115-11"><a href="safety-plots.html#cb115-11" aria-hidden="true"></a>        <span class="dt">axis.ticks.x=</span><span class="kw">element_blank</span>(),</span>
+<span id="cb115-12"><a href="safety-plots.html#cb115-12" aria-hidden="true"></a>        <span class="dt">axis.ticks.y=</span><span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb115-13"><a href="safety-plots.html#cb115-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
+<span id="cb115-14"><a href="safety-plots.html#cb115-14" aria-hidden="true"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">size=</span><span class="dv">1</span>),</span>
+<span id="cb115-15"><a href="safety-plots.html#cb115-15" aria-hidden="true"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span>
+<span id="cb115-16"><a href="safety-plots.html#cb115-16" aria-hidden="true"></a></span>
+<span id="cb115-17"><a href="safety-plots.html#cb115-17" aria-hidden="true"></a>p_table2 <span class="op">+</span></span>
+<span id="cb115-18"><a href="safety-plots.html#cb115-18" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span>.<span class="dv">5</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="safety-plots.html#cb117-1" aria-hidden="true"></a><span class="co"># combine plots</span></span>
-<span id="cb117-2"><a href="safety-plots.html#cb117-2" aria-hidden="true"></a>final_plot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span>p_table1 <span class="op">+</span><span class="st"> </span>p_table2</span>
-<span id="cb117-3"><a href="safety-plots.html#cb117-3" aria-hidden="true"></a></span>
-<span id="cb117-4"><a href="safety-plots.html#cb117-4" aria-hidden="true"></a><span class="co"># display plot w/ layout</span></span>
-<span id="cb117-5"><a href="safety-plots.html#cb117-5" aria-hidden="true"></a>final_plot <span class="op">+</span><span class="st"> </span><span class="kw">plot_layout</span>(<span class="dt">byrow =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb117-6"><a href="safety-plots.html#cb117-6" aria-hidden="true"></a>                        <span class="dt">heights =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="safety-plots.html#cb116-1" aria-hidden="true"></a><span class="co"># combine plots</span></span>
+<span id="cb116-2"><a href="safety-plots.html#cb116-2" aria-hidden="true"></a>final_plot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span>p_table1 <span class="op">+</span><span class="st"> </span>p_table2</span>
+<span id="cb116-3"><a href="safety-plots.html#cb116-3" aria-hidden="true"></a><span class="co"># display plot w/ layout</span></span>
+<span id="cb116-4"><a href="safety-plots.html#cb116-4" aria-hidden="true"></a>final_plot <span class="op">+</span><span class="st"> </span><span class="kw">plot_layout</span>(<span class="dt">byrow =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb116-5"><a href="safety-plots.html#cb116-5" aria-hidden="true"></a>                        <span class="dt">heights =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-132-1.png" width="1152" /></p>
 
 </div>
@@ -636,17 +645,7 @@ Week 12
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": null,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
@@ -664,7 +663,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

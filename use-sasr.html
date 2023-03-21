@@ -262,19 +262,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <code>{[saspy](https://github.com/sassoftware/saspy)}</code>, an official python interface to connect SAS, can be called from R.
 It adds some simple wrappers to the {saspy} functionalities to make the syntax similar to R.</p>
 <p>Here are some simple examples of how you can use it.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="use-sasr.html#cb119-1" aria-hidden="true"></a><span class="kw">library</span>(sasr)</span>
-<span id="cb119-2"><a href="use-sasr.html#cb119-2" aria-hidden="true"></a><span class="co"># Transfer data from R to SAS.</span></span>
-<span id="cb119-3"><a href="use-sasr.html#cb119-3" aria-hidden="true"></a><span class="kw">df2sd</span>(mtcars)</span>
-<span id="cb119-4"><a href="use-sasr.html#cb119-4" aria-hidden="true"></a></span>
-<span id="cb119-5"><a href="use-sasr.html#cb119-5" aria-hidden="true"></a><span class="co"># Execute SAS commands.</span></span>
-<span id="cb119-6"><a href="use-sasr.html#cb119-6" aria-hidden="true"></a><span class="kw">run_sas</span>(<span class="st">&quot;</span></span>
-<span id="cb119-7"><a href="use-sasr.html#cb119-7" aria-hidden="true"></a><span class="st">  data test;</span></span>
-<span id="cb119-8"><a href="use-sasr.html#cb119-8" aria-hidden="true"></a><span class="st">    set work.mtcars;</span></span>
-<span id="cb119-9"><a href="use-sasr.html#cb119-9" aria-hidden="true"></a><span class="st">  run;</span></span>
-<span id="cb119-10"><a href="use-sasr.html#cb119-10" aria-hidden="true"></a><span class="st">&quot;</span>)</span>
-<span id="cb119-11"><a href="use-sasr.html#cb119-11" aria-hidden="true"></a></span>
-<span id="cb119-12"><a href="use-sasr.html#cb119-12" aria-hidden="true"></a><span class="co"># Transfer data back to R.</span></span>
-<span id="cb119-13"><a href="use-sasr.html#cb119-13" aria-hidden="true"></a><span class="kw">sd2df</span>(<span class="st">&quot;test&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="use-sasr.html#cb118-1" aria-hidden="true"></a><span class="kw">library</span>(sasr)</span>
+<span id="cb118-2"><a href="use-sasr.html#cb118-2" aria-hidden="true"></a><span class="co"># Transfer data from R to SAS.</span></span>
+<span id="cb118-3"><a href="use-sasr.html#cb118-3" aria-hidden="true"></a><span class="kw">df2sd</span>(mtcars)</span>
+<span id="cb118-4"><a href="use-sasr.html#cb118-4" aria-hidden="true"></a></span>
+<span id="cb118-5"><a href="use-sasr.html#cb118-5" aria-hidden="true"></a><span class="co"># Execute SAS commands.</span></span>
+<span id="cb118-6"><a href="use-sasr.html#cb118-6" aria-hidden="true"></a><span class="kw">run_sas</span>(<span class="st">&quot;</span></span>
+<span id="cb118-7"><a href="use-sasr.html#cb118-7" aria-hidden="true"></a><span class="st">  data test;</span></span>
+<span id="cb118-8"><a href="use-sasr.html#cb118-8" aria-hidden="true"></a><span class="st">    set work.mtcars;</span></span>
+<span id="cb118-9"><a href="use-sasr.html#cb118-9" aria-hidden="true"></a><span class="st">  run;</span></span>
+<span id="cb118-10"><a href="use-sasr.html#cb118-10" aria-hidden="true"></a><span class="st">&quot;</span>)</span>
+<span id="cb118-11"><a href="use-sasr.html#cb118-11" aria-hidden="true"></a></span>
+<span id="cb118-12"><a href="use-sasr.html#cb118-12" aria-hidden="true"></a><span class="co"># Transfer data back to R.</span></span>
+<span id="cb118-13"><a href="use-sasr.html#cb118-13" aria-hidden="true"></a><span class="kw">sd2df</span>(<span class="st">&quot;test&quot;</span>)</span></code></pre></div>
 <p>This requires that you have a machine with SAS and it accessible through specific
 <a href="https://sassoftware.github.io/saspy/configuration.html">connection types</a>,
 where <code>ssh</code> is a common type of connection.</p>
@@ -299,17 +299,7 @@ where <code>ssh</code> is a common type of connection.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": null,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
@@ -327,7 +317,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null
