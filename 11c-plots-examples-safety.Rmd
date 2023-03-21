@@ -1,4 +1,4 @@
-## Safety Plots
+### Safety Plots
 
 Again, we refer to the FDA safety guide which you can find int he [scatterplot section][Scatter plot]. The [falcon](https://github.com/pharmaverse/falcon) package aims to cover all tables and plots eventually. However, similar visualisation might be of interest also outside of this package. This is why we provide some code here to show how to combine a plot and a table using the *patchwork* package. 
 
