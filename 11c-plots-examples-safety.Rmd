@@ -99,7 +99,6 @@ p_table1 <- ggplot(data = data_table1, aes(x = AVISIT, y = TRTA)) +
   scale_shape_manual(values = 1:length(data_table1$TRTA))+
   ggpubr::geom_exec(geom_text, data = data_table1, label = data_table1$value, color = "TRTA", size=3) +
   theme_classic() +
-  coord_fixed(ratio=.4)+
   labs(title = "Mean Change from Baseline / Mean Value", x = "", y = "" ) +
   scale_color_manual(values=c("#93918E","#0B5A8F", "#73BDEE")) +
   theme(axis.text.y = element_text(colour = c("#93918E","#0B5A8F", "#73BDEE")),
@@ -110,7 +109,8 @@ p_table1 <- ggplot(data = data_table1, aes(x = AVISIT, y = TRTA)) +
         panel.border = element_rect(colour = "black", fill=NA, size=1),
         plot.title = element_text(size=10, face = "bold"))
 
-p_table1 
+p_table1 +
+    coord_fixed(ratio=.5)
 
 ```
 
@@ -123,7 +123,6 @@ p_table2 <- ggplot(data = data_table2, aes(x = AVISIT, y = TRTA)) +
   scale_shape_manual(values = 1:length(data_table2$TRTA))+
   ggpubr::geom_exec(geom_text, data = data_table2, label = data_table2$n_patients, color = "TRTA", size=3) +
   theme_classic() +
-  coord_fixed(ratio=.4)+
   labs(title = "Number of Patients with Data", x = "", y = "" ) +
   scale_color_manual(values=c("#93918E","#0B5A8F", "#73BDEE")) +
   theme(axis.text.y = element_text(colour = c("#93918E","#0B5A8F", "#73BDEE")),
@@ -134,34 +133,19 @@ p_table2 <- ggplot(data = data_table2, aes(x = AVISIT, y = TRTA)) +
         panel.border = element_rect(colour = "black", fill=NA, size=1),
         plot.title = element_text(size=10, face = "bold"))
 
-p_table2
+p_table2 +
+    coord_fixed(ratio=.5)
 
 ```
 
 
-```{r, message = FALSE, warning = FALSE, error = FALSE}
-
-# combine everything and align
-
-patchwork <- p / p_table1 / p_table2
-
-patchwork[[1]] <- patchwork[[1]] + theme(axis.title.y = element_text(vjust = 12)) + theme(legend.position = "bottom") 
-patchwork[[2]] <- patchwork[[2]] + theme(legend.position = "none")
-patchwork[[3]] <- patchwork[[3]] + theme(legend.position = "none")
-
-
-
-
-
-
+```{r, message = FALSE, warning = FALSE, error = FALSE, fig.width = 12, fig.asp = 0.9}
+# combine plots
+final_plot <- p + p_table1 + p_table2
+# display plot w/ layout
+final_plot + plot_layout(byrow = FALSE,
+                        heights = c(5,1,1))
 ```
 
-```{r, echo=FALSE, out.width="150%"}
-
-
-patchwork + plot_layout(
-  widths = unit(c(1, 10, 10), c("null", "cm", "cm")), 
-  heights= unit(c(1, -1, -1), c("null", "null", "null")),
-                        )
-```
+         
 
