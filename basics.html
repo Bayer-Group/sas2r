@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Hybrid Programming with SAS and R | SAS and R</title>
-  <meta name="description" content="Chapter 9 Hybrid Programming with SAS and R | SAS and R" />
+  <title>6.1 Basics | SAS and R</title>
+  <meta name="description" content="6.1 Basics | SAS and R" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Hybrid Programming with SAS and R | SAS and R" />
+  <meta property="og:title" content="6.1 Basics | SAS and R" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="bayer-int/ocs.sas2r" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Hybrid Programming with SAS and R | SAS and R" />
+  <meta name="twitter:title" content="6.1 Basics | SAS and R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="content.html"/>
-<link rel="next" href="use-sasr.html"/>
+<link rel="prev" href="figures-plots.html"/>
+<link rel="next" href="examples.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,17 +258,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="content/hero.png">
 </div>
-<div id="hybrid-programming-with-sas-and-r" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Hybrid Programming with SAS and R<a href="hybrid-programming-with-sas-and-r.html#hybrid-programming-with-sas-and-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This section contains current solutions of hybrid programming.</p>
+<div id="basics" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Basics<a href="basics.html#basics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="building-a-plot-using-ggplot2" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Building a plot using ggplot2<a href="basics.html#building-a-plot-using-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="packages-and-sample-data-1" class="section level4 hasAnchor" number="6.1.1.1">
+<h4><span class="header-section-number">6.1.1.1</span> Packages and Sample Data<a href="basics.html#packages-and-sample-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="basics.html#cb57-1" aria-hidden="true"></a><span class="co"># Packages</span></span>
+<span id="cb57-2"><a href="basics.html#cb57-2" aria-hidden="true"></a><span class="kw">library</span>(haven)</span>
+<span id="cb57-3"><a href="basics.html#cb57-3" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb57-4"><a href="basics.html#cb57-4" aria-hidden="true"></a></span>
+<span id="cb57-5"><a href="basics.html#cb57-5" aria-hidden="true"></a><span class="co"># Data</span></span>
+<span id="cb57-6"><a href="basics.html#cb57-6" aria-hidden="true"></a>adam_path &lt;-<span class="st"> &quot;https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/&quot;</span></span>
+<span id="cb57-7"><a href="basics.html#cb57-7" aria-hidden="true"></a>adsl &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(haven<span class="op">::</span><span class="kw">read_xpt</span>(<span class="kw">paste0</span>(adam_path, <span class="st">&quot;adsl.xpt&quot;</span>)))</span></code></pre></div>
+<p>Let’s create a basic scatter plot of weight vs height.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="basics.html#cb58-1" aria-hidden="true"></a><span class="co"># basic scatter plot of weight vs height</span></span>
+<span id="cb58-2"><a href="basics.html#cb58-2" aria-hidden="true"></a>my_scatter_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(adsl, <span class="kw">aes</span>(<span class="dt">x =</span> HEIGHTBL, <span class="dt">y =</span> WEIGHTBL)) <span class="op">+</span></span>
+<span id="cb58-3"><a href="basics.html#cb58-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>
+<span id="cb58-4"><a href="basics.html#cb58-4" aria-hidden="true"></a>my_scatter_plot</span></code></pre></div>
+</div>
+</div>
+<div id="exporting-plots" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Exporting plots<a href="basics.html#exporting-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You may export plots as png files a few ways. If your plot is created in ggplot2, you can use the <code>ggsave()</code> function to export as png:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="basics.html#cb59-1" aria-hidden="true"></a><span class="co"># save plot as a png file</span></span>
+<span id="cb59-2"><a href="basics.html#cb59-2" aria-hidden="true"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_scatter_plot, </span>
+<span id="cb59-3"><a href="basics.html#cb59-3" aria-hidden="true"></a>       <span class="dt">filename =</span> <span class="st">&quot;my_plot_output_1.png&quot;</span>, </span>
+<span id="cb59-4"><a href="basics.html#cb59-4" aria-hidden="true"></a>       <span class="dt">width =</span> <span class="dv">7</span>, </span>
+<span id="cb59-5"><a href="basics.html#cb59-5" aria-hidden="true"></a>       <span class="dt">height =</span> <span class="dv">5</span>, </span>
+<span id="cb59-6"><a href="basics.html#cb59-6" aria-hidden="true"></a>       <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>)</span></code></pre></div>
+<p>The more general way to save plots as png files is to use the <code>png()</code> function. It can work with ggplot2, but also plots created in base R.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="basics.html#cb60-1" aria-hidden="true"></a><span class="kw">png</span>(<span class="dt">filename =</span> <span class="st">&quot;my_plot_output_2.png&quot;</span>, </span>
+<span id="cb60-2"><a href="basics.html#cb60-2" aria-hidden="true"></a>    <span class="dt">width =</span> <span class="dv">7</span>, </span>
+<span id="cb60-3"><a href="basics.html#cb60-3" aria-hidden="true"></a>    <span class="dt">height =</span> <span class="dv">5</span>, </span>
+<span id="cb60-4"><a href="basics.html#cb60-4" aria-hidden="true"></a>    <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>, </span>
+<span id="cb60-5"><a href="basics.html#cb60-5" aria-hidden="true"></a>    <span class="dt">res =</span> <span class="dv">300</span>)</span>
+<span id="cb60-6"><a href="basics.html#cb60-6" aria-hidden="true"></a></span>
+<span id="cb60-7"><a href="basics.html#cb60-7" aria-hidden="true"></a><span class="kw">print</span>(my_scatter_plot)</span>
+<span id="cb60-8"><a href="basics.html#cb60-8" aria-hidden="true"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="content.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="use-sasr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="figures-plots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="examples.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -289,7 +326,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bayer-Group/sas2r/blob/main/14-hybrid-programming.Rmd",
+"link": "https://github.com/Bayer-Group/sas2r/blob/main/06-plots-basics.Rmd",
 "text": "Edit"
 },
 "history": {
