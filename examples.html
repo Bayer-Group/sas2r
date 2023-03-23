@@ -411,10 +411,10 @@ aval
 1
 </td>
 <td style="text-align:center;">
-Drug
+Placebo
 </td>
 <td style="text-align:center;">
-27.217589
+-19.7892433
 </td>
 </tr>
 <tr>
@@ -422,10 +422,10 @@ Drug
 2
 </td>
 <td style="text-align:center;">
-Drug
+Placebo
 </td>
 <td style="text-align:center;">
-11.429569
+12.1131597
 </td>
 </tr>
 <tr>
@@ -436,7 +436,7 @@ Drug
 Placebo
 </td>
 <td style="text-align:center;">
--35.114809
+-0.4784747
 </td>
 </tr>
 <tr>
@@ -447,7 +447,7 @@ Placebo
 Placebo
 </td>
 <td style="text-align:center;">
-19.142386
+-34.7499604
 </td>
 </tr>
 <tr>
@@ -458,7 +458,7 @@ Placebo
 Placebo
 </td>
 <td style="text-align:center;">
-5.149756
+12.9806691
 </td>
 </tr>
 <tr>
@@ -466,10 +466,10 @@ Placebo
 6
 </td>
 <td style="text-align:center;">
-Drug
+Placebo
 </td>
 <td style="text-align:center;">
-7.082577
+7.0179968
 </td>
 </tr>
 </tbody>
@@ -1965,6 +1965,7 @@ Xanomeline Low Dose
 <div id="safety-plots" class="section level3 hasAnchor" number="6.2.8">
 <h3><span class="header-section-number">6.2.8</span> Safety Plots<a href="examples.html#safety-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Again, we refer to the FDA safety guide which you can find int he <a href="examples.html#scatter-plot">scatterplot section</a>. The <a href="https://github.com/pharmaverse/falcon">falcon</a> package aims to cover all tables and plots eventually. However, similar visualisation might be of interest also outside of this package. This is why we provide some code here to show how to combine a plot and a table using the <em>patchwork</em> package.</p>
+<p>But we start with loading the required libraries and adsl and adlb dataset:</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="examples.html#cb112-1" aria-hidden="true"></a><span class="co">### load relevant libraries and data </span></span>
 <span id="cb112-2"><a href="examples.html#cb112-2" aria-hidden="true"></a></span>
 <span id="cb112-3"><a href="examples.html#cb112-3" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
@@ -2130,6 +2131,7 @@ Sodium (mmol/L)
 </tr>
 </tbody>
 </table>
+<p>Now, we create a line plot which deomnstrates the change of the average of Sodium per week. Each line represents one dose. Additionally, we also provide the standard error intervals.</p>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="examples.html#cb113-1" aria-hidden="true"></a><span class="co"># create plot</span></span>
 <span id="cb113-2"><a href="examples.html#cb113-2" aria-hidden="true"></a></span>
 <span id="cb113-3"><a href="examples.html#cb113-3" aria-hidden="true"></a>p &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
@@ -2139,7 +2141,7 @@ Sodium (mmol/L)
 <span id="cb113-7"><a href="examples.html#cb113-7" aria-hidden="true"></a>         <span class="dt">se_chg =</span> <span class="kw">sd</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">length</span>(CHG))) <span class="op">%&gt;%</span></span>
 <span id="cb113-8"><a href="examples.html#cb113-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
 <span id="cb113-9"><a href="examples.html#cb113-9" aria-hidden="true"></a><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x=</span>AVISIT, <span class="dt">y=</span>mean_chg, <span class="dt">group=</span>TRTA, <span class="dt">linetype =</span> TRTA)) <span class="op">+</span></span>
-<span id="cb113-10"><a href="examples.html#cb113-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>mean_chg<span class="op">-</span>se_chg, <span class="dt">ymax=</span>mean_chg<span class="op">+</span>se_chg, <span class="dt">color=</span>TRTA), <span class="dt">width=</span>.<span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb113-10"><a href="examples.html#cb113-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>mean_chg<span class="op">-</span>se_chg, <span class="dt">ymax=</span>mean_chg<span class="op">+</span>se_chg, <span class="dt">color=</span>TRTA), <span class="dt">width=</span>.<span class="dv">1</span>) <span class="op">+</span><span class="st">  </span></span>
 <span id="cb113-11"><a href="examples.html#cb113-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span>TRTA)) <span class="op">+</span></span>
 <span id="cb113-12"><a href="examples.html#cb113-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>TRTA)) <span class="op">+</span></span>
 <span id="cb113-13"><a href="examples.html#cb113-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">0</span>, <span class="dt">linetype=</span><span class="st">&#39;dashed&#39;</span>)<span class="op">+</span></span>
@@ -2153,31 +2155,31 @@ Sodium (mmol/L)
 <span id="cb113-21"><a href="examples.html#cb113-21" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> <span class="fl">0.5</span>)</span>
 <span id="cb113-22"><a href="examples.html#cb113-22" aria-hidden="true"></a></span>
 <span id="cb113-23"><a href="examples.html#cb113-23" aria-hidden="true"></a>p</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-127-1.png" width="672" />
+Addtionally, we would like to create two tables. The first one should display the mean change from baseline and the mean value for each visit, the second one the number of subjects per visit.</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="examples.html#cb114-1" aria-hidden="true"></a><span class="co"># prepare data for table </span></span>
 <span id="cb114-2"><a href="examples.html#cb114-2" aria-hidden="true"></a></span>
-<span id="cb114-3"><a href="examples.html#cb114-3" aria-hidden="true"></a></span>
-<span id="cb114-4"><a href="examples.html#cb114-4" aria-hidden="true"></a>table_data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
-<span id="cb114-5"><a href="examples.html#cb114-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>AVISIT <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;End of Treatment&quot;</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(AVISIT)) <span class="op">%&gt;%</span></span>
-<span id="cb114-6"><a href="examples.html#cb114-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(AVISIT, TRTA) <span class="op">%&gt;%</span></span>
-<span id="cb114-7"><a href="examples.html#cb114-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_chg =</span> <span class="kw">mean</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb114-8"><a href="examples.html#cb114-8" aria-hidden="true"></a>         <span class="dt">mean_aval  =</span> <span class="kw">mean</span>(AVAL, <span class="dt">na.rm  =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb114-9"><a href="examples.html#cb114-9" aria-hidden="true"></a>         <span class="dt">n_patients =</span> <span class="kw">n_distinct</span>(USUBJID),</span>
-<span id="cb114-10"><a href="examples.html#cb114-10" aria-hidden="true"></a>          <span class="dt">n_patients =</span> <span class="kw">n_distinct</span>(USUBJID), </span>
-<span id="cb114-11"><a href="examples.html#cb114-11" aria-hidden="true"></a>         <span class="dt">TRTA =</span> <span class="kw">case_when</span>(</span>
-<span id="cb114-12"><a href="examples.html#cb114-12" aria-hidden="true"></a>           TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline High Dose&quot;</span> <span class="op">~</span><span class="st">&quot;High Dose&quot;</span>,</span>
-<span id="cb114-13"><a href="examples.html#cb114-13" aria-hidden="true"></a>           TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline Low Dose&quot;</span> <span class="op">~</span><span class="st"> &quot;Low Dose&quot;</span>,</span>
-<span id="cb114-14"><a href="examples.html#cb114-14" aria-hidden="true"></a>           <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>TRTA)) <span class="op">%&gt;%</span></span>
-<span id="cb114-15"><a href="examples.html#cb114-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
-<span id="cb114-16"><a href="examples.html#cb114-16" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(TRTA, AVISIT, mean_chg, mean_aval, n_patients) <span class="op">%&gt;%</span></span>
-<span id="cb114-17"><a href="examples.html#cb114-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">distinct</span>()</span>
-<span id="cb114-18"><a href="examples.html#cb114-18" aria-hidden="true"></a></span>
-<span id="cb114-19"><a href="examples.html#cb114-19" aria-hidden="true"></a>data_table1 &lt;-<span class="st"> </span>table_data <span class="op">%&gt;%</span></span>
-<span id="cb114-20"><a href="examples.html#cb114-20" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n_patients) <span class="op">%&gt;%</span></span>
-<span id="cb114-21"><a href="examples.html#cb114-21" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">paste0</span>(<span class="kw">round</span>(mean_chg, <span class="dv">2</span>), <span class="st">&quot;/&quot;</span>, <span class="kw">round</span>(mean_aval, <span class="dv">2</span>)))</span>
-<span id="cb114-22"><a href="examples.html#cb114-22" aria-hidden="true"></a></span>
-<span id="cb114-23"><a href="examples.html#cb114-23" aria-hidden="true"></a>data_table2 &lt;-<span class="st"> </span>table_data <span class="op">%&gt;%</span></span>
-<span id="cb114-24"><a href="examples.html#cb114-24" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>mean_chg, <span class="op">-</span>mean_aval)</span></code></pre></div>
+<span id="cb114-3"><a href="examples.html#cb114-3" aria-hidden="true"></a>table_data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb114-4"><a href="examples.html#cb114-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>AVISIT <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;End of Treatment&quot;</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(AVISIT)) <span class="op">%&gt;%</span></span>
+<span id="cb114-5"><a href="examples.html#cb114-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(AVISIT, TRTA) <span class="op">%&gt;%</span></span>
+<span id="cb114-6"><a href="examples.html#cb114-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_chg =</span> <span class="kw">mean</span>(CHG, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb114-7"><a href="examples.html#cb114-7" aria-hidden="true"></a>         <span class="dt">mean_aval  =</span> <span class="kw">mean</span>(AVAL, <span class="dt">na.rm  =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb114-8"><a href="examples.html#cb114-8" aria-hidden="true"></a>         <span class="dt">n_patients =</span> <span class="kw">n_distinct</span>(USUBJID),</span>
+<span id="cb114-9"><a href="examples.html#cb114-9" aria-hidden="true"></a>          <span class="dt">n_patients =</span> <span class="kw">n_distinct</span>(USUBJID), </span>
+<span id="cb114-10"><a href="examples.html#cb114-10" aria-hidden="true"></a>         <span class="dt">TRTA =</span> <span class="kw">case_when</span>(</span>
+<span id="cb114-11"><a href="examples.html#cb114-11" aria-hidden="true"></a>           TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline High Dose&quot;</span> <span class="op">~</span><span class="st">&quot;High Dose&quot;</span>,</span>
+<span id="cb114-12"><a href="examples.html#cb114-12" aria-hidden="true"></a>           TRTA <span class="op">==</span><span class="st"> &quot;Xanomeline Low Dose&quot;</span> <span class="op">~</span><span class="st"> &quot;Low Dose&quot;</span>,</span>
+<span id="cb114-13"><a href="examples.html#cb114-13" aria-hidden="true"></a>           <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>TRTA)) <span class="op">%&gt;%</span></span>
+<span id="cb114-14"><a href="examples.html#cb114-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb114-15"><a href="examples.html#cb114-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(TRTA, AVISIT, mean_chg, mean_aval, n_patients) <span class="op">%&gt;%</span></span>
+<span id="cb114-16"><a href="examples.html#cb114-16" aria-hidden="true"></a><span class="st">  </span><span class="kw">distinct</span>()</span>
+<span id="cb114-17"><a href="examples.html#cb114-17" aria-hidden="true"></a></span>
+<span id="cb114-18"><a href="examples.html#cb114-18" aria-hidden="true"></a>data_table1 &lt;-<span class="st"> </span>table_data <span class="op">%&gt;%</span></span>
+<span id="cb114-19"><a href="examples.html#cb114-19" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n_patients) <span class="op">%&gt;%</span></span>
+<span id="cb114-20"><a href="examples.html#cb114-20" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">paste0</span>(<span class="kw">round</span>(mean_chg, <span class="dv">2</span>), <span class="st">&quot;/&quot;</span>, <span class="kw">round</span>(mean_aval, <span class="dv">2</span>)))</span>
+<span id="cb114-21"><a href="examples.html#cb114-21" aria-hidden="true"></a></span>
+<span id="cb114-22"><a href="examples.html#cb114-22" aria-hidden="true"></a>data_table2 &lt;-<span class="st"> </span>table_data <span class="op">%&gt;%</span></span>
+<span id="cb114-23"><a href="examples.html#cb114-23" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>mean_chg, <span class="op">-</span>mean_aval)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -2286,24 +2288,30 @@ Week 12
 </tr>
 </tbody>
 </table>
+<p>Now, we transform the table to a plot to be able to style it and display it aligned with the visualisation above.</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="examples.html#cb115-1" aria-hidden="true"></a><span class="co"># plot table 1</span></span>
-<span id="cb115-2"><a href="examples.html#cb115-2" aria-hidden="true"></a>p_table1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_table1, <span class="kw">aes</span>(<span class="dt">x =</span> AVISIT, <span class="dt">y =</span> TRTA)) <span class="op">+</span></span>
-<span id="cb115-3"><a href="examples.html#cb115-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="dt">values =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(data_table1<span class="op">$</span>TRTA))<span class="op">+</span></span>
-<span id="cb115-4"><a href="examples.html#cb115-4" aria-hidden="true"></a><span class="st">  </span>ggpubr<span class="op">::</span><span class="kw">geom_exec</span>(geom_text, <span class="dt">data =</span> data_table1, <span class="dt">label =</span> data_table1<span class="op">$</span>value, <span class="dt">color =</span> <span class="st">&quot;TRTA&quot;</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
-<span id="cb115-5"><a href="examples.html#cb115-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></span>
-<span id="cb115-6"><a href="examples.html#cb115-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Mean Change from Baseline / Mean Value&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span> ) <span class="op">+</span></span>
-<span id="cb115-7"><a href="examples.html#cb115-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)) <span class="op">+</span></span>
-<span id="cb115-8"><a href="examples.html#cb115-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)),</span>
-<span id="cb115-9"><a href="examples.html#cb115-9" aria-hidden="true"></a>        <span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb115-10"><a href="examples.html#cb115-10" aria-hidden="true"></a>        <span class="dt">axis.ticks.x=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb115-11"><a href="examples.html#cb115-11" aria-hidden="true"></a>        <span class="dt">axis.ticks.y=</span><span class="kw">element_blank</span>()) <span class="op">+</span></span>
-<span id="cb115-12"><a href="examples.html#cb115-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
-<span id="cb115-13"><a href="examples.html#cb115-13" aria-hidden="true"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">size=</span><span class="dv">1</span>),</span>
-<span id="cb115-14"><a href="examples.html#cb115-14" aria-hidden="true"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span>
-<span id="cb115-15"><a href="examples.html#cb115-15" aria-hidden="true"></a></span>
-<span id="cb115-16"><a href="examples.html#cb115-16" aria-hidden="true"></a>p_table1 <span class="op">+</span></span>
-<span id="cb115-17"><a href="examples.html#cb115-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<span id="cb115-2"><a href="examples.html#cb115-2" aria-hidden="true"></a></span>
+<span id="cb115-3"><a href="examples.html#cb115-3" aria-hidden="true"></a>p_table1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_table1, <span class="kw">aes</span>(<span class="dt">x =</span> AVISIT, <span class="dt">y =</span> TRTA)) <span class="op">+</span></span>
+<span id="cb115-4"><a href="examples.html#cb115-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="dt">values =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(data_table1<span class="op">$</span>TRTA))<span class="op">+</span></span>
+<span id="cb115-5"><a href="examples.html#cb115-5" aria-hidden="true"></a><span class="st">  </span>ggpubr<span class="op">::</span><span class="kw">geom_exec</span>(geom_text, <span class="dt">data =</span> data_table1, <span class="dt">label =</span> data_table1<span class="op">$</span>value, <span class="dt">color =</span> <span class="st">&quot;TRTA&quot;</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb115-6"><a href="examples.html#cb115-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></span>
+<span id="cb115-7"><a href="examples.html#cb115-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Mean Change from Baseline / Mean Value&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span> ) <span class="op">+</span></span>
+<span id="cb115-8"><a href="examples.html#cb115-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)) <span class="op">+</span></span>
+<span id="cb115-9"><a href="examples.html#cb115-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="kw">c</span>(<span class="st">&quot;#93918E&quot;</span>,<span class="st">&quot;#0B5A8F&quot;</span>, <span class="st">&quot;#73BDEE&quot;</span>)),</span>
+<span id="cb115-10"><a href="examples.html#cb115-10" aria-hidden="true"></a>        <span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),</span>
+<span id="cb115-11"><a href="examples.html#cb115-11" aria-hidden="true"></a>        <span class="dt">axis.ticks.x=</span><span class="kw">element_blank</span>(),</span>
+<span id="cb115-12"><a href="examples.html#cb115-12" aria-hidden="true"></a>        <span class="dt">axis.ticks.y=</span><span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb115-13"><a href="examples.html#cb115-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
+<span id="cb115-14"><a href="examples.html#cb115-14" aria-hidden="true"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">size=</span><span class="dv">1</span>),</span>
+<span id="cb115-15"><a href="examples.html#cb115-15" aria-hidden="true"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span>
+<span id="cb115-16"><a href="examples.html#cb115-16" aria-hidden="true"></a></span>
+<span id="cb115-17"><a href="examples.html#cb115-17" aria-hidden="true"></a></span>
+<span id="cb115-18"><a href="examples.html#cb115-18" aria-hidden="true"></a><span class="co"># just for the sake of displaying it</span></span>
+<span id="cb115-19"><a href="examples.html#cb115-19" aria-hidden="true"></a></span>
+<span id="cb115-20"><a href="examples.html#cb115-20" aria-hidden="true"></a>p_table1 <span class="op">+</span></span>
+<span id="cb115-21"><a href="examples.html#cb115-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span>.<span class="dv">5</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+<p>We do the same for the second table.</p>
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="examples.html#cb116-1" aria-hidden="true"></a><span class="co"># plot table 2</span></span>
 <span id="cb116-2"><a href="examples.html#cb116-2" aria-hidden="true"></a></span>
 <span id="cb116-3"><a href="examples.html#cb116-3" aria-hidden="true"></a>p_table2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_table2, <span class="kw">aes</span>(<span class="dt">x =</span> AVISIT, <span class="dt">y =</span> TRTA)) <span class="op">+</span></span>
@@ -2320,14 +2328,19 @@ Week 12
 <span id="cb116-14"><a href="examples.html#cb116-14" aria-hidden="true"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">size=</span><span class="dv">1</span>),</span>
 <span id="cb116-15"><a href="examples.html#cb116-15" aria-hidden="true"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span>
 <span id="cb116-16"><a href="examples.html#cb116-16" aria-hidden="true"></a></span>
-<span id="cb116-17"><a href="examples.html#cb116-17" aria-hidden="true"></a>p_table2 <span class="op">+</span></span>
-<span id="cb116-18"><a href="examples.html#cb116-18" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<span id="cb116-17"><a href="examples.html#cb116-17" aria-hidden="true"></a><span class="co"># just for the sake of displaying it</span></span>
+<span id="cb116-18"><a href="examples.html#cb116-18" aria-hidden="true"></a></span>
+<span id="cb116-19"><a href="examples.html#cb116-19" aria-hidden="true"></a>p_table2 <span class="op">+</span></span>
+<span id="cb116-20"><a href="examples.html#cb116-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span>.<span class="dv">5</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p>Finally, we combine all three visualisations using the patchwork package functionality:</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="examples.html#cb117-1" aria-hidden="true"></a><span class="co"># combine plots</span></span>
-<span id="cb117-2"><a href="examples.html#cb117-2" aria-hidden="true"></a>final_plot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span>p_table1 <span class="op">+</span><span class="st"> </span>p_table2</span>
-<span id="cb117-3"><a href="examples.html#cb117-3" aria-hidden="true"></a><span class="co"># display plot w/ layout</span></span>
-<span id="cb117-4"><a href="examples.html#cb117-4" aria-hidden="true"></a>final_plot <span class="op">+</span><span class="st"> </span><span class="kw">plot_layout</span>(<span class="dt">byrow =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb117-5"><a href="examples.html#cb117-5" aria-hidden="true"></a>                        <span class="dt">heights =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<span id="cb117-2"><a href="examples.html#cb117-2" aria-hidden="true"></a></span>
+<span id="cb117-3"><a href="examples.html#cb117-3" aria-hidden="true"></a>final_plot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span>p_table1 <span class="op">+</span><span class="st"> </span>p_table2</span>
+<span id="cb117-4"><a href="examples.html#cb117-4" aria-hidden="true"></a></span>
+<span id="cb117-5"><a href="examples.html#cb117-5" aria-hidden="true"></a><span class="co"># display plot w/ layout</span></span>
+<span id="cb117-6"><a href="examples.html#cb117-6" aria-hidden="true"></a>final_plot <span class="op">+</span><span class="st"> </span><span class="kw">plot_layout</span>(<span class="dt">byrow =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb117-7"><a href="examples.html#cb117-7" aria-hidden="true"></a>                        <span class="dt">heights =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-132-1.png" width="1152" /></p>
 
 </div>
