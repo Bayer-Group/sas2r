@@ -2,6 +2,8 @@
 
 Again, we refer to the FDA safety guide which you can find int he [scatterplot section][Scatter plot]. The [falcon](https://github.com/pharmaverse/falcon) package aims to cover all tables and plots eventually. However, similar visualisation might be of interest also outside of this package. This is why we provide some code here to show how to combine a plot and a table using the *patchwork* package. 
 
+But we start with loading the required libraries and adsl and adlb dataset:
+
 ```{r, message = FALSE, warning = FALSE, error = FALSE}
 
 ### load relevant libraries and data 
@@ -32,6 +34,8 @@ data <- adlb %>%
 kableExtra::kable(head(data, n=5), escape = FALSE, align = 'c')
 ```
 
+Now, we create a line plot which deomnstrates the change of the average of Sodium per week. Each line represents one dose. Additionally, we also provide the standard error intervals.
+
 ```{r, message = FALSE, warning = FALSE, error = FALSE}
 
 # create plot
@@ -43,7 +47,7 @@ p <- data %>%
          se_chg = sd(CHG, na.rm = TRUE) / sqrt(length(CHG))) %>%
   ungroup() %>%
 ggplot(., aes(x=AVISIT, y=mean_chg, group=TRTA, linetype = TRTA)) +
-  geom_errorbar(aes(ymin=mean_chg-se_chg, ymax=mean_chg+se_chg, color=TRTA), width=.1) +
+  geom_errorbar(aes(ymin=mean_chg-se_chg, ymax=mean_chg+se_chg, color=TRTA), width=.1) +  
   geom_line(aes(color=TRTA)) +
   geom_point(aes(color=TRTA)) +
   geom_hline(yintercept=0, linetype='dashed')+
@@ -58,11 +62,11 @@ ggplot(., aes(x=AVISIT, y=mean_chg, group=TRTA, linetype = TRTA)) +
 
 p
 ```
+Addtionally, we would like to create two tables. The first one should display the mean change from baseline and the mean value for each visit, the second one the number of subjects per visit. 
 
 ```{r, message = FALSE, warning = FALSE, error = FALSE}
 
 # prepare data for table 
-
 
 table_data <- data %>%
   filter(!AVISIT %in% c("Baseline", "End of Treatment") & !is.na(AVISIT)) %>%
@@ -92,9 +96,12 @@ data_table2 <- table_data %>%
 kableExtra::kable(head(data_table1, n=5), escape = FALSE, align = 'c')
 ```
 
+Now, we transform the table to a plot to be able to style it and display it aligned with the visualisation above.
+
 ```{r, message = FALSE, warning = FALSE, error = FALSE}
 
 # plot table 1
+
 p_table1 <- ggplot(data = data_table1, aes(x = AVISIT, y = TRTA)) +
   scale_shape_manual(values = 1:length(data_table1$TRTA))+
   ggpubr::geom_exec(geom_text, data = data_table1, label = data_table1$value, color = "TRTA", size=3) +
@@ -109,11 +116,15 @@ p_table1 <- ggplot(data = data_table1, aes(x = AVISIT, y = TRTA)) +
         panel.border = element_rect(colour = "black", fill=NA, size=1),
         plot.title = element_text(size=10, face = "bold"))
 
+
+# just for the sake of displaying it
+
 p_table1 +
     coord_fixed(ratio=.5)
 
 ```
 
+We do the same for the second table. 
 
 ```{r, message = FALSE, warning = FALSE, error = FALSE}
 
@@ -133,15 +144,20 @@ p_table2 <- ggplot(data = data_table2, aes(x = AVISIT, y = TRTA)) +
         panel.border = element_rect(colour = "black", fill=NA, size=1),
         plot.title = element_text(size=10, face = "bold"))
 
+# just for the sake of displaying it
+
 p_table2 +
     coord_fixed(ratio=.5)
 
 ```
 
+Finally, we combine all three visualisations using the patchwork package functionality:
 
 ```{r, message = FALSE, warning = FALSE, error = FALSE, fig.width = 12, fig.asp = 0.9}
 # combine plots
+
 final_plot <- p + p_table1 + p_table2
+
 # display plot w/ layout
 final_plot + plot_layout(byrow = FALSE,
                         heights = c(5,1,1))
