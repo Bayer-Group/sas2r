@@ -10,5 +10,4 @@ bookdown::gitbook:
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit: https://github.com/Bayer-Group/sas2r/blob/main/%s
-    download: ["pdf", "epub"]
     sharing: null

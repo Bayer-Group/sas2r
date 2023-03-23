@@ -1,8 +1,12 @@
 ### Scatter Plot
 #### Overview
-This article will demonstrate how to construct a scatter plot in ggplot2. We will use a sample figure from the recent [Standard Safety Tables and Figures: Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0002/attachment_1.pdf) released by the FDA as a guide. 
+This article will demonstrate how to construct a scatter plot in ggplot2. Recently, the FDA has published a document for a more standardized presentation of safety data (see below). We will use some sample figures from this guide for this section and the section about [safety plots][Safety Plots]. 
 
-```{r out.height = "460px", out.width='800px', echo=F, fig.cap = "Sample figure from the SSTFIG (Figure 17)"}
+```{r out.height = "460px", out.width='800px', echo=F}
+knitr::include_graphics("./additional resources/FDA_safety_guide.pdf")
+```
+
+```{r out.height = "460px", out.width='700px', echo=F, fig.cap = "Sample figure from the SSTFIG (Figure 17)"}
 knitr::include_graphics("./additional resources/f17.png")
 ```
  
