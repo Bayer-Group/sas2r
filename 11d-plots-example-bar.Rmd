@@ -1,0 +1,35 @@
+### Bar Plot
+
+A simple example to show how to make a bar plot.
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+
+### load relevant libraries and data 
+
+library(dplyr)
+library(haven)
+library(ggplot2)
+
+adam_path <- "https://github.com/phuse-org/TestDataFactory/raw/main/Updated/TDF_ADaM/"
+adsl <- read_xpt(paste0(adam_path, "adsl.xpt"))
+
+
+```
+
+First we create a basic bar plot
+
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+
+# create plot
+ggplot(data = adsl, aes(x = SITEID)) +
+  geom_bar()
+```
+
+Next, we add some customizations. Here I will cover each bar by SEX, and specify a theme
+```{r, message = FALSE, warning = FALSE, error = FALSE}
+
+# create plot
+ggplot(data = adsl, aes(x = SITEID, fill = SEX)) +
+  geom_bar() +
+  theme_classic()
+```
