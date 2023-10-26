@@ -4,9 +4,9 @@ This section contains current solutions of hybrid programming.
 
 ## Use {sasr}
 
-`{[sasr](https://github.com/insightsengineering/sasr)}` is a package built on
-`{[reticulate](https://rstudio.github.io/reticulate/index.html)}` so that the Python package
-`{[saspy](https://github.com/sassoftware/saspy)}`, an official python interface to connect SAS, can be called from R.
+[`{sasr}`](https://github.com/insightsengineering/sasr/) is a package built on
+[`{reticulate}`](https://rstudio.github.io/reticulate/) so that the Python package
+[`{saspy}`](https://github.com/sassoftware/saspy/), an official python interface to connect SAS, can be called from R.
 It adds some simple wrappers to the {saspy} functionalities to make the syntax similar to R.
 
 Here are some simple examples of how you can use it.
